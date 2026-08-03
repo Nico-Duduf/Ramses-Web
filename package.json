@@ -1,0 +1,9 @@
+{
+  "name": "ramses-web",
+  "private": true,
+  "type": "module",
+  "description": "Present ONLY so `node --test` parses app/js/*.js as ES modules. There are no dependencies and there is no npm build: app/assets/app.css is built by the Tailwind standalone CLI (tools/build.ps1). Do not add dependencies here.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

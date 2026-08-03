@@ -1,0 +1,21 @@
+# Tailwind standalone CLI - fetched by tools/fetch-tools.ps1, never committed (108 MB)
+tools/tailwindcss.exe
+
+# Staging folder, rebuilt from scratch by tools/publish.ps1
+publish/
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*~
+
+# Python (test helpers only)
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Never introduce npm here: the build is the standalone CLI on purpose.
+node_modules/
+package-lock.json
