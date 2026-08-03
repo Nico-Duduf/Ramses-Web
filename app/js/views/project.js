@@ -16,10 +16,13 @@ export function projectView(store) {
     get steps() {
       return this.data ? shotSteps(this.data.steps) : [];
     },
-    /** One grid template shared by the header row and every lane, so the step
-     * labels stay aligned with the segments they name. */
+    /** One column template shared by the summary bars, the sticky header and
+     * every lane, so all three stay aligned with the steps they name. */
+    get laneCols() {
+      return `repeat(${this.steps.length}, minmax(0, 1fr))`;
+    },
     get laneStyle() {
-      return { gridTemplateColumns: `repeat(${this.steps.length}, minmax(0, 1fr))` };
+      return { gridTemplateColumns: this.laneCols };
     },
     /** Sequences in configured order, each with its shots in natural order. */
     get sequences() {

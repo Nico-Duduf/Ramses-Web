@@ -75,6 +75,28 @@
   border-bottom-right-radius: 3px;
 }
 
+/* The per-step summary bars.
+ *
+ * Stacked on a phone, where four bars side by side would be unreadable. Once
+ * there is room they adopt the lane's own column template, so each bar sits
+ * directly above the column of shots it summarises. The template arrives as
+ * --lane-cols because it depends on how many steps the project has, and a
+ * media query cannot be expressed in an inline style.
+ */
+.step-grid {
+  display: grid;
+  gap: 0.625rem;
+}
+@media (min-width: 48rem) {
+  .step-grid {
+    grid-template-columns: var(--lane-cols);
+    /* Wider than the lane's 2px so the name and percentage of adjacent steps
+     * do not run into each other. The columns drift a few pixels from the lanes
+     * below as a result, which is invisible, where the crowding was not. */
+    gap: 0.75rem;
+  }
+}
+
 /* Nothing-to-do. Present, so the lane stays aligned, but silent: on most shots
  * three of four steps are NO, and drawing them as chips turned the grid into
  * noise that hid the states that matter.

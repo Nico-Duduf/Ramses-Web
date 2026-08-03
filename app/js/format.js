@@ -158,15 +158,27 @@ export function sinceText(date) {
   return Math.round(hours / 24) + " days ago";
 }
 
-/** "2026-07-13 15:38:53" (UTC, as the server stamps it) -> "13 Jul, 15:38". */
+/**
+ * "2026-07-13 15:38:53" (UTC, as the server stamps it) -> "13 Jul, 15:38".
+ *
+ * Pinned to en-GB rather than the browser's locale. Following the browser meant
+ * a German phone rendered "13. Juli, 15:38" inside an otherwise English
+ * interface, which reads as a bug rather than as localisation. The whole app is
+ * one language, so its dates are too. Day before month, and 24 hour time, both
+ * because that is what the studio uses and what every other Ramses tool shows.
+ *
+ * The timezone stays local: the question is always "when did this change,
+ * relative to my day", never "what did the server's clock say".
+ */
 export function shortDate(stamp) {
   if (!stamp) return "";
   const d = new Date(stamp.replace(" ", "T") + "Z");
   if (isNaN(d)) return stamp;
-  return d.toLocaleString(undefined, {
+  return d.toLocaleString("en-GB", {
     day: "numeric",
     month: "short",
     hour: "2-digit",
     minute: "2-digit",
+    hourCycle: "h23",
   });
 }
