@@ -6,6 +6,7 @@ import {
   label,
   lastActivity,
   shotSteps,
+  showStrip,
   sinceText,
   sortShots,
   stateColor,
@@ -93,58 +94,9 @@ export function projectView(store) {
         color: stateColor(t.state),
       }));
     },
-    /**
-     * The show strip: every shot in the project, sized by its length and
-     * coloured by the state of its last pipeline step.
-     *
-     * This is the one thing on the screen that is weighted by running time
-     * rather than by shot count, and the two answer different questions. A show
-     * can be ninety percent of shots finished and half its footage finished,
-     * because the shots that remain are the long ones. Counting shots hides
-     * that; counting frames is what the schedule actually runs on.
-     *
-     * The last step is used because it is the delivery-facing one: a shot is
-     * done when the end of its pipeline says so.
-     */
+    /** The strip is shared with the project list; see format.showStrip. */
     get strip() {
-      const last = this.steps[this.steps.length - 1];
-      if (!last) return [];
-
-      const groups = this.sequences.map((seq) => ({
-        uuid: seq.uuid,
-        name: label(seq),
-        shots: seq.shots,
-      }));
-      const total =
-        groups.reduce(
-          (n, g) => n + g.shots.reduce((m, s) => m + this.frames(s), 0),
-          0
-        ) || 1;
-
-      return groups.map((group) => {
-        const groupFrames = group.shots.reduce((n, s) => n + this.frames(s), 0);
-        return {
-          uuid: group.uuid,
-          name: group.name,
-          width: (groupFrames / total) * 100,
-          segments: group.shots.map((shot) => {
-            const seg = this.segment(shot.uuid, last.uuid);
-            const count = this.frames(shot);
-            return {
-              uuid: shot.uuid,
-              width: (count / groupFrames || 0) * 100,
-              idle: seg.idle,
-              color: seg.idle ? "" : seg.style.backgroundColor,
-              title:
-                label(shot) +
-                "  " +
-                groupDigits(count) +
-                " frames  " +
-                (seg.label || "nothing to do"),
-            };
-          }),
-        };
-      });
+      return showStrip(this.data);
     },
     /** Names what the strip's colour means, using the project's own step. */
     get stripCaption() {

@@ -174,9 +174,19 @@
 /* Nothing-to-do. Present, so the lane stays aligned, but silent: on most shots
  * three of four steps are NO, and drawing them as chips turned the grid into
  * noise that hid the states that matter.
+ *
+ * A faint diagonal rule rather than flat fill, so an idle cell reads as
+ * deliberately not-applicable rather than as a hole where a colour failed to
+ * load. Two degrees of contrast below everything else: it should be felt, not
+ * looked at.
  */
 .seg-idle {
   background-color: color-mix(in oklab, var(--color-ram-line) 50%, transparent);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 5px,
+    color-mix(in oklab, var(--color-ram-line) 55%, transparent) 5px 6px
+  );
 }
 
 /* ---------------------------------------------------------------------------
@@ -229,6 +239,32 @@
   outline: none;
 }
 
+/* The strip on a project card: same object, quieter, and not interactive. The
+ * whole card is the target there, so its segments must not compete for the
+ * click or suggest they are separately reachable. */
+.strip-card {
+  height: 1.75rem;
+  border-radius: 4px;
+}
+.strip-card .strip-seg {
+  pointer-events: none;
+}
+@media (min-width: 48rem) {
+  .strip-card {
+    height: 2.25rem;
+  }
+}
+
+/* A row is clickable, so it should say so. Everything else that takes a click
+ * already had a hover state; the shot rows were the exception. */
+.shot-row:hover .lane,
+.shot-row:focus-visible .lane {
+  filter: brightness(1.12);
+}
+.shot-row:hover {
+  background-color: color-mix(in oklab, var(--color-ram-card) 60%, transparent);
+}
+
 /* The per-step summary bars.
  *
  * Stacked on a phone, where four side by side would be unreadable. Once there
@@ -254,6 +290,22 @@
 
 /* One orchestrated entrance rather than scattered effects: rows arrive in
  * sequence, which reads as the list assembling itself once. */
+/* The strip arrives by wiping left to right, which is the one motion this
+ * subject owns: it is how a playhead crosses a timeline and how a strip of
+ * film runs. It plays once, before the rows, so the page assembles in the
+ * order the eye should read it. */
+@keyframes wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.strip {
+  animation: wipe 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -265,7 +317,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise {
+  .rise,
+  .strip {
     animation: none;
   }
   * {

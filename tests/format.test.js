@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import {
   clockText,
   deadlineText,
+  showStrip,
   frameCount,
   framerateFor,
   groupDigits,
@@ -223,6 +224,37 @@ test("a deadline is stated, never judged", () => {
   assert.equal(deadlineText("2026-06-04", now), "Deadline 4 Jun, 30 days ago");
   assert.equal(deadlineText("", now), "");
   assert.equal(deadlineText(null, now), "");
+});
+
+test("the show strip covers the whole project, weighted by length", () => {
+  const groups = showStrip(fixture);
+
+  // One group per sequence, and every shot present exactly once.
+  assert.equal(groups.length, Object.keys(fixture.sequences).length);
+  const segments = groups.flatMap((g) => g.segments);
+  assert.equal(segments.length, Object.keys(fixture.shots).length);
+
+  // Two denominators, and getting them confused is what makes a strip stop
+  // short of its container. A group is a share of the whole project...
+  const byGroup = groups.reduce((n, g) => n + g.width, 0);
+  assert.ok(Math.abs(byGroup - 100) < 0.001, "group widths must sum to 100");
+
+  // ...while a segment is a share of its own group, because it is laid out
+  // inside a box already sized to that group.
+  for (const g of groups) {
+    const inner = g.segments.reduce((n, s) => n + s.width, 0);
+    assert.ok(
+      Math.abs(inner - 100) < 0.001,
+      "each group's segments must fill it, got " + inner
+    );
+  }
+
+  // The strip is coloured by the LAST pipeline step, not the first.
+  assert.ok(segments.some((s) => !s.idle), "some shots must carry a colour");
+  assert.ok(
+    segments.some((s) => s.idle),
+    "the reference project has a shot with no work at its last step"
+  );
 });
 
 test("swatch text flips with the state colour", () => {

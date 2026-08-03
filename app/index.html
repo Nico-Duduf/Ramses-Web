@@ -134,11 +134,21 @@
                   <span x-text="p.name" class="t-label"></span>
                   <span x-text="percent(p)" class="t-figure"></span>
                 </div>
-                <div class="mt-4 h-1.5 overflow-hidden rounded-full bg-ram-line md:mt-6">
-                  <div
-                    class="h-full rounded-full bg-ram-accent-lit transition-[width] duration-500"
-                    :style="{ width: (p.completion ?? 0) + '%' }"
-                  ></div>
+                <!-- The project's own strip, not a progress bar. A bar would
+                     restate the figure printed beside it; this says where the
+                     work actually is. -->
+                <div class="strip strip-card mt-4 md:mt-6">
+                  <template x-for="group in strip(p)" :key="group.uuid">
+                    <div class="strip-group" :style="{ flexBasis: group.width + '%' }">
+                      <template x-for="seg in group.segments" :key="seg.uuid">
+                        <span
+                          :class="seg.idle ? 'seg-idle' : ''"
+                          :style="{ flexBasis: seg.width + '%', backgroundColor: seg.color }"
+                          class="strip-seg"
+                        ></span>
+                      </template>
+                    </div>
+                  </template>
                 </div>
               </button>
             </template>
@@ -289,7 +299,7 @@
                       <template x-for="(shot, i) in seq.shots" :key="shot.uuid">
                         <button
                           @click="open(shot)"
-                          class="rise flex w-full items-center gap-3 rounded-md py-0.5 text-left focus-visible:outline-2 focus-visible:outline-ram-accent-lit md:gap-4"
+                          class="rise shot-row flex w-full items-center gap-3 rounded-md py-0.5 text-left focus-visible:outline-2 focus-visible:outline-ram-accent-lit md:gap-4"
                           :style="{ animationDelay: Math.min(i * 18, 360) + 'ms' }"
                         >
                           <span

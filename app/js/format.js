@@ -208,6 +208,78 @@ export function lastActivity(statuses) {
 }
 
 /**
+ * The show strip: every shot in a project, grouped by sequence, sized by its
+ * share of the running time and coloured by the state of the last pipeline
+ * step.
+ *
+ * Lives here rather than in a view because two screens draw it: the project
+ * page, and each card in the project list, where it replaced a plain progress
+ * bar. A bar says one number that the figure beside it already says; the strip
+ * says where the work is.
+ *
+ * Two different denominators, which is the thing to get right: a GROUP's width
+ * is its share of the whole project, so a sequence that is half the running
+ * time is half the ribbon; a SEGMENT's width is its share of its own group,
+ * because it is laid out inside a box that has already been sized down to that
+ * group's share. Using the project total for both underfills every group by its
+ * own factor, which looks like a strip that stops short of the edge.
+ */
+export function showStrip({ project, sequences, shots, steps, states, statuses }) {
+  const pipeline = shotSteps(steps);
+  const last = pipeline[pipeline.length - 1];
+  if (!last) return [];
+
+  const grouped = Object.entries(sequences)
+    .map(([uuid, seq]) => ({
+      uuid,
+      order: seq.order ?? 0,
+      shots: sortShots(
+        Object.entries(shots)
+          .filter(([, s]) => s.sequence === uuid)
+          .map(([shotUuid, s]) => ({ uuid: shotUuid, ...s }))
+      ),
+      framerate: framerateFor(seq, project),
+    }))
+    .sort((a, b) => a.order - b.order);
+
+  const total =
+    grouped.reduce(
+      (n, g) => n + g.shots.reduce((m, s) => m + frameCount(s, null, { framerate: g.framerate }), 0),
+      0
+    ) || 1;
+
+  return grouped
+    .map((group) => {
+      const frames = group.shots.map((s) =>
+        frameCount(s, null, { framerate: group.framerate })
+      );
+      return {
+        uuid: group.uuid,
+        width: (frames.reduce((a, b) => a + b, 0) / total) * 100,
+        segments: group.shots.map((shot, i) => {
+          const groupFrames = frames.reduce((a, b) => a + b, 0) || 1;
+          const task = taskFor(shot.uuid, last.uuid, statuses);
+          const state = task ? states[task.state] ?? null : null;
+          const idle = !state || state.shortName === "NO";
+          return {
+            uuid: shot.uuid,
+            width: (frames[i] / groupFrames) * 100,
+            idle,
+            color: idle ? "" : stateColor(state),
+            title:
+              label(shot) +
+              "  " +
+              groupDigits(frames[i]) +
+              " frames  " +
+              (idle ? "nothing to do" : label(state)),
+          };
+        }),
+      };
+    })
+    .filter((g) => g.segments.length > 0);
+}
+
+/**
  * How the remaining work at one step is distributed, least finished first.
  *
  * A percentage says how far along a step is; it cannot say whether what is left
