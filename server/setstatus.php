@@ -71,17 +71,22 @@
         /*
             Completion follows the state.
 
-            RamStatus carries its own completionRatio, separate from the state's,
-            and in the client they are separate fields with separate menu
-            actions. But in practice they track: across the reference project
-            every task whose state defines a ratio carries exactly that ratio
-            (OK 100 x40, CHK 85 x2, TODO and NO 0 x118). Only the states that
-            define no ratio of their own (WIP) show tasks that differ.
+            RamStatus carries its own completionRatio, separate from the
+            state's, and in the client they are separate fields with separate
+            menu actions. In practice they track closely: across the reference
+            project 181 of 204 tasks carry exactly the ratio their state
+            defines, 11 sit on a state that defines no ratio at all (WIP), and
+            12 disagree.
 
-            So: copy the state's ratio when it has one, and leave the existing
-            value untouched when it does not. Setting a shot to OK from a phone
-            has to move the percentage, or the app lies about the thing it
-            exists to show.
+            Those 12 are all CHK at 80 against a state that now says 85, which
+            is what a state redefined after the fact looks like: the task keeps
+            the number it was given. So the two fields genuinely can diverge,
+            and copying is a choice rather than a tidy-up.
+
+            It is still the right choice. Setting a shot to OK from a phone has
+            to move the percentage, or the app lies about the thing it exists
+            to show. The state's ratio is copied when it defines one, and the
+            existing value is left alone when it does not.
         */
         $stateRatio = isset($states[$stateUuid]["completionRatio"])
             ? $states[$stateUuid]["completionRatio"]

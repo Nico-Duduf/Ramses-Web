@@ -51,8 +51,14 @@
             "shots"     => array("name", "shortName", "sequence", "duration"),
             "steps"     => array("name", "shortName", "type", "order", "color"),
             "states"    => array("name", "shortName", "color", "completionRatio"),
+            // No modifiedBy: it is the uuid of whoever last touched the task,
+            // and nothing can be done with it here. User rows are encrypted in
+            // the database, so a name would need decrypting server-side, and
+            // the field that would actually answer "who is on this" is
+            // assignedUser, not this one. It was riding along on every request
+            // and being read nowhere.
             "statuses"  => array("item", "itemType", "step", "state",
-                                 "completionRatio", "comment", "modifiedBy"),
+                                 "completionRatio", "comment"),
         );
 
         $content = array();

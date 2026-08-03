@@ -27,6 +27,7 @@ export function createStore() {
   return {
     route: parseHash(),
     user: null,
+    projects: [],
     /** Per project uuid: the ?weboverview payload, cached for this session. */
     overviews: {},
     busy: false,
@@ -99,8 +100,6 @@ export function createStore() {
       }
     },
 
-    projects: [],
-
     async login(email, password) {
       return this.guard(async () => {
         this.user = await api.login(email, password);
@@ -128,7 +127,7 @@ export function createStore() {
      *
      * Fine at three people and a handful of projects; each payload is tens of
      * kilobytes. If this list ever grows past that, this is the place to change:
-     * either compute the figure in weboverview.php, or drop the bars from the
+     * either compute the figure in weboverview.php, or drop the strips from the
      * list and show them only once a project is open.
      */
     async loadCompletions() {

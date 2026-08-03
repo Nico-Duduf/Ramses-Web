@@ -31,7 +31,7 @@ KEEP = {
     "steps": ("name", "shortName", "type", "order", "color"),
     "states": ("name", "shortName", "color", "completionRatio"),
     "statuses": ("item", "itemType", "step", "state", "completionRatio",
-                 "comment", "modifiedBy"),
+                 "comment"),
 }
 
 

@@ -181,7 +181,7 @@ test("last activity is the most recent change, not the first found", () => {
   assert.equal(lastActivity([{ modified: "" }]), null);
 });
 
-test("the state tally counts what is left, in pipeline order", () => {
+test("the state tally counts what is left", () => {
   const plate = Object.entries(fixture.steps).find(
     ([, s]) => s.shortName === "PLATE"
   )[0];
