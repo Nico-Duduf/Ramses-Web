@@ -1,99 +1,131 @@
 # Ramses-Web
 
-A glanceable, always-current overview of where each project stands, for use away
-from the desk (phone and tablet). A window into Ramses, not a replacement for
-Ramses-Client.
+A phone and tablet view of where every shot in your Ramses projects stands.
 
-Read-mostly: the only write is setting a shot step's state, with an optional note.
+Sign in with your normal Ramses account and you get the same picture the desktop
+client shows: completion per project, per step and per shot, coloured by state.
+It is a window into Ramses, not a replacement for Ramses-Client.
 
-See [docs/SPEC.md](docs/SPEC.md) for the locked MVP scope and
-[docs/DEPLOY.md](docs/DEPLOY.md) for how it reaches the server.
+Read-only today. Setting a shot step's state from the phone is planned and not
+built yet.
 
-## Layout
+## Requirements
 
-    app/         THE SHIPPED FOLDER. This, and only this, is copied to the server.
-      index.html
-      assets/    app.css (built, committed), alpine.min.js (vendored)
-      js/        api.js, format.js, store.js, views/
-    src/         Tailwind authoring input. Not shipped.
-    server/      Four PHP files to graft into Ramses-Server's src/. Not shipped as-is.
-    tools/       build / watch / publish scripts, and the Tailwind CLI (gitignored).
-    tests/       node --test for the completion formula. No npm dependencies.
-    docs/        SPEC.md, DEPLOY.md
+- A Ramses-Server installation you can upload files to, served over **HTTPS**
+- An SFTP client
+- Windows, for the build scripts (PowerShell)
+- Python 3, to run the local preview
+- Node 20 or newer, to run the tests
 
-`app/` holds no build tooling, no tests and no docs, so deploying is literally
-"copy `app/`". That is the same split Ramses-Fusion uses, and it exists because
-these folders get copied by hand.
+Node and Python are only needed to work on the app. Neither is required on the
+server.
 
-## Stack
+## Try it locally
 
-- **Tailwind CSS** through the standalone CLI. No npm, no `node_modules`, no
-  build step on the server: `app/assets/app.css` is committed as a built artifact.
-- **Alpine.js**, vendored at a pinned version in `app/assets/`.
-- Vanilla `fetch` in ES modules. No framework, no bundler.
+No server needed. This runs the whole app against a sample project:
 
-Node is used for one thing only: running `node --test` on the completion formula.
-It is not part of the build and not required to deploy.
+    python tools\mockserver.py 8099
 
-## Working on it
+Then open <http://127.0.0.1:8099/ramses/app/> and sign in with anything.
 
-    tools\fetch-tools.ps1     # once: downloads the Tailwind CLI
-    tools\watch.ps1           # rebuilds app.css on change, serves app/ on :8080
-    tools\build.ps1           # one-off minified build
-    python tools\mockserver.py 8099   # the whole app, on the test fixture
-    node --test               # the completion formula against real project data
-    tools\publish.ps1         # stages publish\ for upload (refuses if app.css is stale)
+## Deploy
 
-`mockserver.py` stands in for Ramses-Server: it serves `app/` at
-`/ramses/app/` and answers the four endpoints from `tests/fixtures/demo.json`.
-Every view can be driven end to end, including sign-in, without touching the
-live server. Use it before uploading; a UI bug found here costs nothing, and one
-found in production costs an upload and a colleague's confusion.
+Ramses-Web installs into your existing Ramses-Server folder, the one containing
+`index.php`. It adds an `app/` subfolder and four PHP files, and does not modify
+any file that is already there.
 
-`app/` is copied wholesale to the server, so it must never grow a test, a script
-or a doc. Those live in the folders above it.
+**1. Build and stage the release.**
 
-## Deploying
+    tools\fetch-tools.ps1     # first time only, downloads the Tailwind CLI
+    tools\build.ps1
+    tools\publish.ps1
 
-Everything goes into the one folder on the server that holds Ramses-Server's
-`index.php`. `tools\publish.ps1` stages `publish\ramses\` mirroring that
-folder, and you upload its contents with an SFTP client:
+This creates `publish\ramses\`, laid out exactly like the server.
 
-    app\        -> a new app/ subfolder, served at <api>/app/
-    *.php       -> four new files beside index.php
+**2. Upload the contents of `publish\ramses\`** into your Ramses-Server folder.
+You are adding one folder and four files:
 
-**One manual step, once.** Nothing here edits `index.php`, because a three-line
-change to Ramses-Server's own file should show up in its diff rather than being
-applied behind its back. Add these by hand:
+    app\             ->  a new app/ subfolder
+    *.php            ->  four new files next to index.php
+
+Check that `app\.htaccess` uploaded. Some SFTP clients hide dotfiles, and the
+app needs it to serve its stylesheet and scripts.
+
+**3. Add three lines to `index.php`.** This is the only change to an existing
+file, and it is only needed once:
 
 ```php
     include("users_reset_password.php");
-    include("weblogin.php");          // <-- add, MUST be above login.php
+    include("weblogin.php");          // add this line
     include("login.php");
 ```
 
 ```php
     include("projects_get.php");
-    include("weboverview.php");       // <-- add
-    include("setstatus.php");         // <-- add
+    include("weboverview.php");       // add this line
+    include("setstatus.php");         // and this one
 ```
 
-`weblogin.php` has to come before `login.php`: it rewrites the request so the
-stock `?login` handler picks it up, and it is skipped entirely if login has
-already run. See [server/README.md](server/README.md) for what each endpoint
-does and [docs/DEPLOY.md](docs/DEPLOY.md) for the full routine.
+`weblogin.php` must come before `login.php`. It prepares the request for the
+server's own login handler, and has no effect if login has already run.
 
-## Why the completion numbers must be reproduced exactly
+**4. Open `https://your-server/ramses/app/`** and sign in.
 
-The percentages here have to agree with the ones Ramses-Client shows, or the app
-is worse than useless. The formula is reimplemented in `app/js/format.js` and
-pinned by tests against a fixture extracted from a real project database. See the
-comment at the top of that file for the C++ it mirrors.
+Later releases are steps 1 and 2 again. Step 3 stays done.
 
-The database that fixture came from is committed as `tests/fixtures/demo.ramses`,
-so the tests keep working after that production is archived. Nothing in
-this repo reads a path outside it.
+### If something is wrong
 
-`package.json` exists only so `node --test` parses `app/js/*.js` as ES modules.
-It has no dependencies and never should: adding one puts a `node_modules` between
-you and a deploy that is supposed to be a folder copy.
+| What you see | What it means |
+| --- | --- |
+| "The server answered with a web page instead of JSON" | `app/` is not one level below the API folder. The message shows the URL it tried. |
+| Unstyled page, no colours | `app/.htaccess` is missing, or the stylesheet returned 403 or 404. |
+| Changes do not appear after uploading | Cached. Hard-reload before looking for anything else. |
+| "Either this project doesn't exist..." | You are signed in but not assigned to that project in Ramses. |
+
+## Layout
+
+    app/         The only folder that goes on the server
+    server/      Four PHP endpoints, installed next to index.php
+    src/         Tailwind source for the stylesheet
+    tools/       Build, preview and release scripts
+    tests/       Test suite and sample project data
+    docs/        SPEC.md (what it does), DEPLOY.md (deployment detail)
+
+`app/` contains only what ships. Keep tests, scripts and documentation out of it.
+
+## How it is built
+
+- **Tailwind CSS**, through the standalone CLI. No npm and no `node_modules`.
+  `app/assets/app.css` is committed, so the server never builds anything.
+- **Alpine.js**, vendored at a pinned version.
+- Plain `fetch` and ES modules. No framework, no bundler.
+
+Do not add npm dependencies. Deploying is meant to stay a folder copy.
+
+## Working on it
+
+    tools\watch.ps1                  rebuild the stylesheet on change, serve app/ on :8080
+    python tools\mockserver.py 8099  the full app against the sample project
+    node --test                      run the tests
+    tools\publish.ps1                stage a release
+
+Use the preview before uploading. Every screen, including sign-in, works against
+the sample data.
+
+### The completion percentages
+
+They must match what Ramses-Client shows. The formula lives in
+`app/js/format.js`, which documents the client code it mirrors, and the tests
+pin it against figures taken from a real project and checked against the
+desktop.
+
+That project's database is committed, anonymised, as
+`tests/fixtures/demo.ramses`. To refresh it from your own data, see
+`tests/anonymise_fixture.py`.
+
+### Tests
+
+    node --test
+
+`package.json` exists so the test runner reads `app/js/*.js` as ES modules. It
+has no dependencies.
