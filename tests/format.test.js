@@ -43,13 +43,13 @@ const completionOf = (shortName) =>
 
 test("step completion matches the desktop client", () => {
   assert.equal(completionOf("PLATE"), 100);
-  assert.equal(completionOf("MaMo"), 0);
-  assert.equal(completionOf("Mod"), 0);
-  assert.equal(completionOf("Comp"), 6);
+  assert.equal(completionOf("MaMo"), 81);
+  assert.equal(completionOf("Mod"), 16);
+  assert.equal(completionOf("Comp"), 39);
 });
 
 test("project completion is the mean of the shot steps", () => {
-  assert.equal(projectCompletion(fixture), 26);
+  assert.equal(projectCompletion(fixture), 59);
 });
 
 test("a status whose shot no longer exists is not counted", () => {
@@ -65,7 +65,7 @@ test("a status whose shot no longer exists is not counted", () => {
     ...fixture,
     shots: { ...fixture.shots, [orphans[0].item]: { shortName: "SH010" } },
   };
-  assert.equal(stepCompletion(byShortName["PLATE"], withGhost), 97);
+  assert.equal(stepCompletion(byShortName["PLATE"], withGhost), 98);
 });
 
 test("a nothing-to-do task is not counted", () => {
@@ -149,13 +149,13 @@ test("frame counts use each shot's own sequence rate", () => {
     (sum, s) => sum + frameCount(s, fixture.sequences[s.sequence], fixture.project),
     0
   );
-  // The whole reference project at 25 fps: 41 shots, 197.4 seconds.
-  assert.equal(total, 4935);
-  assert.equal(shots.length, 41);
+  // The whole reference project at 25 fps: 51 shots, 4 minutes 18 seconds.
+  assert.equal(total, 6446);
+  assert.equal(shots.length, 51);
 });
 
 test("long counts stay scannable and clocks roll over at a minute", () => {
-  assert.equal(groupDigits(4935), "4 935");
+  assert.equal(groupDigits(6446), "6 446");
   assert.equal(groupDigits(93), "93");
   assert.equal(clockText(48), "48 s");
   assert.equal(clockText(128), "2:08");
@@ -174,7 +174,7 @@ test("timestamps are read as UTC, which is how the server writes them", () => {
 test("last activity is the most recent change, not the first found", () => {
   assert.equal(
     lastActivity(fixture.statuses).toISOString(),
-    "2026-07-15T18:47:54.000Z"
+    "2026-08-03T10:35:53.000Z"
   );
   assert.equal(lastActivity([]), null);
   assert.equal(lastActivity([{ modified: "" }]), null);
@@ -187,12 +187,30 @@ test("the state tally counts what is left, in pipeline order", () => {
   const tally = stateTally(plate, fixture);
 
   // Same exclusions as the completion formula: no nothing-to-do, no orphans.
-  assert.equal(tally.reduce((n, t) => n + t.count, 0), 40);
+  assert.equal(tally.reduce((n, t) => n + t.count, 0), 50);
   assert.ok(!tally.some((t) => t.state.shortName === "NO"));
+});
 
-  // Pipeline order, so the sentence always reads the same way round.
-  const orders = tally.map((t) => t.state.order ?? 0);
-  assert.deepEqual(orders, [...orders].sort((a, b) => a - b));
+test("the tally reads least finished first", () => {
+  const comp = Object.entries(fixture.steps).find(
+    ([, s]) => s.shortName === "Comp"
+  )[0];
+  const tally = stateTally(comp, fixture);
+
+  // Comp is the step with real variety: five distinct states in play.
+  assert.deepEqual(
+    tally.map((t) => t.state.shortName),
+    ["TODO", "WIP", "RTK", "CHK", "OK"]
+  );
+
+  // Guard against the previous version of this test, which sorted on a field
+  // that is not in the payload: every key was undefined, so the assertion held
+  // no matter what order the tally came back in.
+  const ranks = tally.map((t) =>
+    typeof t.state.completionRatio === "number" ? t.state.completionRatio : 50
+  );
+  assert.ok(new Set(ranks).size >= 3, "the ordering key must actually vary");
+  assert.deepEqual(ranks, [...ranks].sort((a, b) => a - b));
 });
 
 test("a deadline is stated, never judged", () => {

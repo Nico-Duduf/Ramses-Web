@@ -208,12 +208,20 @@ export function lastActivity(statuses) {
 }
 
 /**
- * How the remaining work at one step is distributed, most-blocking first.
+ * How the remaining work at one step is distributed, least finished first.
  *
  * A percentage says how far along a step is; it cannot say whether what is left
- * is forty untouched shots or two in review. Ordered by the state's own order
- * field, which is the pipeline's order, so the sentence always reads the same
- * way round.
+ * is forty untouched shots or two in review.
+ *
+ * Ordered by each state's own completionRatio, so the tally always reads from
+ * least done to most done: TODO, then WIP, then RTK, then CHK, then OK. An
+ * earlier version sorted on the state's `order` field, which is not in the
+ * payload at all, so every key was undefined and the sort did nothing while
+ * claiming to be in pipeline order. Completion is the better key regardless:
+ * it is what the reader actually wants ranked, and it needs no new field.
+ *
+ * States with no ratio of their own (WIP is one) sort at 50, the same default
+ * taskCompletion applies, which lands them between started and finished.
  */
 export function stateTally(stepUuid, { statuses, states, shots }) {
   const counts = new Map();
@@ -223,9 +231,13 @@ export function stateTally(stepUuid, { statuses, states, shots }) {
     if (!state || state.shortName === "NO") continue;
     counts.set(s.state, (counts.get(s.state) || 0) + 1);
   }
+
+  const rank = (state) =>
+    typeof state.completionRatio === "number" ? state.completionRatio : 50;
+
   return [...counts.entries()]
     .map(([uuid, count]) => ({ count, state: states[uuid] }))
-    .sort((a, b) => (a.state.order ?? 0) - (b.state.order ?? 0));
+    .sort((a, b) => rank(a.state) - rank(b.state));
 }
 
 /**
