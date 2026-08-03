@@ -16,6 +16,8 @@ built yet.
 Every shot is a lane, segmented by pipeline step and coloured by its state. The
 ribbon at the top is the whole project: one block per shot, sized by its length
 in frames, so you can see where the work sits rather than only how much is left.
+It is coloured by the last step in your pipeline, and you can pick a different
+one.
 
 ## Requirements
 
