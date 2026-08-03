@@ -9,6 +9,14 @@ It is a window into Ramses, not a replacement for Ramses-Client.
 Read-only today. Setting a shot step's state from the phone is planned and not
 built yet.
 
+![A project on the desktop: the show strip across the top, completion per step, and every shot as a lane coloured by state](docs/images/project-desktop.jpg)
+
+<img src="docs/images/project-phone.jpg" alt="The same project on a phone" width="360">
+
+Every shot is a lane, segmented by pipeline step and coloured by its state. The
+ribbon at the top is the whole project: one block per shot, sized by its length
+in frames, so you can see where the work sits rather than only how much is left.
+
 ## Requirements
 
 - A Ramses-Server installation you can upload files to, served over **HTTPS**

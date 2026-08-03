@@ -13,3 +13,7 @@
 
 # The fixture database is a SQLite file.
 *.ramses binary
+
+# Screenshots.
+*.png binary
+*.jpg binary
