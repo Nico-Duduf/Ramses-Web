@@ -219,7 +219,6 @@
  * ends and the next begins without a single label. */
 .strip-group {
   display: flex;
-  gap: 1px;
   min-width: 0;
   overflow: hidden;
   border-radius: 4px;
@@ -232,6 +231,19 @@
   flex-grow: 0;
   flex-shrink: 1;
   transition: filter 0.15s;
+}
+
+/* The divider between shots is drawn INSIDE each segment, not as a gap between
+ * them.
+ *
+ * As a flex gap it measured a uniform 1px in CSS, but rendered unevenly: shot
+ * widths are fractional (5.948px, 14.406px, ...) and at a device pixel ratio of
+ * 1.5 a 1px gap is 1.5 device pixels, so where each fractional edge happened to
+ * fall decided whether it painted as one device pixel or two. Every separator
+ * is now at the same offset inside its own box, so they all rasterise alike.
+ */
+.strip-seg:not(:first-child) {
+  box-shadow: inset 1px 0 0 var(--color-ram-bg);
 }
 .strip-seg:hover,
 .strip-seg:focus-visible {
