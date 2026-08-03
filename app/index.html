@@ -256,14 +256,19 @@
                   <div class="flex items-center gap-3">
                     <span class="w-16 shrink-0"></span>
                     <div class="lane flex-1" :style="laneStyle">
+                      <!-- Not t-eyebrow: that uppercases, and these are the
+                           user's own step names. "MaMo" is matchmove; "MAMO"
+                           throws away the camel case that says so, and it
+                           disagrees with the bars directly above. Never
+                           transform data. -->
                       <template x-for="step in steps" :key="step.uuid">
                         <span
                           x-text="step.shortName"
-                          class="t-eyebrow truncate text-center"
+                          class="t-meta truncate text-center"
                         ></span>
                       </template>
                     </div>
-                    <span class="t-eyebrow w-12 shrink-0 text-right">Fr</span>
+                    <span class="t-eyebrow w-12 shrink-0 text-right">Frames</span>
                   </div>
                 </div>
 
