@@ -32,7 +32,28 @@ const BASE = new URL("../", window.location.href).href;
  */
 let apiVersion = window.localStorage.getItem("ramses.version") || "0.0.0";
 
-let token = "";
+/**
+ * The session token, kept in localStorage.
+ *
+ * It used to live only in this variable, which meant every reload signed you
+ * out even though the PHP session cookie was still perfectly valid. On a phone
+ * that is constant: locking the screen, switching apps or returning to the tab
+ * all discard the page.
+ *
+ * The token is useless on its own. The server compares it against the session
+ * it issued, and that session is bound to a `secure` cookie and pinned to the
+ * client's IP, so a copied token cannot be replayed from anywhere else. What is
+ * stored here is a handle to a session, not a credential: the password is never
+ * written down, and logging out clears it.
+ */
+const TOKEN_KEY = "ramses.token";
+let token = window.localStorage.getItem(TOKEN_KEY) || "";
+
+function setToken(value) {
+  token = value || "";
+  if (token) window.localStorage.setItem(TOKEN_KEY, token);
+  else window.localStorage.removeItem(TOKEN_KEY);
+}
 
 export class ApiError extends Error {
   constructor(message, reply) {
@@ -120,7 +141,7 @@ export async function ping() {
  */
 export async function login(email, password) {
   const content = await request("weblogin", { email, password });
-  token = content.token;
+  setToken(content.token);
   return {
     uuid: content.uuid,
     role: content.role,
@@ -132,8 +153,14 @@ export async function logout() {
   try {
     await request("logout");
   } finally {
-    token = "";
+    setToken("");
   }
+}
+
+/** Drops the stored token without telling the server. For a session the server
+ * has already forgotten, where ?logout would only fail again. */
+export function forget() {
+  setToken("");
 }
 
 /** Projects this user is assigned to. Uses the server's existing endpoint. */

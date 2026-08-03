@@ -141,6 +141,23 @@ export function sortShots(shots) {
   );
 }
 
+/**
+ * How long ago the data on screen was fetched.
+ *
+ * Deliberately coarse. The exact second is never the question; "is this
+ * current?" is, and "just now" answers it faster than a timestamp does.
+ */
+export function sinceText(date) {
+  if (!date) return "";
+  const seconds = Math.max(0, (Date.now() - date.getTime()) / 1000);
+  if (seconds < 45) return "just now";
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) return minutes + (minutes === 1 ? " min ago" : " min ago");
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) return hours + (hours === 1 ? " hour ago" : " hours ago");
+  return Math.round(hours / 24) + " days ago";
+}
+
 /** "2026-07-13 15:38:53" (UTC, as the server stamps it) -> "13 Jul, 15:38". */
 export function shortDate(stamp) {
   if (!stamp) return "";

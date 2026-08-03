@@ -16,6 +16,11 @@ export function projectView(store) {
     get steps() {
       return this.data ? shotSteps(this.data.steps) : [];
     },
+    /** One grid template shared by the header row and every lane, so the step
+     * labels stay aligned with the segments they name. */
+    get laneStyle() {
+      return { gridTemplateColumns: `repeat(${this.steps.length}, minmax(0, 1fr))` };
+    },
     /** Sequences in configured order, each with its shots in natural order. */
     get sequences() {
       if (!this.data) return [];
@@ -38,19 +43,27 @@ export function projectView(store) {
     stepWidth(stepUuid) {
       return (stepCompletion(stepUuid, this.data) ?? 0) + "%";
     },
-    /** The state row for one shot at one step, or null when there is no task. */
-    state(shotUuid, stepUuid) {
+    /**
+     * One segment of a shot's lane.
+     *
+     * "Idle" covers both no task at all and the nothing-to-do state, because on
+     * screen they mean the same thing: this step is not part of this shot's
+     * work. Most shots are idle at most steps, so drawing them as full chips
+     * buried the states that actually matter under a wall of "NO".
+     */
+    segment(shotUuid, stepUuid) {
       const task = taskFor(shotUuid, stepUuid, this.data.statuses);
-      return task ? this.data.states[task.state] ?? null : null;
-    },
-    swatch(shotUuid, stepUuid) {
-      const bg = stateColor(this.state(shotUuid, stepUuid));
-      return { "background-color": bg, color: textOn(bg) };
-    },
-    stateName(shotUuid, stepUuid) {
-      return label(this.state(shotUuid, stepUuid)) === "?"
-        ? ""
-        : label(this.state(shotUuid, stepUuid));
+      const state = task ? this.data.states[task.state] ?? null : null;
+      const idle = !state || state.shortName === "NO";
+
+      if (idle) return { idle: true, style: {}, label: "" };
+
+      const bg = stateColor(state);
+      return {
+        idle: false,
+        style: { backgroundColor: bg, color: textOn(bg) },
+        label: label(state),
+      };
     },
     open(shot) {
       store.go("shot", shot.uuid);

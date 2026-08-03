@@ -40,8 +40,15 @@ It is not part of the build and not required to deploy.
     tools\fetch-tools.ps1     # once: downloads the Tailwind CLI
     tools\watch.ps1           # rebuilds app.css on change, serves app/ on :8080
     tools\build.ps1           # one-off minified build
+    python tools\mockserver.py 8099   # the whole app, on the test fixture
     node --test               # the completion formula against real project data
     tools\publish.ps1         # stages publish\ for upload (refuses if app.css is stale)
+
+`mockserver.py` stands in for Ramses-Server: it serves `app/` at
+`/ramses/app/` and answers the four endpoints from `tests/fixtures/demo.json`.
+Every view can be driven end to end, including sign-in, without touching the
+live server. Use it before uploading; a UI bug found here costs nothing, and one
+found in production costs an upload and a colleague's confusion.
 
 `app/` is copied wholesale to the server, so it must never grow a test, a script
 or a doc. Those live in the folders above it.

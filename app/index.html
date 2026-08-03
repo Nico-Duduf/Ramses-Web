@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#17191c" />
+    <meta name="theme-color" content="#131518" />
     <title>Ramses</title>
     <link rel="stylesheet" href="assets/app.css" />
     <!--
@@ -22,51 +22,92 @@
     <script defer src="assets/alpine.min.js"></script>
   </head>
 
-  <body class="min-h-dvh bg-ram-bg text-ram-fg antialiased">
-    <div x-data x-cloak class="mx-auto max-w-3xl px-4 pb-16 pt-[env(safe-area-inset-top)]">
-      <!-- Header -->
-      <header class="flex items-baseline justify-between py-4">
-        <h1 class="font-mono text-sm tracking-widest text-ram-dim">RAMSES</h1>
-        <button
-          x-show="$store.ramses.user"
-          @click="$store.ramses.logout()"
-          class="text-xs text-ram-dim hover:text-ram-fg"
-        >
-          Log out
-        </button>
+  <body class="min-h-dvh bg-ram-bg font-sans text-ram-fg antialiased">
+    <div
+      x-data
+      x-cloak
+      class="mx-auto max-w-2xl px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))]"
+    >
+      <!-- Header. Present once signed in; the login screen carries its own. -->
+      <header
+        x-show="$store.ramses.user"
+        class="mb-5 flex items-center justify-between border-b border-ram-line pb-3"
+      >
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.3em] text-ram-dim">RAMSES</p>
+          <p
+            class="mt-0.5 text-[11px] text-ram-dim"
+            x-text="$store.ramses.busy
+              ? 'Refreshing...'
+              : ($store.ramses.since ? 'Updated ' + $store.ramses.since : '')"
+          ></p>
+        </div>
+        <div class="flex items-center gap-1">
+          <button
+            @click="$store.ramses.refresh()"
+            :disabled="$store.ramses.busy"
+            class="rounded px-2.5 py-1.5 text-xs text-ram-dim hover:bg-ram-card hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit disabled:opacity-40"
+          >
+            Refresh
+          </button>
+          <button
+            @click="$store.ramses.logout()"
+            class="rounded px-2.5 py-1.5 text-xs text-ram-dim hover:bg-ram-card hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+          >
+            Sign out
+          </button>
+        </div>
       </header>
 
-      <!-- Error banner. Never blocks the view underneath. -->
+      <!-- Errors never replace the view underneath, only sit above it. -->
       <p
         x-show="$store.ramses.error"
         x-text="$store.ramses.error"
         class="mb-4 rounded border border-ram-bad/40 bg-ram-bad/10 px-3 py-2 text-sm text-ram-bad"
       ></p>
 
-      <!-- Login -->
-      <section x-show="!$store.ramses.user" x-data="loginView">
-        <form @submit.prevent="submit" class="space-y-3">
+      <!-- Sign in -->
+      <section
+        x-show="!$store.ramses.user"
+        x-data="loginView"
+        class="flex min-h-[70dvh] flex-col justify-center"
+      >
+        <div class="mb-8">
+          <h1 class="font-mono text-2xl tracking-[0.42em] text-ram-fg">RAMSES</h1>
+          <p class="mt-2 text-sm text-ram-dim">
+            Where everything stands, away from the desk.
+          </p>
+        </div>
+
+        <form @submit.prevent="submit" class="space-y-2.5">
+          <label class="sr-only" for="email">Email</label>
           <input
+            id="email"
             type="email"
             x-model="email"
             autocomplete="username"
+            inputmode="email"
             placeholder="email"
-            class="w-full rounded bg-ram-card px-3 py-2.5 outline-none ring-1 ring-ram-line focus:ring-ram-accent"
+            class="w-full rounded-md bg-ram-card px-3.5 py-3 outline-none ring-1 ring-ram-line focus:ring-ram-accent-lit"
           />
+          <label class="sr-only" for="password">Password</label>
           <input
+            id="password"
             type="password"
             x-model="password"
             autocomplete="current-password"
             placeholder="password"
-            class="w-full rounded bg-ram-card px-3 py-2.5 outline-none ring-1 ring-ram-line focus:ring-ram-accent"
+            class="w-full rounded-md bg-ram-card px-3.5 py-3 outline-none ring-1 ring-ram-line focus:ring-ram-accent-lit"
           />
           <button
             type="submit"
             :disabled="!canSubmit"
-            class="w-full rounded bg-ram-accent py-2.5 font-medium disabled:opacity-40"
+            class="w-full rounded-md bg-ram-accent py-3 font-medium transition-opacity hover:opacity-90 disabled:opacity-40"
             x-text="$store.ramses.busy ? 'Signing in...' : 'Sign in'"
           ></button>
         </form>
+
+        <p class="mt-6 font-mono text-[11px] text-ram-dim" x-text="host"></p>
       </section>
 
       <template x-if="$store.ramses.user">
@@ -77,82 +118,130 @@
             x-data="projectsView"
             class="space-y-2"
           >
-            <template x-for="p in projects" :key="p.uuid">
+            <template x-for="(p, i) in projects" :key="p.uuid">
               <button
                 @click="open(p)"
-                class="block w-full rounded bg-ram-card p-3 text-left ring-1 ring-ram-line hover:ring-ram-accent"
+                class="rise block w-full rounded-lg bg-ram-card p-4 text-left ring-1 ring-ram-line transition-colors hover:ring-ram-accent-lit/40 focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                :style="{ animationDelay: (i * 40) + 'ms' }"
               >
-                <div class="flex items-baseline justify-between">
-                  <span x-text="p.name" class="font-medium"></span>
-                  <span x-text="percent(p)" class="font-mono text-sm text-ram-dim"></span>
+                <div class="flex items-end justify-between gap-4">
+                  <span x-text="p.name" class="text-[15px] font-medium"></span>
+                  <span
+                    x-text="percent(p)"
+                    class="tnum font-mono text-2xl leading-none text-ram-fg"
+                  ></span>
                 </div>
-                <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-ram-line">
+                <div class="mt-3 h-1 overflow-hidden rounded-full bg-ram-line">
                   <div
-                    class="h-full rounded-full bg-ram-good"
+                    class="h-full rounded-full bg-ram-accent-lit transition-[width] duration-500"
                     :style="{ width: (p.completion ?? 0) + '%' }"
                   ></div>
                 </div>
               </button>
             </template>
+
+            <p
+              x-show="projects.length === 0 && !$store.ramses.busy"
+              class="py-12 text-center text-sm text-ram-dim"
+            >
+              No projects are assigned to you yet.
+            </p>
           </section>
 
           <!-- One project -->
           <section
             x-show="$store.ramses.route.view === 'project'"
             x-data="projectView"
-            class="space-y-6"
           >
             <template x-if="data">
-              <div class="space-y-6">
-                <div>
-                  <button @click="back()" class="mb-3 text-xs text-ram-dim hover:text-ram-fg">
-                    &larr; Projects
-                  </button>
-                  <h2 x-text="data.project.name" class="text-lg font-medium"></h2>
-                </div>
+              <div>
+                <button
+                  @click="back()"
+                  class="text-xs text-ram-dim hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                >
+                  &larr; Projects
+                </button>
+                <h2 x-text="data.project.name" class="mt-2 text-xl font-medium"></h2>
 
                 <!-- Completion by step -->
-                <div class="space-y-2">
+                <div class="mt-5 space-y-2.5">
                   <template x-for="step in steps" :key="step.uuid">
                     <div>
-                      <div class="flex items-baseline justify-between text-sm">
-                        <span x-text="step.shortName" class="font-mono"></span>
-                        <span x-text="stepPercent(step.uuid)" class="font-mono text-ram-dim"></span>
+                      <div class="flex items-baseline justify-between text-xs">
+                        <span
+                          x-text="step.shortName"
+                          class="font-mono tracking-wide"
+                        ></span>
+                        <span
+                          x-text="stepPercent(step.uuid)"
+                          class="tnum font-mono text-ram-dim"
+                        ></span>
                       </div>
-                      <div class="mt-1 h-1.5 overflow-hidden rounded-full bg-ram-line">
+                      <div class="mt-1 h-1 overflow-hidden rounded-full bg-ram-line">
                         <div
-                          class="h-full rounded-full"
-                          :style="{ width: stepWidth(step.uuid), backgroundColor: step.color || '#51a548' }"
+                          class="h-full rounded-full transition-[width] duration-500"
+                          :style="{ width: stepWidth(step.uuid), backgroundColor: step.color || '#7fa3d8' }"
                         ></div>
                       </div>
                     </div>
                   </template>
                 </div>
 
-                <!-- Shots, by sequence, coloured by state -->
+                <!-- Column headers for the lanes below. Sticky, because the
+                     shot list is long and the labels are the only thing that
+                     says which segment is which. -->
+                <div
+                  class="sticky top-0 z-10 -mx-4 mt-7 border-b border-ram-line bg-ram-bg px-4 pb-1.5 pt-2"
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="w-14 shrink-0"></span>
+                    <div class="lane flex-1" :style="laneStyle">
+                      <template x-for="step in steps" :key="step.uuid">
+                        <span
+                          x-text="step.shortName"
+                          class="truncate text-center font-mono text-[10px] tracking-wide text-ram-dim"
+                        ></span>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Shots, by sequence -->
                 <template x-for="seq in sequences" :key="seq.uuid">
-                  <div>
-                    <h3
-                      x-text="label(seq)"
-                      class="mb-2 font-mono text-xs tracking-widest text-ram-dim"
-                    ></h3>
+                  <div class="mt-5">
+                    <h3 class="mb-1.5 flex items-center gap-2">
+                      <span
+                        x-text="label(seq)"
+                        class="font-mono text-[11px] tracking-[0.2em] text-ram-dim"
+                      ></span>
+                      <span class="h-px flex-1 bg-ram-line"></span>
+                      <span
+                        x-text="seq.shots.length"
+                        class="tnum font-mono text-[11px] text-ram-dim"
+                      ></span>
+                    </h3>
+
                     <div class="space-y-1">
-                      <template x-for="shot in seq.shots" :key="shot.uuid">
+                      <template x-for="(shot, i) in seq.shots" :key="shot.uuid">
                         <button
                           @click="open(shot)"
-                          class="flex w-full items-center gap-1.5 rounded bg-ram-card p-1.5 text-left ring-1 ring-ram-line hover:ring-ram-accent"
+                          class="rise flex w-full items-center gap-2 rounded py-0.5 text-left focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                          :style="{ animationDelay: Math.min(i * 18, 360) + 'ms' }"
                         >
                           <span
                             x-text="label(shot)"
-                            class="w-16 shrink-0 pl-1 font-mono text-sm"
+                            class="tnum w-14 shrink-0 font-mono text-[13px]"
                           ></span>
-                          <template x-for="step in steps" :key="step.uuid">
-                            <span
-                              class="flex-1 truncate rounded px-1 py-1 text-center font-mono text-[10px] leading-none"
-                              :style="swatch(shot.uuid, step.uuid)"
-                              x-text="stateName(shot.uuid, step.uuid)"
-                            ></span>
-                          </template>
+                          <div class="lane h-6 flex-1" :style="laneStyle">
+                            <template x-for="step in steps" :key="step.uuid">
+                              <span
+                                class="flex items-center justify-center truncate font-mono text-[10px] leading-none"
+                                :class="segment(shot.uuid, step.uuid).idle ? 'seg-idle' : ''"
+                                :style="segment(shot.uuid, step.uuid).style"
+                                x-text="segment(shot.uuid, step.uuid).label"
+                              ></span>
+                            </template>
+                          </div>
                         </button>
                       </template>
                     </div>
@@ -165,38 +254,53 @@
           <!-- One shot -->
           <section x-show="$store.ramses.route.view === 'shot'" x-data="shotView">
             <template x-if="shot">
-              <div class="space-y-4">
-                <div>
-                  <button @click="back()" class="mb-3 text-xs text-ram-dim hover:text-ram-fg">
-                    &larr; Back
-                  </button>
-                  <h2 class="font-mono text-lg" x-text="label(shot)"></h2>
+              <div>
+                <button
+                  @click="back()"
+                  class="text-xs text-ram-dim hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                >
+                  &larr; Back
+                </button>
+
+                <div class="mt-2 flex items-baseline gap-3">
+                  <h2 class="tnum font-mono text-2xl" x-text="label(shot)"></h2>
                   <p class="text-xs text-ram-dim">
                     <span x-text="sequence ? label(sequence) : ''"></span>
-                    <span x-show="shot.duration" x-text="' - ' + shot.duration + 's'"></span>
+                    <span
+                      x-show="shot.duration"
+                      x-text="' / ' + Number(shot.duration).toFixed(2) + ' s'"
+                      class="tnum font-mono"
+                    ></span>
                   </p>
                 </div>
 
-                <div class="space-y-2">
-                  <template x-for="row in rows" :key="row.step.uuid">
-                    <div class="rounded bg-ram-card p-3 ring-1 ring-ram-line">
-                      <div class="flex items-center justify-between gap-2">
-                        <span x-text="row.step.shortName" class="font-mono text-sm"></span>
+                <div class="mt-5 space-y-1.5">
+                  <template x-for="(row, i) in rows" :key="row.step.uuid">
+                    <div
+                      class="rise rounded-lg bg-ram-card p-3.5 ring-1 ring-ram-line"
+                      :style="{ animationDelay: (i * 40) + 'ms' }"
+                    >
+                      <div class="flex items-center justify-between gap-3">
                         <span
-                          class="rounded px-2 py-0.5 font-mono text-xs"
-                          :style="row.swatch"
-                          x-text="row.stateName || 'no task'"
+                          x-text="row.step.shortName"
+                          class="font-mono text-[13px] tracking-wide"
+                        ></span>
+                        <span
+                          class="rounded px-2 py-0.5 font-mono text-[10px]"
+                          :class="row.state ? '' : 'text-ram-dim ring-1 ring-ram-line'"
+                          :style="row.state ? row.swatch : {}"
+                          x-text="row.stateName || 'nothing to do'"
                         ></span>
                       </div>
                       <p
                         x-show="row.comment"
                         x-text="row.comment"
-                        class="mt-2 text-sm text-ram-dim"
+                        class="mt-2 text-[13px] leading-snug text-ram-fg/80"
                       ></p>
                       <p
                         x-show="row.modified"
                         x-text="row.modified"
-                        class="mt-1 font-mono text-[10px] text-ram-dim"
+                        class="mt-1.5 font-mono text-[10px] text-ram-dim"
                       ></p>
                     </div>
                   </template>
@@ -207,10 +311,11 @@
         </div>
       </template>
 
-      <!-- Busy indicator, deliberately unobtrusive: the views keep their content -->
+      <!-- Busy indicator. Deliberately a hairline: the views keep their content
+           while refreshing, so this must not imply the screen is empty. -->
       <div
         x-show="$store.ramses.busy"
-        class="fixed inset-x-0 top-0 h-0.5 animate-pulse bg-ram-accent"
+        class="fixed inset-x-0 top-0 h-0.5 animate-pulse bg-ram-accent-lit"
       ></div>
     </div>
   </body>

@@ -10,25 +10,34 @@
 @source "../app/index.html";
 @source "../app/js";
 
-/* Dark-committed on purpose. This sits next to Fusion, Nuke and DaVinci all day,
- * and it matches the Ramses-Client palette so the two read as one tool.
+/* Dark-committed on purpose. This sits next to Fusion, Nuke and DaVinci all
+ * day, and it matches the Ramses-Client palette so the two read as one tool.
  *
- * State colours are NOT here: they come from the server's RamState rows at
- * runtime, so recolouring a state in Ramses-Client recolours it here too.
+ * The governing rule: the only saturated colour on screen is data. Every state
+ * colour comes from the server's RamState rows at runtime, so the chrome has to
+ * stay out of their way. Anything here that competes with a state swatch is a
+ * bug, not a style.
  */
 @theme {
-  --color-ram-bg: #17191c;
-  --color-ram-card: #1f2226;
-  --color-ram-line: #2c3036;
-  --color-ram-fg: #e8e8e8;
-  --color-ram-dim: #8b9199;
+  --color-ram-bg: #131518;
+  --color-ram-card: #1b1e22;
+  --color-ram-line: #262a30;
+  --color-ram-fg: #e6e8ea;
+  --color-ram-dim: #7d858f;
 
-  /* Ramses-Client's own two accents. */
+  /* Ramses-Client's own blue, plus a tint of it that survives on a dark
+   * background for links and focus rings. */
   --color-ram-accent: #2c4468;
-  --color-ram-good: #2b5a4c;
+  --color-ram-accent-lit: #7fa3d8;
 
-  /* Only used for the error banner. */
-  --color-ram-bad: #c05353;
+  /* Errors only. Deliberately desaturated: a red that shouts would out-compete
+   * the RTK state swatch, which is the red that actually matters. */
+  --color-ram-bad: #b3585c;
+
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono",
+    Consolas, monospace;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
 }
 
 /* Alpine paints x-data content for one frame before it initialises; x-cloak
@@ -36,4 +45,61 @@
  */
 [x-cloak] {
   display: none !important;
+}
+
+/* Shot codes, percentages and step names are set in mono and sit in columns
+ * that must line up, so digits have to be fixed width. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* The lane: one shot, segmented by step.
+ *
+ * A shot is a thing that moves left to right through the pipeline, so it is
+ * drawn as a single track rather than as four separate chips. Rounding only the
+ * outer edges is what makes four elements read as one object.
+ */
+.lane {
+  display: grid;
+  gap: 2px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.lane > :first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.lane > :last-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/* Nothing-to-do. Present, so the lane stays aligned, but silent: on most shots
+ * three of four steps are NO, and drawing them as chips turned the grid into
+ * noise that hid the states that matter.
+ */
+.seg-idle {
+  background-color: color-mix(in oklab, var(--color-ram-line) 55%, transparent);
+}
+
+/* One orchestrated entrance rather than scattered effects: rows arrive in
+ * sequence, which reads as the list assembling itself once. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+.rise {
+  animation: rise 0.32s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }
