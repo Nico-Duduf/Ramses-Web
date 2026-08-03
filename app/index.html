@@ -176,10 +176,16 @@
                   x-text="data.project.name"
                   class="mt-2 text-xl font-medium md:mt-3 md:text-3xl"
                 ></h2>
-                <p
-                  x-text="projectTally"
-                  class="tnum mt-1 font-mono text-[11px] text-ram-dim md:text-sm"
-                ></p>
+                <!-- Scale, schedule and pulse. Three facts, stated in the same
+                     dim type: this app has no behind-schedule detection, so a
+                     passed deadline reads as information, not as an alarm. -->
+                <div
+                  class="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 font-mono text-[11px] text-ram-dim md:mt-2 md:gap-x-5 md:text-sm"
+                >
+                  <span x-text="projectTally" class="tnum"></span>
+                  <span x-show="deadline" x-text="deadline" class="tnum"></span>
+                  <span x-show="lastChange" x-text="lastChange"></span>
+                </div>
 
                 <!-- Completion by step.
                      On a phone these stack full width and scroll away, so the
@@ -211,6 +217,22 @@
                           :style="{ width: stepWidth(step.uuid), backgroundColor: step.color || '#7fa3d8' }"
                         ></div>
                       </div>
+
+                      <!-- What is left, not just how much. A percentage cannot
+                           say whether the remainder is forty untouched shots or
+                           two in review. Desktop only: on a phone this would be
+                           four more lines above the list it describes. -->
+                      <p class="mt-1.5 hidden truncate font-mono text-[10px] md:block">
+                        <template x-for="(t, i) in tallyFor(step.uuid)" :key="t.name">
+                          <span>
+                            <span x-show="i > 0" class="text-ram-line">/</span>
+                            <span
+                              x-text="t.count + ' ' + t.name"
+                              :style="{ color: t.color }"
+                            ></span>
+                          </span>
+                        </template>
+                      </p>
                     </div>
                   </template>
                   </div>

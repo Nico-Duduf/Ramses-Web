@@ -187,6 +187,71 @@ export function clockText(seconds) {
 }
 
 /**
+ * The server stamps `modified` as UTC without saying so, in the SQL shape
+ * "2026-07-13 15:38:53". Safari refuses that string outright and Chrome reads
+ * it as local time, which is an hour or two of silent drift.
+ */
+export function parseStamp(stamp) {
+  if (!stamp) return null;
+  const d = new Date(String(stamp).replace(" ", "T") + "Z");
+  return isNaN(d) ? null : d;
+}
+
+/** The most recent change to any task, or null if there are none. */
+export function lastActivity(statuses) {
+  let latest = null;
+  for (const s of statuses || []) {
+    const d = parseStamp(s.modified);
+    if (d && (!latest || d > latest)) latest = d;
+  }
+  return latest;
+}
+
+/**
+ * How the remaining work at one step is distributed, most-blocking first.
+ *
+ * A percentage says how far along a step is; it cannot say whether what is left
+ * is forty untouched shots or two in review. Ordered by the state's own order
+ * field, which is the pipeline's order, so the sentence always reads the same
+ * way round.
+ */
+export function stateTally(stepUuid, { statuses, states, shots }) {
+  const counts = new Map();
+  for (const s of statuses) {
+    if (s.step !== stepUuid || s.itemType !== "shot" || !shots[s.item]) continue;
+    const state = states[s.state];
+    if (!state || state.shortName === "NO") continue;
+    counts.set(s.state, (counts.get(s.state) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([uuid, count]) => ({ count, state: states[uuid] }))
+    .sort((a, b) => (a.state.order ?? 0) - (b.state.order ?? 0));
+}
+
+/**
+ * "Deadline 13 Jul, in 9 days".
+ *
+ * Stated, never judged: this app deliberately has no behind-schedule
+ * detection, so a passed deadline reads as a fact in the same dim type as any
+ * other, not as an alarm. Whole days from local midnight, so "today" means
+ * today rather than "within 24 hours".
+ */
+export function deadlineText(deadline, now = new Date()) {
+  if (!deadline) return "";
+  const due = new Date(String(deadline) + "T00:00:00");
+  if (isNaN(due)) return "";
+
+  const label = due.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const days = Math.round((due - midnight) / 86400000);
+
+  if (days === 0) return "Deadline " + label + ", today";
+  const n = Math.abs(days);
+  const unit = n === 1 ? " day" : " days";
+  return "Deadline " + label + (days > 0 ? ", in " + n + unit : ", " + n + unit + " ago");
+}
+
+/**
  * How long ago the data on screen was fetched.
  *
  * Deliberately coarse. The exact second is never the question; "is this
@@ -216,9 +281,8 @@ export function sinceText(date) {
  * relative to my day", never "what did the server's clock say".
  */
 export function shortDate(stamp) {
-  if (!stamp) return "";
-  const d = new Date(stamp.replace(" ", "T") + "Z");
-  if (isNaN(d)) return stamp;
+  const d = parseStamp(stamp);
+  if (!d) return stamp || "";
   return d.toLocaleString("en-GB", {
     day: "numeric",
     month: "short",

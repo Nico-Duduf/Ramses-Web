@@ -1,11 +1,15 @@
 import {
   clockText,
+  deadlineText,
   frameCount,
   groupDigits,
   label,
+  lastActivity,
   shotSteps,
+  sinceText,
   sortShots,
   stateColor,
+  stateTally,
   stepCompletion,
   taskFor,
   textOn,
@@ -63,6 +67,28 @@ export function projectView(store) {
     get projectTally() {
       const shots = Object.entries(this.data.shots).map(([uuid, s]) => ({ uuid, ...s }));
       return this.tally(shots, null);
+    },
+    get deadline() {
+      return deadlineText(this.data.project.deadline);
+    },
+    /** When anyone last touched this project, as opposed to when this page last
+     * fetched it. Both are worth knowing, and they are not the same thing. */
+    get lastChange() {
+      const at = lastActivity(this.data.statuses);
+      return at ? "Last change " + sinceText(at) : "";
+    },
+    /**
+     * The shape of the remaining work at one step, in pipeline order.
+     *
+     * Each entry carries its state's own colour, so the tally and the lanes
+     * below it are visibly the same information counted two ways.
+     */
+    tallyFor(stepUuid) {
+      return stateTally(stepUuid, this.data).map((t) => ({
+        count: t.count,
+        name: label(t.state),
+        color: stateColor(t.state),
+      }));
     },
     stepPercent(stepUuid) {
       const r = stepCompletion(stepUuid, this.data);

@@ -15,9 +15,13 @@ import { fileURLToPath } from "node:url";
 
 import {
   clockText,
+  deadlineText,
   frameCount,
   framerateFor,
   groupDigits,
+  lastActivity,
+  parseStamp,
+  stateTally,
   projectCompletion,
   shotSteps,
   sortShots,
@@ -156,6 +160,51 @@ test("long counts stay scannable and clocks roll over at a minute", () => {
   assert.equal(clockText(48), "48 s");
   assert.equal(clockText(128), "2:08");
   assert.equal(clockText(600), "10:00");
+});
+
+test("timestamps are read as UTC, which is how the server writes them", () => {
+  // "2026-07-13 15:38:53" is not a format Safari accepts at all, and Chrome
+  // reads it as local time, which is an hour or two of silent drift.
+  assert.equal(parseStamp("2026-07-13 15:38:53").toISOString(),
+    "2026-07-13T15:38:53.000Z");
+  assert.equal(parseStamp(""), null);
+  assert.equal(parseStamp("not a date"), null);
+});
+
+test("last activity is the most recent change, not the first found", () => {
+  assert.equal(
+    lastActivity(fixture.statuses).toISOString(),
+    "2026-07-15T18:47:54.000Z"
+  );
+  assert.equal(lastActivity([]), null);
+  assert.equal(lastActivity([{ modified: "" }]), null);
+});
+
+test("the state tally counts what is left, in pipeline order", () => {
+  const plate = Object.entries(fixture.steps).find(
+    ([, s]) => s.shortName === "PLATE"
+  )[0];
+  const tally = stateTally(plate, fixture);
+
+  // Same exclusions as the completion formula: no nothing-to-do, no orphans.
+  assert.equal(tally.reduce((n, t) => n + t.count, 0), 40);
+  assert.ok(!tally.some((t) => t.state.shortName === "NO"));
+
+  // Pipeline order, so the sentence always reads the same way round.
+  const orders = tally.map((t) => t.state.order ?? 0);
+  assert.deepEqual(orders, [...orders].sort((a, b) => a - b));
+});
+
+test("a deadline is stated, never judged", () => {
+  const now = new Date(2026, 6, 4); // 4 Jul 2026, local midnight
+  assert.equal(deadlineText("2026-07-13", now), "Deadline 13 Jul, in 9 days");
+  assert.equal(deadlineText("2026-07-05", now), "Deadline 5 Jul, in 1 day");
+  assert.equal(deadlineText("2026-07-04", now), "Deadline 4 Jul, today");
+  // Passed deadlines read as fact. No alarm wording, by design.
+  assert.equal(deadlineText("2026-07-03", now), "Deadline 3 Jul, 1 day ago");
+  assert.equal(deadlineText("2026-06-04", now), "Deadline 4 Jun, 30 days ago");
+  assert.equal(deadlineText("", now), "");
+  assert.equal(deadlineText(null, now), "");
 });
 
 test("swatch text flips with the state colour", () => {
