@@ -208,6 +208,42 @@ export function lastActivity(statuses) {
 }
 
 /**
+ * The step that ends the pipeline: the one something feeds, that feeds nothing.
+ *
+ * Derived from RamPipe rather than from the steps' `order`, which is only a
+ * display preference. Sorting by it happens to give the right answer on a
+ * straight-line pipeline and silently gives a meaningless one as soon as a
+ * project has branches, or an Archive or QC step tacked on after delivery, or
+ * someone drags a step in Ramses-Client.
+ *
+ * A pipe carries files from its outputStep to its inputStep, so a terminal step
+ * appears as an inputStep and never as an outputStep.
+ *
+ * Falls back to the last shot step by order when the graph cannot answer, which
+ * covers a project with no pipes configured at all. That is the old behaviour,
+ * so a half-configured project keeps working exactly as it does today. When the
+ * graph yields several terminals, which a branching pipeline can, the last of
+ * them by order wins.
+ */
+export function terminalStep(steps, pipes) {
+  const production = shotSteps(steps);
+  if (production.length === 0) return null;
+
+  const fedBy = new Set();
+  const feeds = new Set();
+  for (const pipe of Object.values(pipes || {})) {
+    if (pipe.inputStep) fedBy.add(pipe.inputStep);
+    if (pipe.outputStep) feeds.add(pipe.outputStep);
+  }
+
+  const terminals = production.filter(
+    (s) => fedBy.has(s.uuid) && !feeds.has(s.uuid)
+  );
+  const candidates = terminals.length > 0 ? terminals : production;
+  return candidates[candidates.length - 1];
+}
+
+/**
  * The show strip: every shot in a project, grouped by sequence, sized by its
  * share of the running time and coloured by the state of the last pipeline
  * step.
@@ -224,9 +260,10 @@ export function lastActivity(statuses) {
  * group's share. Using the project total for both underfills every group by its
  * own factor, which looks like a strip that stops short of the edge.
  */
-export function showStrip({ project, sequences, shots, steps, states, statuses }) {
-  const pipeline = shotSteps(steps);
-  const last = pipeline[pipeline.length - 1];
+export function showStrip(data, stepUuid) {
+  const { project, sequences, shots, steps, states, statuses, pipes } = data;
+  const chosen = stepUuid && steps[stepUuid] ? { uuid: stepUuid } : null;
+  const last = chosen || terminalStep(steps, pipes);
   if (!last) return [];
 
   const grouped = Object.entries(sequences)

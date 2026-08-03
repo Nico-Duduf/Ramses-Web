@@ -288,6 +288,33 @@
   }
 }
 
+/* The step picker sits inside a sentence, so it has to read as the last word of
+ * that sentence rather than as a form control dropped into prose. Native
+ * select, because on a phone that gets the system picker for free. */
+.step-picker {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dotted var(--color-ram-dim);
+  color: var(--color-ram-fg);
+  font: inherit;
+  padding: 0 0.15em 1px;
+  margin-left: 0.15em;
+  cursor: pointer;
+}
+.step-picker:hover {
+  border-bottom-color: var(--color-ram-fg);
+}
+.step-picker:focus-visible {
+  outline: 2px solid var(--color-ram-accent-lit);
+  outline-offset: 2px;
+}
+/* The list itself is drawn by the OS and does not inherit the page. */
+.step-picker option {
+  background: var(--color-ram-card);
+  color: var(--color-ram-fg);
+}
+
 /* One orchestrated entrance rather than scattered effects: rows arrive in
  * sequence, which reads as the list assembling itself once. */
 /* The strip arrives by wiping left to right, which is the one motion this

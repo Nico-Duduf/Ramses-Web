@@ -30,6 +30,7 @@ KEEP = {
     "shots": ("name", "shortName", "sequence", "duration"),
     "steps": ("name", "shortName", "type", "order", "color"),
     "states": ("name", "shortName", "color", "completionRatio"),
+    "pipes": ("inputStep", "outputStep"),
     "statuses": ("item", "itemType", "step", "state", "completionRatio",
                  "comment"),
 }
@@ -62,6 +63,7 @@ def main(db_path, out_path):
         "shots": keyed("RamShot", "shots"),
         "steps": keyed("RamStep", "steps"),
         "states": keyed("RamState", "states"),
+        "pipes": keyed("RamPipe", "pipes"),
         # `modified` is a column rather than a field of `data`, and the shot view
         # shows it, so it has to be added explicitly. weboverview.php does the same.
         "statuses": [

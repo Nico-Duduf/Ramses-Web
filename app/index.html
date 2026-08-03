@@ -210,7 +210,25 @@
                       </div>
                     </template>
                   </div>
-                  <p class="t-meta mt-2" x-text="stripCaption"></p>
+                  <!-- The caption is the control. A separate labelled dropdown
+                       would say the same word twice; this way the sentence
+                       reads and the last word of it is what you change. -->
+                  <p class="t-meta mt-2">
+                    <span x-text="stripCaption"></span>
+                    <select
+                      class="step-picker"
+                      @change="setColourStep($event.target.value)"
+                      aria-label="Colour the strip by which step"
+                    >
+                      <template x-for="step in steps" :key="step.uuid">
+                        <option
+                          :value="step.uuid"
+                          :selected="step.uuid === colourStepUuid"
+                          x-text="step.shortName"
+                        ></option>
+                      </template>
+                    </select>
+                  </p>
                 </div>
 
                 <!-- Completion by step.

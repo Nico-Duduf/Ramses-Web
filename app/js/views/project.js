@@ -13,8 +13,12 @@ import {
   stateTally,
   stepCompletion,
   taskFor,
+  terminalStep,
   textOn,
 } from "../format.js";
+
+/** localStorage key prefix; the project uuid is appended. */
+const STEP_KEY = "ramses.stripStep.";
 
 export function projectView(store) {
   return {
@@ -94,16 +98,29 @@ export function projectView(store) {
         color: stateColor(t.state),
       }));
     },
-    /** The strip is shared with the project list; see format.showStrip. */
-    get strip() {
-      return showStrip(this.data);
+    /**
+     * Which step colours the strip.
+     *
+     * Defaults to the end of the pipeline and can be changed per project,
+     * because "done" means different things to different people: a modeller
+     * wants Mod, a producer wants the delivery step. Remembered per project, so
+     * the choice survives a reload but does not leak to other shows.
+     */
+    get colourStepUuid() {
+      const stored = window.localStorage.getItem(STEP_KEY + this.data.project.uuid);
+      if (stored && this.data.steps[stored]) return stored;
+      const terminal = terminalStep(this.data.steps, this.data.pipes);
+      return terminal ? terminal.uuid : "";
     },
-    /** Names what the strip's colour means, using the project's own step. */
+    setColourStep(uuid) {
+      window.localStorage.setItem(STEP_KEY + this.data.project.uuid, uuid);
+    },
+    get strip() {
+      return showStrip(this.data, this.colourStepUuid);
+    },
+    /** The prose around the step picker, which completes the sentence. */
     get stripCaption() {
-      const last = this.steps[this.steps.length - 1];
-      return last
-        ? "Every shot, sized by length, coloured by " + last.shortName
-        : "";
+      return "Every shot, sized by length, coloured by";
     },
     openShot(uuid) {
       store.go("shot", uuid);

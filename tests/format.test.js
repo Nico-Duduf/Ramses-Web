@@ -23,6 +23,7 @@ import {
   lastActivity,
   parseStamp,
   stateTally,
+  terminalStep,
   projectCompletion,
   shotSteps,
   sortShots,
@@ -224,6 +225,60 @@ test("a deadline is stated, never judged", () => {
   assert.equal(deadlineText("2026-06-04", now), "Deadline 4 Jun, 30 days ago");
   assert.equal(deadlineText("", now), "");
   assert.equal(deadlineText(null, now), "");
+});
+
+test("the end of the pipeline comes from the graph, not the sort order", () => {
+  const end = terminalStep(fixture.steps, fixture.pipes);
+  assert.equal(end.shortName, "Comp");
+
+  // It must be the graph doing the work, not a coincidence of ordering. Give
+  // Comp an order that puts it first and the answer must not move.
+  const shuffled = structuredClone(fixture.steps);
+  for (const [uuid, step] of Object.entries(shuffled)) {
+    step.order = step.shortName === "Comp" ? -10 : 10;
+  }
+  assert.equal(terminalStep(shuffled, fixture.pipes).shortName, "Comp");
+});
+
+test("a project with no pipeline falls back to the last step by order", () => {
+  // Half-configured projects keep behaving exactly as they did before pipes
+  // were read at all, rather than showing a blank strip.
+  assert.equal(terminalStep(fixture.steps, {}).shortName, "Comp");
+  assert.equal(terminalStep(fixture.steps, undefined).shortName, "Comp");
+  assert.equal(terminalStep({}, fixture.pipes), null);
+});
+
+test("a trailing step outside the pipeline does not steal the colouring", () => {
+  // The case that breaks sort order: an Archive step added after delivery.
+  // Nothing feeds it, so the graph still ends at Comp.
+  const steps = structuredClone(fixture.steps);
+  steps["archive-uuid"] = { shortName: "Archive", type: "shot", order: 99 };
+  assert.equal(terminalStep(steps, fixture.pipes).shortName, "Comp");
+});
+
+test("the strip can be coloured by a step other than the end", () => {
+  const plate = Object.entries(fixture.steps).find(
+    ([, s]) => s.shortName === "PLATE"
+  )[0];
+
+  const byEnd = showStrip(fixture).flatMap((g) => g.segments);
+  const byPlate = showStrip(fixture, plate).flatMap((g) => g.segments);
+
+  assert.equal(byEnd.length, byPlate.length, "same shots either way");
+  assert.notDeepEqual(
+    byEnd.map((s) => s.color),
+    byPlate.map((s) => s.color),
+    "colouring by a different step must actually change the colours"
+  );
+
+  // Colouring by the end of the pipeline shows the spread of states; PLATE is
+  // finished everywhere, so it collapses to a single colour. Idle segments
+  // carry no colour at all, so they are counted separately rather than
+  // appearing as an extra "colour".
+  const colours = (segs) => new Set(segs.filter((s) => !s.idle).map((s) => s.color));
+  assert.equal(colours(byEnd).size, 5, "OK, CHK, TODO, RTK and WIP are all in play");
+  assert.equal(colours(byPlate).size, 1, "every plate is finished");
+  assert.equal(byPlate.filter((s) => s.idle).length, 1, "one shot has no plate");
 });
 
 test("the show strip covers the whole project, weighted by length", () => {

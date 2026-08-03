@@ -51,6 +51,10 @@
             "shots"     => array("name", "shortName", "sequence", "duration"),
             "steps"     => array("name", "shortName", "type", "order", "color"),
             "states"    => array("name", "shortName", "color", "completionRatio"),
+            // The pipeline graph. A step's `order` is only a display
+            // preference, so the end of the pipeline has to be derived from
+            // what actually feeds what.
+            "pipes"     => array("inputStep", "outputStep"),
             // No modifiedBy: it is the uuid of whoever last touched the task,
             // and nothing can be done with it here. User rows are encrypted in
             // the database, so a name would need decrypting server-side, and
@@ -71,6 +75,7 @@
         $content["sequences"] = ramwebRows("RamSequence", $keep["sequences"], $projectId);
         $content["shots"]     = ramwebRows("RamShot",     $keep["shots"],     $projectId);
         $content["steps"]     = ramwebRows("RamStep",     $keep["steps"],     $projectId);
+        $content["pipes"]     = ramwebRows("RamPipe",     $keep["pipes"],     $projectId);
 
         // States are shared templates, not per-project rows, so they carry no
         // project_id and must not be filtered by one.

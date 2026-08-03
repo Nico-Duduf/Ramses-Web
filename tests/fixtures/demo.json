@@ -1,4 +1,18 @@
 {
+ "pipes": {
+  "4a682591-ffe3-50af-9896-8d670c6bf0f6": {
+   "inputStep": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "outputStep": "f6c55e9e-c698-59a2-bb82-391847e23897"
+  },
+  "b27635fa-e6ca-530d-a216-655c15c7c1fd": {
+   "inputStep": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "outputStep": "c85b7429-77eb-50b8-b7d4-b92047e6cdda"
+  },
+  "d37550cf-8a1a-5842-9559-daf580938694": {
+   "inputStep": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "outputStep": "b486fb81-e4d4-5af0-a586-b7f09588e485"
+  }
+ },
  "project": {
   "deadline": "2026-07-13",
   "framerate": 25,
