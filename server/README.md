@@ -1,8 +1,11 @@
 # Server endpoints
 
-Four files that belong in Ramses-Server's `src/` folder, next to `login.php` and
-`projects_get.php`. They are **not** part of the shipped `app/` folder and are
-not served to the browser.
+Four files that belong next to `login.php` and `projects_get.php`. They are
+**not** part of the shipped `app/` folder and are not served to the browser.
+
+In the Ramses-Server *repository* those siblings live in `src/`. On a *server*
+there is no `src/`: what gets deployed is that folder's contents, so the four
+files land directly in the API folder, beside `index.php` and `init.php`.
 
 | File | Query | Where it goes in `index.php` |
 | --- | --- | --- |
@@ -13,8 +16,8 @@ not served to the browser.
 
 ## Installing
 
-1. Copy all four files into the server's `src/`.
-2. Add three lines to `src/index.php`:
+1. Copy all four files into the API folder, next to `index.php`.
+2. Add three lines to `index.php`:
 
 ```php
     include("users_reset_password.php");
@@ -44,9 +47,22 @@ The pepper (`clientKey`) is why the endpoint exists at all: Ramses-Client applie
 it locally before sending, and a browser cannot without publishing it to anyone
 who opens the developer tools.
 
-## Two upstream issues found while writing these
+## Three upstream issues found while writing these
 
-Neither is caused by this app, and neither is fixed here. Both are worth a PR.
+None is caused by this app, and none is fixed here. All three are worth a PR.
+
+0. **`init.php:8` reads `$_SERVER["HTTP_ACCEPT_ENCODING"]` unguarded.** A request
+   that does not send `Accept-Encoding` gets a PHP warning printed *before* the
+   JSON, which makes the reply unparseable, and because output has started the
+   session cookie can no longer be set: `session_name()`,
+   `session_set_cookie_params()` and two `ini_set()` calls all then fail with
+   "headers have already been sent". Reproduced against the live Overmind server
+   on 2026-08-03 with a plain `curl` POST to `?ping`.
+
+   Browsers always send `Accept-Encoding`, and so does Ramses-Client, so this
+   stays invisible until something scripted talks to the API. It is a one-line
+   fix (`$_SERVER["HTTP_ACCEPT_ENCODING"] ?? ""`) and it silently breaks
+   authentication, which makes it the most worthwhile of the three.
 
 1. **`setCurrentProject()` does not check the user.** `functions.php:280` joins
    `ServerProjectUser` but never restricts `user_id` to the session's user, so

@@ -1,0 +1,32 @@
+# The app lives inside the API folder, and Ramses-Server ships an .htaccess
+# there that denies everything except index.php:
+#
+#     Order allow,deny
+#     Deny from All
+#     <FilesMatch "^(index\.php)?$">
+#         Allow from All
+#     </FilesMatch>
+#
+# .htaccess rules are inherited by subdirectories, so wherever that file is in
+# force, every request for app.css or a .js module under app/ is a 403 and the
+# app renders as an unstyled, dead page. This re-allows the static files for
+# this folder only.
+#
+# As of 2026-08-03 that deny is NOT active on the Overmind host (requesting
+# config/config.php returns 200, not 403), so this file is currently doing
+# nothing. It stays because the day the server's own .htaccess starts working
+# is the day the app breaks, and the failure would look like a bad upload.
+
+<IfModule mod_authz_core.c>
+    # Apache 2.4
+    Require all granted
+</IfModule>
+<IfModule !mod_authz_core.c>
+    # Apache 2.2, or 2.4 with mod_access_compat
+    Order allow,deny
+    Allow from All
+</IfModule>
+
+# Still no directory listings.
+Options -Indexes
+IndexIgnore *
