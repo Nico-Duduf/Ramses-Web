@@ -75,8 +75,15 @@ a missed build.
 
 ## Caching
 
-The server sends no cache headers for static files, so Apache's defaults apply
-and `app.css` can survive an upload in a phone's cache. If a release looks like
-it did not land, hard-reload before debugging anything else. If that becomes a
-recurring annoyance, the fix is a query string on the `<link>` and `<script>`
-tags in `index.html`, bumped at build time.
+The host sends `Cache-Control: max-age=31536000` on static files, a one-year
+cache. That is correct for assets with versioned filenames and wrong for this
+app, whose filenames are stable and uploaded by hand: a phone that visited once
+would keep the old JavaScript for a year.
+
+`app/.htaccess` overrides it to `no-cache`, which means revalidate before use
+rather than do not store. The server sends ETags, so an unchanged file costs a
+304 and no body.
+
+A device that visited before that override was uploaded is still holding the
+old files and will not ask for new ones. Clear the site data for it once, or
+open it in a private tab to confirm that is all it is.

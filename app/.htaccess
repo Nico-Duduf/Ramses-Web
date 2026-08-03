@@ -30,3 +30,22 @@
 # Still no directory listings.
 Options -Indexes
 IndexIgnore *
+
+# Always revalidate.
+#
+# The host sets Cache-Control: max-age=31536000 on static files, a one-year
+# cache. That is right for assets with versioned filenames and wrong for this
+# app, which is uploaded by hand under stable names: a phone that visited once
+# kept the old JavaScript for a year and silently ran a mix of old and new
+# files. The symptom was a feature appearing on one screen and not another,
+# because the two shipped in different releases.
+#
+# no-cache does not mean do not store, it means revalidate before use. The
+# server already sends ETags, so an unchanged file costs a 304 and no body.
+# The whole app is about 120 KB, so this is cheap and never stale.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|css|js)$">
+        Header set Cache-Control "no-cache"
+        Header unset Expires
+    </FilesMatch>
+</IfModule>
