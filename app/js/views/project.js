@@ -106,13 +106,27 @@ export function projectView(store) {
      * wants Mod, a producer wants the delivery step. Remembered per project, so
      * the choice survives a reload but does not leak to other shows.
      */
+    /**
+     * The chosen step per project uuid.
+     *
+     * Reactive on purpose. The first version read localStorage directly inside
+     * the getter, which stored the choice and updated the dropdown but left the
+     * strip on its old colours until a reload: Alpine re-evaluates a getter when
+     * something it tracks changes, and localStorage is not something it can
+     * track. The store is the reactive copy; localStorage is only how it
+     * survives a reload.
+     */
+    choices: {},
     get colourStepUuid() {
-      const stored = window.localStorage.getItem(STEP_KEY + this.data.project.uuid);
-      if (stored && this.data.steps[stored]) return stored;
+      const project = this.data.project.uuid;
+      const chosen =
+        this.choices[project] ?? window.localStorage.getItem(STEP_KEY + project);
+      if (chosen && this.data.steps[chosen]) return chosen;
       const terminal = terminalStep(this.data.steps, this.data.pipes);
       return terminal ? terminal.uuid : "";
     },
     setColourStep(uuid) {
+      this.choices[this.data.project.uuid] = uuid;
       window.localStorage.setItem(STEP_KEY + this.data.project.uuid, uuid);
     },
     get strip() {
