@@ -1,9 +1,10 @@
 // The completion formula, pinned against a real project database.
 //
-// These numbers are not invented. They come from the reference project as it stood on
-// 2026-07-15, and they have to keep agreeing with what Ramses-Client shows. If
-// one of them changes, either the formula drifted or the fixture was
-// regenerated from a different project; find out which before editing.
+// These numbers are not invented. They come from a real production database as
+// it stood on 2026-07-15, anonymised by tests/anonymise_fixture.py, and they
+// have to keep agreeing with what Ramses-Client shows. If one of them changes,
+// either the formula drifted or the fixture was regenerated from a different
+// project; find out which before editing.
 //
 //   node --test tests/
 

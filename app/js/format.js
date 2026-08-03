@@ -29,9 +29,9 @@ export function taskCompletion(status) {
  *
  * Two exclusions, both load-bearing:
  *
- *  - state "NO" (nothing to do). Ramses-Client returns early on it. On
- *    the reference project that is 74 of 165 statuses, so including them would roughly
- *    halve every step.
+ *  - state "NO" (nothing to do). Ramses-Client returns early on it. On the
+ *    reference project that is 74 of 165 statuses, so including them would
+ *    roughly halve every step.
  *
  *  - orphans, whose item is not in `shots`. Ramses-Client cannot hit these
  *    because it builds its task table by walking the item list, so a status

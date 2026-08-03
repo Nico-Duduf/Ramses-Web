@@ -54,7 +54,7 @@ pinned by tests against a fixture extracted from a real project database. See th
 comment at the top of that file for the C++ it mirrors.
 
 The database that fixture came from is committed as `tests/fixtures/demo.ramses`,
-so the tests keep working after the the reference project project is archived. Nothing in
+so the tests keep working after that production is archived. Nothing in
 this repo reads a path outside it.
 
 `package.json` exists only so `node --test` parses `app/js/*.js` as ES modules.

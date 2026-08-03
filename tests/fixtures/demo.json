@@ -1,0 +1,2188 @@
+{
+ "project": {
+  "deadline": "2026-07-13",
+  "name": "Demo Project",
+  "shortName": "DEMO",
+  "uuid": "87418cbf-704e-4e43-b816-30d3306d07c5"
+ },
+ "sequences": {
+  "23744337-571d-44c8-bce2-07df92de5850": {
+   "name": "001",
+   "shortName": "001"
+  },
+  "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83": {
+   "name": "003",
+   "shortName": "003"
+  },
+  "a35d266e-ae50-4af8-a667-9c926039056b": {
+   "name": "002",
+   "shortName": "002"
+  }
+ },
+ "shots": {
+  "014b4fab-3e1b-4856-925b-7ec34c1cb0a6": {
+   "duration": 3.8,
+   "name": "0615",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0615"
+  },
+  "0cad7e66-e6f4-4b66-85b6-f5d1d3c0eecd": {
+   "duration": 5.96,
+   "name": "0932",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0932"
+  },
+  "0e7b8022-c893-4ddb-a06a-8a8241dd8575": {
+   "duration": 3.76,
+   "name": "0935",
+   "sequence": "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83",
+   "shortName": "0935"
+  },
+  "1463fac5-f4ae-4a38-9a23-4e808032e719": {
+   "duration": 2.52,
+   "name": "0515",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0515"
+  },
+  "15f6a845-95f5-45bf-adde-2e80ce455809": {
+   "duration": 3.56,
+   "name": "0165",
+   "sequence": "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83",
+   "shortName": "0165"
+  },
+  "1912250c-4395-4334-8522-971227484681": {
+   "duration": 2.8,
+   "name": "0485",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0485"
+  },
+  "1dd0905e-fa68-4f34-b79a-175e503851b2": {
+   "duration": 27.64,
+   "name": "0950",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0950"
+  },
+  "22837e7b-e981-4d1f-92b5-04c099b84b36": {
+   "duration": 3.32,
+   "name": "0530",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0530"
+  },
+  "22e98fce-eb62-4455-b4cb-eb6d3daff480": {
+   "duration": 35.44,
+   "name": "0933",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0933"
+  },
+  "2cc5bc71-c2aa-4e2b-9615-e98113ec666c": {
+   "duration": 1.92,
+   "name": "0550",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0550"
+  },
+  "2e7fb819-fed1-4b54-8812-18b5f6bb509f": {
+   "duration": 4.6,
+   "name": "0570",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0570"
+  },
+  "31572203-49c7-489f-b71d-6cce125b3586": {
+   "duration": 1.92,
+   "name": "0953",
+   "sequence": "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83",
+   "shortName": "0953"
+  },
+  "33ceb314-2373-4113-90ad-3cee4fde70a5": {
+   "duration": 4.12,
+   "name": "0645",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0645"
+  },
+  "3a2e8458-0742-4e89-847a-8cd0264fab84": {
+   "duration": 4.04,
+   "name": "0620",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0620"
+  },
+  "3b059467-619f-465f-8dc9-e1a30e1d05ca": {
+   "duration": 7.48,
+   "name": "0640",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0640"
+  },
+  "3dc5d4a9-5ff5-4c3c-9e29-1fe501d4a935": {
+   "duration": 3.68,
+   "name": "0937",
+   "sequence": "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83",
+   "shortName": "0937"
+  },
+  "4822e273-9f56-4b18-a60d-9f91b8ac529e": {
+   "duration": 3.84,
+   "name": "0955",
+   "sequence": "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83",
+   "shortName": "0955"
+  },
+  "5bc9c93d-b09f-4015-812c-7156126242b9": {
+   "duration": 3.12,
+   "name": "0198",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0198"
+  },
+  "65ced56a-0827-4d88-97ef-7b308fe172bd": {
+   "duration": 2.8,
+   "name": "0465",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0465"
+  },
+  "66884a3a-ef19-4c01-b2c8-6917af880fcf": {
+   "duration": 3.08,
+   "name": "0196",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0196"
+  },
+  "690f7c03-0a9f-47c0-b079-48d4d7f3579f": {
+   "duration": 4.16,
+   "name": "0195",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0195"
+  },
+  "6ed53f71-d865-4c5b-8c97-a130507578b4": {
+   "duration": 2.04,
+   "name": "0990",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0990"
+  },
+  "6f3f96b1-a62f-4103-8861-d713ebb906c2": {
+   "duration": 5,
+   "name": "0957A",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0957A"
+  },
+  "76379916-67a3-476d-8354-2d98f897b2f1": {
+   "duration": 1.12,
+   "name": "0555",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0555"
+  },
+  "864d57bb-629e-4f29-8636-79dbaf535bcf": {
+   "duration": 1.64,
+   "name": "0540",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0540"
+  },
+  "8b0634d3-0b0e-4152-a13a-5731fc27649d": {
+   "duration": 2.88,
+   "name": "0630",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0630"
+  },
+  "8c3fb8a9-07bd-420a-965b-6a8637827a9b": {
+   "duration": 2.68,
+   "name": "0958",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0958"
+  },
+  "8fae959c-3dcb-4e5c-ac21-370fa583c205": {
+   "duration": 4.76,
+   "name": "1000",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "1000"
+  },
+  "ac188115-235d-4932-8705-c558c4897af4": {
+   "duration": 3.12,
+   "name": "0970",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0970"
+  },
+  "b74b9422-4385-40b2-a4f2-db3d6867a2c0": {
+   "duration": 2.2,
+   "name": "0580",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0580"
+  },
+  "b8d8288f-6920-43de-aeb0-f4f336880f95": {
+   "duration": 4.36,
+   "name": "0980",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0980"
+  },
+  "be0a5a4f-8e62-4ece-9b25-58c9cfcb6d53": {
+   "duration": 3.12,
+   "name": "0959",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0959"
+  },
+  "c905573a-0dde-4f02-93bc-8ade67baa820": {
+   "duration": 1.68,
+   "name": "1005",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "1005"
+  },
+  "ce52a083-ae19-4ca3-9a41-656d1f7ff709": {
+   "duration": 1.72,
+   "name": "0163",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0163"
+  },
+  "dc44c8f9-410d-446c-9f51-65a832baa29a": {
+   "duration": 5.56,
+   "name": "0957",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0957"
+  },
+  "e65b9432-82f0-44e9-953a-b5fe2335f13c": {
+   "duration": 2.96,
+   "name": "0957B",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0957B"
+  },
+  "e7c08db4-07fd-4847-94d4-7e83ef2eaa85": {
+   "duration": 3.72,
+   "name": "0925",
+   "sequence": "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83",
+   "shortName": "0925"
+  },
+  "ec71075e-99f1-4c42-9d4a-9398c8a94024": {
+   "duration": 6.8,
+   "name": "0490",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0490"
+  },
+  "ef8f17af-ded1-4a13-8d32-89c67bf8c77f": {
+   "duration": 4.2,
+   "name": "0610",
+   "sequence": "a35d266e-ae50-4af8-a667-9c926039056b",
+   "shortName": "0610"
+  },
+  "f320c5ba-60ca-4928-b5ab-c1b3fada9ac6": {
+   "duration": 2.12,
+   "name": "0480",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0480"
+  },
+  "fb7417f1-3dd2-4b8d-b58e-89513c28f4c0": {
+   "duration": 2.16,
+   "name": "0617",
+   "sequence": "23744337-571d-44c8-bce2-07df92de5850",
+   "shortName": "0617"
+  }
+ },
+ "states": {
+  "1f6bf5e8-605d-5076-97ce-9ab387f07295": {
+   "color": "#449d6d",
+   "completionRatio": 90,
+   "name": "Could be better",
+   "shortName": "CBB"
+  },
+  "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0": {
+   "color": "#111111",
+   "completionRatio": 0,
+   "name": "Nothing to do",
+   "shortName": "NO"
+  },
+  "4cba3030-a9b9-568c-acd1-b7b54383db1b": {
+   "color": "#c37945",
+   "completionRatio": 85,
+   "name": "Waiting for approval",
+   "shortName": "CHK"
+  },
+  "50d99f6a-8d0d-5132-9ffb-bda1d7c00bd7": {
+   "color": "#9a192d",
+   "completionRatio": 75,
+   "name": "Retake",
+   "shortName": "RTK"
+  },
+  "7ecfc011-1536-5229-bc00-6f83fcff139a": {
+   "color": "#585fbf",
+   "completionRatio": 0,
+   "name": "Ready to do",
+   "shortName": "TODO"
+  },
+  "94bfe2b8-4774-5bfc-bcbd-8653679e0def": {
+   "color": "#51a548",
+   "completionRatio": 100,
+   "name": "Finished",
+   "shortName": "OK"
+  },
+  "9a895650-93a2-57c3-8ec9-0e616e2880af": {
+   "color": "#55aaff",
+   "completionRatio": 80,
+   "name": "Ready For Review",
+   "shortName": "RFR"
+  },
+  "ba832b34-0a8e-557f-a70b-46647d076451": {
+   "color": "#7f349d",
+   "completionRatio": 95,
+   "name": "Rendering",
+   "shortName": "RDR"
+  },
+  "ce329919-4c37-5020-9561-f6a5e2557778": {
+   "color": "#37b3a9",
+   "completionRatio": 65,
+   "name": "First Version",
+   "shortName": "FIRST"
+  },
+  "d6daaa56-e6e6-58f4-a3c1-a7fd0c5d4c78": {
+   "name": "New state",
+   "shortName": "NEW"
+  },
+  "f4a6388f-07ac-5dd0-8161-8d4e6b7da6cb": {
+   "color": "#595959",
+   "completionRatio": 0,
+   "name": "Stand By",
+   "shortName": "STB"
+  },
+  "f826583f-7c87-5dd4-bcaf-f708aae8d8da": {
+   "color": "#c3b075",
+   "name": "Work in progress",
+   "shortName": "WIP"
+  }
+ },
+ "statuses": [
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ef8f17af-ded1-4a13-8d32-89c67bf8c77f",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "8e6b1aaf-584e-5647-b22c-2982507baa16"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "0cad7e66-e6f4-4b66-85b6-f5d1d3c0eecd",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "5ca94f12-666d-5c3b-9efa-103f1c7ac1d3"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "65ced56a-0827-4d88-97ef-7b308fe172bd",
+   "itemType": "shot",
+   "modified": "2026-07-15 15:21:12",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "5c2a4030-e8bf-52df-b943-8cfe75ad7623"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3a2e8458-0742-4e89-847a-8cd0264fab84",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "f09734c6-9d8a-508a-abf5-7844dc44a50f"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "15f6a845-95f5-45bf-adde-2e80ce455809",
+   "itemType": "shot",
+   "modified": "2026-07-15 15:20:07",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "6ae01677-d879-51f9-8460-7d1b4f317a04"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "e65b9432-82f0-44e9-953a-b5fe2335f13c",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "1c67a245-bdd4-57c0-b145-c9118d1d9fa8"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "690f7c03-0a9f-47c0-b079-48d4d7f3579f",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "9740211e-e597-571e-bef4-bf79f2aa17da"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "22e98fce-eb62-4455-b4cb-eb6d3daff480",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "42eff5f1-d306-5806-a216-ebd776f28a26"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "b8d8288f-6920-43de-aeb0-f4f336880f95",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "572312bf-4304-5b8f-b189-e327cbfb1ad9"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "864d57bb-629e-4f29-8636-79dbaf535bcf",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "0957973d-091c-5777-a549-72fe01e9e74e"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "22e98fce-eb62-4455-b4cb-eb6d3daff480",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:36",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "9afcf421-36ca-572c-aa4d-e0103e63f903"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "dc44c8f9-410d-446c-9f51-65a832baa29a",
+   "itemType": "shot",
+   "modified": "2026-07-14 09:55:17",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "ffead811-9f44-530e-87f4-5a04ae23ee80"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 0,
+   "item": "dc44c8f9-410d-446c-9f51-65a832baa29a",
+   "itemType": "shot",
+   "modified": "2026-07-14 09:55:17",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "0034da04-0efd-5fa5-927f-f047ccdb9f48"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "b8d8288f-6920-43de-aeb0-f4f336880f95",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "377b7530-f5de-52cf-be81-0f9ea276951a"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "fb7417f1-3dd2-4b8d-b58e-89513c28f4c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "c63580b2-8ad7-5fce-aa51-3bceb6ce7243"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ec71075e-99f1-4c42-9d4a-9398c8a94024",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "cb6e0e4c-edac-5a10-8b81-b75ce4b339bc"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "1912250c-4395-4334-8522-971227484681",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "050ad969-ef6c-5f9d-85a6-340874006134"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "33ceb314-2373-4113-90ad-3cee4fde70a5",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "459c5f99-dc37-57cb-bce8-e435d82f265a"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "014b4fab-3e1b-4856-925b-7ec34c1cb0a6",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:10",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "913cffa4-c3ef-515d-92d7-a10ac1b514f5"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3b059467-619f-465f-8dc9-e1a30e1d05ca",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:52",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "030a9548-47a2-55bc-83fc-4aed596e9546"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "5bc9c93d-b09f-4015-812c-7156126242b9",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "6e1805cc-23f5-5f55-bcf4-71ef8d189e43"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 0,
+   "item": "46427e25-cbcc-4740-ad05-8664b216e222",
+   "itemType": "shot",
+   "modified": "2026-07-13 19:12:27",
+   "modifiedBy": "none",
+   "state": "f826583f-7c87-5dd4-bcaf-f708aae8d8da",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "db62bb7d-e030-5873-aaf6-0faed199f6ff"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "690f7c03-0a9f-47c0-b079-48d4d7f3579f",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "9c6355b9-f1ad-510f-8738-d8e9d66b9d39"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "6ed53f71-d865-4c5b-8c97-a130507578b4",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "a5a122e8-1da1-5e38-b8bd-6df50ce24c8e"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "ec71075e-99f1-4c42-9d4a-9398c8a94024",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "4ec4673b-7f04-53e5-be30-d0fb636c9e87"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8c3fb8a9-07bd-420a-965b-6a8637827a9b",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "f08e68dd-5010-5727-99d1-dcee0b406f8f"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "690f7c03-0a9f-47c0-b079-48d4d7f3579f",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "65e19318-5106-587c-8d5d-89063ff7217c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "c905573a-0dde-4f02-93bc-8ade67baa820",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "629502f5-525d-53cc-8554-cebd85c76ee6"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "66884a3a-ef19-4c01-b2c8-6917af880fcf",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "58111e0a-88f9-575b-bece-90b81aad74be"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "31572203-49c7-489f-b71d-6cce125b3586",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:50:05",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "9b6928c9-bc38-5d40-a632-3e3c76b386d4"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "864d57bb-629e-4f29-8636-79dbaf535bcf",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:03",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "acc304ff-4d83-5485-85ef-0d25e5434509"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "b74b9422-4385-40b2-a4f2-db3d6867a2c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "8d83c93f-442e-5873-9199-f2e76db3e686"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ec71075e-99f1-4c42-9d4a-9398c8a94024",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:52",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "a786ffbf-39bc-53c5-87e4-45863267ee0b"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "e65b9432-82f0-44e9-953a-b5fe2335f13c",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "be0b695a-ab7a-5ad1-86ac-11ab6a8d418e"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "e7c08db4-07fd-4847-94d4-7e83ef2eaa85",
+   "itemType": "shot",
+   "modified": "2026-07-14 21:57:58",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "ad99d6d6-a4de-52a0-a480-7d3aa836800f"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "c905573a-0dde-4f02-93bc-8ade67baa820",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "9207d7db-581d-5e75-b83d-100c300ac17f"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "6f3f96b1-a62f-4103-8861-d713ebb906c2",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "a7632200-3f9b-59b3-9b44-51cb6b3e712c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "22e98fce-eb62-4455-b4cb-eb6d3daff480",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "d1a004f0-fe57-560e-a3b3-76b68c4e6d1c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "2e7fb819-fed1-4b54-8812-18b5f6bb509f",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "e7e18f23-d1ee-5ab3-a124-70c9d1902a3d"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "3dc5d4a9-5ff5-4c3c-9e29-1fe501d4a935",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:11",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "821c15bd-d89e-5b12-a0b3-70a6cd318f59"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "0e7b8022-c893-4ddb-a06a-8a8241dd8575",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "597b8aab-0f3b-50c3-b3b4-9bf71b366a7c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3a2e8458-0742-4e89-847a-8cd0264fab84",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "ba6288e8-bb0e-53a7-b16a-c1b2c4b5c406"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "5bc9c93d-b09f-4015-812c-7156126242b9",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "9e51955b-b559-52bf-a80b-293fe8c2ebbf"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "65ced56a-0827-4d88-97ef-7b308fe172bd",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "d9807fdb-51c1-5487-83ab-71369cce430a"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1912250c-4395-4334-8522-971227484681",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "4ce792bc-1a6a-5c6a-8b20-6b9ffdc4af65"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "be0a5a4f-8e62-4ece-9b25-58c9cfcb6d53",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "95f00d3d-f828-5f51-aaa5-78b4cda6471c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "33ceb314-2373-4113-90ad-3cee4fde70a5",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "7cc14d16-dc77-55f0-94e7-499c7d6ae4fa"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8b0634d3-0b0e-4152-a13a-5731fc27649d",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "1ac1ac71-7d2d-590c-a8ba-bce8b31584bd"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "ac188115-235d-4932-8705-c558c4897af4",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "ba3b4490-33da-52c3-b974-3b990d2c9559"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "0cad7e66-e6f4-4b66-85b6-f5d1d3c0eecd",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "d99b88f9-252c-5803-93b2-f45d7f1a323a"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "ce52a083-ae19-4ca3-9a41-656d1f7ff709",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:09",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "b740a925-9da9-5be4-9040-906dd32d984c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "b8d8288f-6920-43de-aeb0-f4f336880f95",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "d6eb68dc-b4c7-5e76-bddb-e0fcba00e893"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "2cc5bc71-c2aa-4e2b-9615-e98113ec666c",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "88fe1930-45e3-58f1-888f-67e5ea33caa9"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8fae959c-3dcb-4e5c-ac21-370fa583c205",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "e90f823d-6993-58d2-a770-c96ad3954711"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "dc44c8f9-410d-446c-9f51-65a832baa29a",
+   "itemType": "shot",
+   "modified": "2026-07-14 09:55:17",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "6ced31b0-dbfe-54d8-9ad1-be29733dead7"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "31572203-49c7-489f-b71d-6cce125b3586",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "5b195d7d-adeb-50b9-bea7-e8d3a39b9537"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "8fae959c-3dcb-4e5c-ac21-370fa583c205",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "8c9a2c46-d5c4-5ae9-8a1a-b0f17e6aadd8"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "1dd0905e-fa68-4f34-b79a-175e503851b2",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:13",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "ec15c21e-7209-5381-b8df-fcf5326445b6"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "be0a5a4f-8e62-4ece-9b25-58c9cfcb6d53",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "fd350835-7896-5ab8-8394-47d9ab0c141d"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8fae959c-3dcb-4e5c-ac21-370fa583c205",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "0bf5c5e8-17e2-50e2-b5d3-b23ddc654214"
+  },
+  {
+   "comment": "Note.",
+   "completionRatio": 0,
+   "item": "f320c5ba-60ca-4928-b5ab-c1b3fada9ac6",
+   "itemType": "shot",
+   "modified": "2026-07-14 09:35:23",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "11b40a35-0aea-5877-bca3-64bf732f9212"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "66884a3a-ef19-4c01-b2c8-6917af880fcf",
+   "itemType": "shot",
+   "modified": "2026-07-15 14:54:23",
+   "modifiedBy": "e1079af5-5376-51d0-9d58-e6c8ac2f41a1",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "400cc5e7-57cc-5e21-85b2-5fd347be86e9"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "33ceb314-2373-4113-90ad-3cee4fde70a5",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "79419aa2-ba4a-514b-9fc4-e795629d3c56"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "3a2e8458-0742-4e89-847a-8cd0264fab84",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "5aabebc0-d246-5e4a-8044-d3d7a1f9c295"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "0e7b8022-c893-4ddb-a06a-8a8241dd8575",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:52:08",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "a4198888-5af7-5eb0-b2f0-c3dd6bf3ff13"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "4822e273-9f56-4b18-a60d-9f91b8ac529e",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:11",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "5914002c-06cc-5abe-8685-f74b3bf9399c"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "22837e7b-e981-4d1f-92b5-04c099b84b36",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "1afab858-16e9-5e9f-b191-7d684b7fe28e"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "2e7fb819-fed1-4b54-8812-18b5f6bb509f",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "28982d60-d489-5bf1-aeea-6fd4da51eee2"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "c905573a-0dde-4f02-93bc-8ade67baa820",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:03",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "7c784565-24d6-5977-8790-251be5d4a530"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ac188115-235d-4932-8705-c558c4897af4",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "1bcd80c5-9a96-5db6-80bf-4bd47ce598ed"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "864d57bb-629e-4f29-8636-79dbaf535bcf",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "3f36a9af-9d59-557f-8fbf-3eec907ba11c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1463fac5-f4ae-4a38-9a23-4e808032e719",
+   "itemType": "shot",
+   "modified": "2026-07-14 18:32:25",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "f826583f-7c87-5dd4-bcaf-f708aae8d8da",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "32fd43b4-8da6-5fe7-ba42-002498d23820"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "8b0634d3-0b0e-4152-a13a-5731fc27649d",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "26c4a1c4-f45e-52c0-af0a-9147a13bd697"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "014b4fab-3e1b-4856-925b-7ec34c1cb0a6",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "2c57d419-2a88-52b9-8219-afd36b4cc619"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "4822e273-9f56-4b18-a60d-9f91b8ac529e",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "77428c55-8a85-5af5-b8c4-e56d22bf816b"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ef8f17af-ded1-4a13-8d32-89c67bf8c77f",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "ad9872f3-672a-533d-9f8d-64120dd9ba4d"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "fb7417f1-3dd2-4b8d-b58e-89513c28f4c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "daf6e3e0-69c7-5c5e-83f7-19bbe547119f"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3dc5d4a9-5ff5-4c3c-9e29-1fe501d4a935",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "eadbaef9-cd22-51e6-b95e-c773352c1855"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "15f6a845-95f5-45bf-adde-2e80ce455809",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:12",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "84aab83f-e6eb-5e04-aa75-03276ed4ce27"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ce52a083-ae19-4ca3-9a41-656d1f7ff709",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "875dee3c-40f9-5f01-a0e4-e937dc922452"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8b0634d3-0b0e-4152-a13a-5731fc27649d",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "d799c245-1bf4-5977-a033-750c216120fc"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "22837e7b-e981-4d1f-92b5-04c099b84b36",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "03e9b2cb-35c0-512f-b143-e6c5e25c1749"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "6ed53f71-d865-4c5b-8c97-a130507578b4",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "b1421b8b-d694-576e-891c-2afd887e93b3"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "1463fac5-f4ae-4a38-9a23-4e808032e719",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "239fccb1-7995-55ea-871f-74569a2fc107"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "76379916-67a3-476d-8354-2d98f897b2f1",
+   "itemType": "shot",
+   "modified": "2026-07-15 15:11:01",
+   "modifiedBy": "e1079af5-5376-51d0-9d58-e6c8ac2f41a1",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "e9777f06-7950-50df-bf24-42662bd676d7"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "2e7fb819-fed1-4b54-8812-18b5f6bb509f",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "28f39296-1444-5606-8d4b-d2bc1e1e1f8c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 50,
+   "item": "864d57bb-629e-4f29-8636-79dbaf535bcf",
+   "itemType": "shot",
+   "modified": "2026-07-15 08:16:02",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "f826583f-7c87-5dd4-bcaf-f708aae8d8da",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "82253407-d9da-501f-9cb3-0de229486363"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "6ed53f71-d865-4c5b-8c97-a130507578b4",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "72b0920e-5fea-5470-a9f8-ee3d0b99227f"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ac188115-235d-4932-8705-c558c4897af4",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "ff491e0d-d263-5f58-8e0e-3cf5dcfeabab"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1463fac5-f4ae-4a38-9a23-4e808032e719",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "394bdf1e-c47b-59e1-adf0-c315cc7c904a"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "15f6a845-95f5-45bf-adde-2e80ce455809",
+   "itemType": "shot",
+   "modified": "2026-07-14 18:20:53",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "1d8d6304-8c96-5f45-985c-e311d16cb94e"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "f320c5ba-60ca-4928-b5ab-c1b3fada9ac6",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "a3b045d2-d7ca-5eee-adf5-acd3af9bae01"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "690f7c03-0a9f-47c0-b079-48d4d7f3579f",
+   "itemType": "shot",
+   "modified": "2026-07-15 15:20:07",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "fb0cf37f-7e32-5997-9a01-659b774b25a4"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "66884a3a-ef19-4c01-b2c8-6917af880fcf",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:10",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "772e6e23-7412-5cbd-ba4a-466db5fa1166"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "65ced56a-0827-4d88-97ef-7b308fe172bd",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "3d1c5cd0-0d77-5306-9ed6-b17d3276ca76"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "0cad7e66-e6f4-4b66-85b6-f5d1d3c0eecd",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "5c8a637f-36d6-5312-a73f-1bcf43bb2acf"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "31572203-49c7-489f-b71d-6cce125b3586",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:49:38",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "f3931b43-5940-5386-a3ec-4e6b45da09a9"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "e7c08db4-07fd-4847-94d4-7e83ef2eaa85",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:50:05",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "5b90bc9e-65af-5bdd-af11-05b4337f8f72"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "6ed53f71-d865-4c5b-8c97-a130507578b4",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "b711a058-cbde-5f49-8a05-f106e2ffa779"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "014b4fab-3e1b-4856-925b-7ec34c1cb0a6",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "c31452bd-5b87-563c-8c15-234980a74757"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "fb7417f1-3dd2-4b8d-b58e-89513c28f4c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:09",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "a377b2b4-4533-5b26-a8d2-f4fd4d68b3f0"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "014b4fab-3e1b-4856-925b-7ec34c1cb0a6",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "cf183693-22ef-5c4c-b65c-29e106da1d60"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "6f3f96b1-a62f-4103-8861-d713ebb906c2",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "ad9fb34d-6684-5c79-963f-e31e4355a37b"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "22e98fce-eb62-4455-b4cb-eb6d3daff480",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:13",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "99b5676e-4b95-5d3b-b1cb-c1923e354109"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "e7c08db4-07fd-4847-94d4-7e83ef2eaa85",
+   "itemType": "shot",
+   "modified": "2026-07-14 21:58:59",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "3468f9aa-31df-5388-8147-c8fbca6e7ddf"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "2cc5bc71-c2aa-4e2b-9615-e98113ec666c",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "e4de2eeb-b063-5415-b616-a0c9ea285a95"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "0cad7e66-e6f4-4b66-85b6-f5d1d3c0eecd",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "a34ca546-8322-5023-bfab-eb213f517ef3"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ce52a083-ae19-4ca3-9a41-656d1f7ff709",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "3ef50f54-4560-5de1-b660-5e53c9f9cb90"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "f320c5ba-60ca-4928-b5ab-c1b3fada9ac6",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "e53d77f7-b7c8-504b-8c63-44246c0b66c4"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8fae959c-3dcb-4e5c-ac21-370fa583c205",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "7a93320f-c64e-5124-9aed-cc82d10ba89a"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "0e7b8022-c893-4ddb-a06a-8a8241dd8575",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:11",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "aa397b0d-e80a-516c-8d2c-3cd3a949b5ab"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "5bc9c93d-b09f-4015-812c-7156126242b9",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "de8acc15-8f61-56ba-bef2-29e59d467a88"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "b74b9422-4385-40b2-a4f2-db3d6867a2c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "4b8f970a-8c57-5caf-8528-9cb84e298121"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "76379916-67a3-476d-8354-2d98f897b2f1",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "442022c0-313d-5847-ae1c-00b25da1319d"
+  },
+  {
+   "comment": "Note.",
+   "completionRatio": 85,
+   "item": "8c3fb8a9-07bd-420a-965b-6a8637827a9b",
+   "itemType": "shot",
+   "modified": "2026-07-14 00:23:03",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "4cba3030-a9b9-568c-acd1-b7b54383db1b",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "9ff2c585-b715-5e41-8c8f-8958e34694fa"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3b059467-619f-465f-8dc9-e1a30e1d05ca",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "0ff12207-8d7e-5c9a-85f7-bfbbad15a913"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1912250c-4395-4334-8522-971227484681",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "c0dfdb26-388c-5639-b4e8-1d91ff2760f7"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "0e7b8022-c893-4ddb-a06a-8a8241dd8575",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:52:08",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "c5284fc3-86a2-57fc-bd3c-ecd14c952756"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "15f6a845-95f5-45bf-adde-2e80ce455809",
+   "itemType": "shot",
+   "modified": "2026-07-14 18:20:53",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "c999eb1d-6f20-5545-aeab-b6ffac9c808b"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "f320c5ba-60ca-4928-b5ab-c1b3fada9ac6",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "0780a167-3bcf-5302-a36f-6f94a48ddcec"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "33ceb314-2373-4113-90ad-3cee4fde70a5",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "531b05f8-8860-5c1c-b871-e679de74c3ba"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "3b059467-619f-465f-8dc9-e1a30e1d05ca",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "51c58c7e-d390-5ebf-a85a-c647b8affada"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "b74b9422-4385-40b2-a4f2-db3d6867a2c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "6841e6e0-733b-598b-838a-c5401bd3b1c8"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8c3fb8a9-07bd-420a-965b-6a8637827a9b",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "c8e5389c-7b31-5b09-b470-20a7a2ebe047"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "31572203-49c7-489f-b71d-6cce125b3586",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:09",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "22455c53-3e2b-54da-be1e-4355a151e7f8"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1dd0905e-fa68-4f34-b79a-175e503851b2",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "011e66fb-9795-547e-9f28-4aa48c0e60ca"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ac188115-235d-4932-8705-c558c4897af4",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "a150e0cd-024a-5292-a9b9-4601f911dd03"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "2e7fb819-fed1-4b54-8812-18b5f6bb509f",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "0c7b9980-c1f8-54e7-bdb8-da94e54f2b9f"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "be0a5a4f-8e62-4ece-9b25-58c9cfcb6d53",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "8141397c-d09c-5635-9b60-ee7c20abedd8"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "65ced56a-0827-4d88-97ef-7b308fe172bd",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "dc8b1600-5c12-5e75-8c2e-a77be38dd329"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3dc5d4a9-5ff5-4c3c-9e29-1fe501d4a935",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:50:05",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "ef25c7fa-cbf7-5137-a5a4-f1cf82cf4aae"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "2cc5bc71-c2aa-4e2b-9615-e98113ec666c",
+   "itemType": "shot",
+   "modified": "2026-07-15 11:35:29",
+   "modifiedBy": "e1079af5-5376-51d0-9d58-e6c8ac2f41a1",
+   "state": "f826583f-7c87-5dd4-bcaf-f708aae8d8da",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "8949b9e6-45fc-549c-bfa0-58bed34a52dc"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "4822e273-9f56-4b18-a60d-9f91b8ac529e",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "9b1ea81e-d615-5eac-895b-053cf6a5169d"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "2cc5bc71-c2aa-4e2b-9615-e98113ec666c",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "1ceaa8ba-9476-5ed0-aa70-6ab9114bfc43"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "6f3f96b1-a62f-4103-8861-d713ebb906c2",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "0221d474-1b0a-5034-b231-bdccb99ee6f3"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1dd0905e-fa68-4f34-b79a-175e503851b2",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:52:24",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "f37b5e44-a47a-55ed-b595-45d99f004997"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "fb7417f1-3dd2-4b8d-b58e-89513c28f4c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "8220fa33-5762-52fb-93f2-52c274168fb0"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "5bc9c93d-b09f-4015-812c-7156126242b9",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "6ad6bf71-e072-5534-ad8f-e4e12d021611"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "76379916-67a3-476d-8354-2d98f897b2f1",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:03",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "d04e4489-9b27-5e59-9ab9-7cdd9ea5eda6"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "b8d8288f-6920-43de-aeb0-f4f336880f95",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "b4c807ea-ac37-5f83-aaa5-9dae60f61077"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "4822e273-9f56-4b18-a60d-9f91b8ac529e",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:59:21",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "7b805f07-05d4-571a-b304-eefee734d331"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "be0a5a4f-8e62-4ece-9b25-58c9cfcb6d53",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "9d95f89d-b8aa-57e6-bc58-4edf082c2ba9"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "22837e7b-e981-4d1f-92b5-04c099b84b36",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "8dd18160-c118-5adf-95e2-ae9a95bc8585"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "76379916-67a3-476d-8354-2d98f897b2f1",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "2d7167c2-9de4-5215-ae0d-4e00f8c31018"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3a2e8458-0742-4e89-847a-8cd0264fab84",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "713ce730-abaa-5c88-ae35-6a323dcc4982"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ef8f17af-ded1-4a13-8d32-89c67bf8c77f",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "d9dc5d84-4af3-5431-a4d2-5c429501552a"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "b74b9422-4385-40b2-a4f2-db3d6867a2c0",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "defbd9a6-794b-5f13-8c62-1e6aa54aacad"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3dc5d4a9-5ff5-4c3c-9e29-1fe501d4a935",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:49:38",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "9cbc3335-7aad-51b3-a7b8-b7ed53e2bcb2"
+  },
+  {
+   "comment": "",
+   "completionRatio": 50,
+   "item": "22837e7b-e981-4d1f-92b5-04c099b84b36",
+   "itemType": "shot",
+   "modified": "2026-07-14 14:26:46",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "f826583f-7c87-5dd4-bcaf-f708aae8d8da",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "3234fc00-afa7-5403-bead-010ca79f78a5"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "3b059467-619f-465f-8dc9-e1a30e1d05ca",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "34527470-ccd4-55d3-a140-741c9f242253"
+  },
+  {
+   "comment": "Note.",
+   "completionRatio": 0,
+   "item": "1912250c-4395-4334-8522-971227484681",
+   "itemType": "shot",
+   "modified": "2026-07-14 09:34:39",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "e93fd8c7-6a3a-5b1f-b237-193aa272926f"
+  },
+  {
+   "comment": "",
+   "completionRatio": 85,
+   "item": "ce52a083-ae19-4ca3-9a41-656d1f7ff709",
+   "itemType": "shot",
+   "modified": "2026-07-15 18:47:54",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "4cba3030-a9b9-568c-acd1-b7b54383db1b",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "01d9ea5f-4545-5fdf-a809-7405181a7000"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "c905573a-0dde-4f02-93bc-8ade67baa820",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "dcbba184-8034-5737-9aca-25cc0100ce4c"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1463fac5-f4ae-4a38-9a23-4e808032e719",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "e2f37779-1f64-598e-9e0c-16002303ae63"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "8c3fb8a9-07bd-420a-965b-6a8637827a9b",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:04",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "6677adb4-4eab-551a-a05f-dd8b5b0367e8"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "ef8f17af-ded1-4a13-8d32-89c67bf8c77f",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:36:05",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "a1d613eb-0c4c-571f-89fa-43d82d67688d"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "e7c08db4-07fd-4847-94d4-7e83ef2eaa85",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:49:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "b3a48d4b-4b50-5175-935e-755d7fc1430e"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "dc44c8f9-410d-446c-9f51-65a832baa29a",
+   "itemType": "shot",
+   "modified": "2026-07-14 09:55:17",
+   "modifiedBy": "f48d20e9-124e-5324-9804-bcae05a0e621",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "b51c6f00-fc81-5742-a851-e026fc82ff25"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "ec71075e-99f1-4c42-9d4a-9398c8a94024",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "b5385083-1e83-5f1c-8716-e0728a978f9d"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "66884a3a-ef19-4c01-b2c8-6917af880fcf",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:14",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "d15a5455-1bed-552d-b755-3cf058e16840"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "8b0634d3-0b0e-4152-a13a-5731fc27649d",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:38:53",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "a966a1e7-88e2-52c6-82be-b66fc8f9739e",
+   "uuid": "24cc558f-15a9-5fc9-9c2d-507ac19d3890"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "6f3f96b1-a62f-4103-8861-d713ebb906c2",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:12",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "0371c6e7-cef6-5635-8f11-435ca627d3f7"
+  },
+  {
+   "comment": "Ingested v001 from P:/Projects/Demo/_in via Ramses-Ingest",
+   "completionRatio": 100,
+   "item": "e65b9432-82f0-44e9-953a-b5fe2335f13c",
+   "itemType": "shot",
+   "modified": "2026-07-13 15:52:10",
+   "modifiedBy": "none",
+   "state": "94bfe2b8-4774-5bfc-bcbd-8653679e0def",
+   "step": "f6c55e9e-c698-59a2-bb82-391847e23897",
+   "uuid": "886d1208-42b8-5bb2-b390-f4aac767cbf2"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "1dd0905e-fa68-4f34-b79a-175e503851b2",
+   "itemType": "shot",
+   "modified": "2026-07-13 20:52:24",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "7ecfc011-1536-5229-bc00-6f83fcff139a",
+   "step": "b486fb81-e4d4-5af0-a586-b7f09588e485",
+   "uuid": "d17ec7fd-177f-5883-9c0a-db708dcb30b4"
+  },
+  {
+   "comment": "",
+   "completionRatio": 0,
+   "item": "e65b9432-82f0-44e9-953a-b5fe2335f13c",
+   "itemType": "shot",
+   "modified": "2026-07-13 16:05:37",
+   "modifiedBy": "bd86bbd2-cdcc-4d07-919c-7bd76eb12500",
+   "state": "37fb68c3-1e0f-5f20-ad8e-138d81f67ea0",
+   "step": "c85b7429-77eb-50b8-b7d4-b92047e6cdda",
+   "uuid": "1b8297c1-e350-5b7f-9528-dece022ad05e"
+  }
+ ],
+ "steps": {
+  "a966a1e7-88e2-52c6-82be-b66fc8f9739e": {
+   "color": "#b058a7",
+   "name": "Compositing",
+   "order": 3,
+   "shortName": "Comp",
+   "type": "shot"
+  },
+  "b486fb81-e4d4-5af0-a586-b7f09588e485": {
+   "color": "#54b086",
+   "name": "Modeling",
+   "order": 2,
+   "shortName": "Mod",
+   "type": "shot"
+  },
+  "c85b7429-77eb-50b8-b7d4-b92047e6cdda": {
+   "color": "#ffaa00",
+   "name": "Matchmove",
+   "order": 1,
+   "shortName": "MaMo",
+   "type": "shot"
+  },
+  "f6c55e9e-c698-59a2-bb82-391847e23897": {
+   "color": "#00557f",
+   "name": "Plate",
+   "order": 0,
+   "shortName": "PLATE",
+   "type": "shot"
+  }
+ }
+}

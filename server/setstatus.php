@@ -73,10 +73,10 @@
 
             RamStatus carries its own completionRatio, separate from the state's,
             and in the client they are separate fields with separate menu
-            actions. But in practice they track: across the reference project every task
-            whose state defines a ratio carries exactly that ratio (OK 100 x40,
-            CHK 85 x2, TODO and NO 0 x118). Only the states that define no ratio
-            of their own (WIP) show tasks that differ.
+            actions. But in practice they track: across the reference project
+            every task whose state defines a ratio carries exactly that ratio
+            (OK 100 x40, CHK 85 x2, TODO and NO 0 x118). Only the states that
+            define no ratio of their own (WIP) show tasks that differ.
 
             So: copy the state's ratio when it has one, and leave the existing
             value untouched when it does not. Setting a shot to OK from a phone

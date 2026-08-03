@@ -51,7 +51,7 @@ Reimplemented in `app/js/format.js`, mirroring `RamProject::updateEstimation`,
                 - tasks whose item no longer exists
     project = integer mean over the shot-production steps, or 100 if there are none
 
-Both exclusions are load-bearing. On the the reference project project 74 of 165 statuses
+Both exclusions are load-bearing. On the reference project 74 of 165 statuses
 are "NO", and one orphaned `SH010 | Plate` status points at a shot that is gone
 from `RamShot` entirely; counting it turned a finished plate step into 97%.
 
@@ -61,8 +61,8 @@ from the item list. Here it has to be explicit.
 **Known, accepted divergence:** Ramses-Client averages shot-production *and*
 asset-production steps into the project percentage. This app is shots-only, so on
 a project that has asset steps its project percentage will differ from the
-desktop client's. Ours is the shot-only figure. the reference project has no asset steps, so
-this does not currently bite.
+desktop client's. Ours is the shot-only figure. The reference project has no
+asset steps, so this does not currently bite.
 
 ## Data
 

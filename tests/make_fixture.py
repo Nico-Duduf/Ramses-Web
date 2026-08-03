@@ -8,7 +8,7 @@ format.js against the payload it will really be handed.
     python tests/make_fixture.py path/to/other.ramses  # or from another database
 
 The source database is committed alongside its output as
-`tests/fixtures/demo.ramses`, a copy of the the reference project client database as it
+`tests/fixtures/demo.ramses`, a copy of a real client database as it
 stood on 2026-07-15. It is a deliberate copy rather than a path into the live
 project, which will be deleted when the show wraps; nothing here may depend on a
 database that exists on one disk only.
