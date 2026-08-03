@@ -142,6 +142,51 @@ export function sortShots(shots) {
 }
 
 /**
+ * The frame rate that actually applies to a shot.
+ *
+ * A sequence may override the project's rate, and Ramses stores the override
+ * value whether or not the flag is set, so the flag is what decides. Falls back
+ * to the project, then to 25: a wrong-but-stated rate is more useful here than
+ * a blank, because the shot list is scanned for relative size, not audited.
+ */
+export function framerateFor(sequence, project) {
+  if (sequence?.overrideFramerate && sequence.framerate) return sequence.framerate;
+  return project?.framerate || 25;
+}
+
+/**
+ * A shot's length in frames.
+ *
+ * Durations are stored in seconds, but nobody in the building talks in seconds:
+ * bids, retakes and delivery are all counted in frames. Rounded, not floored,
+ * because a 3.98 second shot at 25 is 100 frames and calling it 99 would be
+ * wrong in the direction that matters.
+ */
+export function frameCount(shot, sequence, project) {
+  return Math.round((shot?.duration || 0) * framerateFor(sequence, project));
+}
+
+/**
+ * 3204 -> "3 204", so long frame counts stay scannable.
+ *
+ * Grouped by hand with an explicit ASCII space, not through toLocaleString,
+ * which separates with a comma in some locales and a non-breaking space in
+ * others. The first version of this used a thin space that was invisible in the
+ * source and in the diff, and made the function fail its own test with
+ * "4 201" !== "4 201".
+ */
+export function groupDigits(n) {
+  return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+/** Seconds -> "48 s" under a minute, "2:08" beyond it. */
+export function clockText(seconds) {
+  const total = Math.round(seconds || 0);
+  if (total < 60) return total + " s";
+  return Math.floor(total / 60) + ":" + String(total % 60).padStart(2, "0");
+}
+
+/**
  * How long ago the data on screen was fetched.
  *
  * Deliberately coarse. The exact second is never the question; "is this

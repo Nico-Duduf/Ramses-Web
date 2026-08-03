@@ -1,4 +1,7 @@
 import {
+  clockText,
+  frameCount,
+  groupDigits,
   label,
   shotSteps,
   sortShots,
@@ -38,6 +41,28 @@ export function projectView(store) {
           ),
         }))
         .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    },
+    /** A shot's length in frames, at its own sequence's rate. */
+    frames(shot) {
+      return frameCount(shot, this.data.sequences[shot.sequence], this.data.project);
+    },
+    framesText(shot) {
+      return groupDigits(this.frames(shot)) + " f";
+    },
+    /** "27 shots / 2 105 f / 1:24" for a sequence or the whole project. */
+    tally(shots, sequenceUuid) {
+      const seq = sequenceUuid ? this.data.sequences[sequenceUuid] : null;
+      const frames = shots.reduce(
+        (sum, s) =>
+          sum + frameCount(s, seq || this.data.sequences[s.sequence], this.data.project),
+        0
+      );
+      const seconds = shots.reduce((sum, s) => sum + (s.duration || 0), 0);
+      return `${shots.length} / ${groupDigits(frames)} f / ${clockText(seconds)}`;
+    },
+    get projectTally() {
+      const shots = Object.entries(this.data.shots).map(([uuid, s]) => ({ uuid, ...s }));
+      return this.tally(shots, null);
     },
     stepPercent(stepUuid) {
       const r = stepCompletion(stepUuid, this.data);

@@ -1,4 +1,7 @@
 import {
+  frameCount,
+  framerateFor,
+  groupDigits,
   label,
   shortDate,
   shotSteps,
@@ -32,6 +35,16 @@ export function shotView(store) {
     },
     get sequence() {
       return this.shot ? this.data.sequences[this.shot.sequence] : null;
+    },
+    /** Length in frames, at this sequence's rate, which is how the work is
+     * actually counted. */
+    get frames() {
+      return this.shot
+        ? groupDigits(frameCount(this.shot, this.sequence, this.data.project))
+        : "";
+    },
+    get fps() {
+      return this.data ? framerateFor(this.sequence, this.data.project) : "";
     },
     /** One row per shot-production step, whether or not it has a task yet. */
     get rows() {

@@ -25,8 +25,8 @@ from pathlib import Path
 
 # Mirrors server/weboverview.php. Keep the two in step.
 KEEP = {
-    "project": ("name", "shortName", "deadline"),
-    "sequences": ("name", "shortName", "order"),
+    "project": ("name", "shortName", "deadline", "framerate"),
+    "sequences": ("name", "shortName", "order", "framerate", "overrideFramerate"),
     "shots": ("name", "shortName", "sequence", "duration"),
     "steps": ("name", "shortName", "type", "order", "color"),
     "states": ("name", "shortName", "color", "completionRatio"),

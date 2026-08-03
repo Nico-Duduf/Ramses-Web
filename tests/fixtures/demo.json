@@ -1,21 +1,28 @@
 {
  "project": {
   "deadline": "2026-07-13",
+  "framerate": 25,
   "name": "Demo Project",
   "shortName": "DEMO",
   "uuid": "87418cbf-704e-4e43-b816-30d3306d07c5"
  },
  "sequences": {
   "23744337-571d-44c8-bce2-07df92de5850": {
+   "framerate": 25,
    "name": "001",
+   "overrideFramerate": true,
    "shortName": "001"
   },
   "2a3fcfbb-012d-4f85-8f31-a8dd49c85a83": {
+   "framerate": 25,
    "name": "003",
+   "overrideFramerate": true,
    "shortName": "003"
   },
   "a35d266e-ae50-4af8-a667-9c926039056b": {
+   "framerate": 25,
    "name": "002",
+   "overrideFramerate": true,
    "shortName": "002"
   }
  },

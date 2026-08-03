@@ -42,8 +42,12 @@
         // Only the fields the app reads. Mirrors KEEP in tests/make_fixture.py;
         // keep the two in step, or the tests stop resembling production.
         $keep = array(
-            "project"   => array("name", "shortName", "deadline"),
-            "sequences" => array("name", "shortName", "order"),
+            // framerate rides along because frame counts have to be exact: a
+            // sequence may override the project's rate, and a shot's duration
+            // is only ever stored in seconds.
+            "project"   => array("name", "shortName", "deadline", "framerate"),
+            "sequences" => array("name", "shortName", "order", "framerate",
+                                 "overrideFramerate"),
             "shots"     => array("name", "shortName", "sequence", "duration"),
             "steps"     => array("name", "shortName", "type", "order", "color"),
             "states"    => array("name", "shortName", "color", "completionRatio"),

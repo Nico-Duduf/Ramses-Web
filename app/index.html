@@ -176,14 +176,23 @@
                   x-text="data.project.name"
                   class="mt-2 text-xl font-medium md:mt-3 md:text-3xl"
                 ></h2>
+                <p
+                  x-text="projectTally"
+                  class="tnum mt-1 font-mono text-[11px] text-ram-dim md:text-sm"
+                ></p>
 
-                <!-- Completion by step. Stacked on a phone; once there is room
-                     they sit on the lane grid itself, so each summary bar is
-                     directly above the column of shots it summarises and the
-                     two read as one table rather than two stacked ideas. -->
-                <div class="mt-5 flex items-start gap-2 md:mt-7 md:gap-4">
+                <!-- Completion by step.
+                     On a phone these stack full width and scroll away, so the
+                     compact header row below does the labelling.
+                     On a desktop they sit on the lane grid itself, one bar per
+                     column, which makes them the natural column header: they
+                     become sticky here and the compact row is hidden, because
+                     two rows of the same four names is one too many. -->
+                <div
+                  class="mt-5 flex items-start gap-2 md:sticky md:top-0 md:z-10 md:-mx-8 md:mt-7 md:gap-4 md:border-b md:border-ram-line md:bg-ram-bg md:px-8 md:pb-3 md:pt-4"
+                >
                   <span class="hidden shrink-0 md:block md:w-20"></span>
-                  <div class="step-grid flex-1" :style="{ '--lane-cols': laneCols }">
+                  <div class="step-grid min-w-0 flex-1" :style="{ '--lane-cols': laneCols }">
                   <template x-for="step in steps" :key="step.uuid">
                     <div>
                       <div class="flex items-baseline justify-between text-xs md:text-sm">
@@ -205,13 +214,17 @@
                     </div>
                   </template>
                   </div>
+                  <span
+                    class="hidden shrink-0 text-right font-mono text-xs tracking-wide text-ram-dim md:block md:w-20"
+                    >frames</span
+                  >
                 </div>
 
-                <!-- Column headers for the lanes below. Sticky, because the
-                     shot list is long and the labels are the only thing that
-                     says which segment is which. -->
+                <!-- Phone only. On a desktop the summary bars above are already
+                     one per column and carry these same four names, so this row
+                     would repeat them; there, they do this job themselves. -->
                 <div
-                  class="sticky top-0 z-10 -mx-4 mt-7 border-b border-ram-line bg-ram-bg px-4 pb-1.5 pt-2 md:-mx-8 md:mt-10 md:px-8 md:pb-2.5 md:pt-3"
+                  class="sticky top-0 z-10 -mx-4 mt-7 border-b border-ram-line bg-ram-bg px-4 pb-1.5 pt-2 md:hidden"
                 >
                   <div class="flex items-center gap-2 md:gap-4">
                     <span class="w-14 shrink-0 md:w-20"></span>
@@ -223,6 +236,12 @@
                         ></span>
                       </template>
                     </div>
+                    <!-- Mirrors the frame-count column on each shot row, so the
+                         step labels stay centred over their segments. -->
+                    <span
+                      class="w-12 shrink-0 text-right font-mono text-[10px] tracking-wide text-ram-dim md:w-20 md:text-xs"
+                      >frames</span
+                    >
                   </div>
                 </div>
 
@@ -236,7 +255,7 @@
                       ></span>
                       <span class="h-px flex-1 bg-ram-line"></span>
                       <span
-                        x-text="seq.shots.length"
+                        x-text="tally(seq.shots, seq.uuid)"
                         class="tnum font-mono text-[11px] text-ram-dim md:text-sm"
                       ></span>
                     </h3>
@@ -262,6 +281,10 @@
                               ></span>
                             </template>
                           </div>
+                          <span
+                            x-text="framesText(shot)"
+                            class="tnum w-12 shrink-0 text-right font-mono text-[10px] text-ram-dim md:w-20 md:text-xs"
+                          ></span>
                         </button>
                       </template>
                     </div>
@@ -288,7 +311,7 @@
                     <span x-text="sequence ? label(sequence) : ''"></span>
                     <span
                       x-show="shot.duration"
-                      x-text="' / ' + Number(shot.duration).toFixed(2) + ' s'"
+                      x-text="' / ' + frames + ' f / ' + Number(shot.duration).toFixed(2) + ' s / ' + fps + ' fps'"
                       class="tnum font-mono"
                     ></span>
                   </p>

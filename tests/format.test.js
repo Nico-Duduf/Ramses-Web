@@ -14,6 +14,10 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
 import {
+  clockText,
+  frameCount,
+  framerateFor,
+  groupDigits,
   projectCompletion,
   shotSteps,
   sortShots,
@@ -112,6 +116,46 @@ test("shots sort naturally", () => {
     { shortName: "SH100" },
   ]).map((s) => s.shortName);
   assert.deepEqual(sorted, ["SH9", "SH10", "SH100"]);
+});
+
+test("a sequence's frame rate overrides the project's, but only when flagged", () => {
+  const project = { framerate: 25 };
+  assert.equal(framerateFor({ overrideFramerate: true, framerate: 48 }, project), 48);
+
+  // Ramses stores the override value whether or not the flag is set, so the
+  // flag is the only thing that decides. Reading the value alone would silently
+  // recount every shot in the sequence.
+  assert.equal(framerateFor({ overrideFramerate: false, framerate: 48 }, project), 25);
+  assert.equal(framerateFor(null, project), 25);
+  assert.equal(framerateFor(null, null), 25, "a stated rate beats a blank");
+});
+
+test("frame counts round rather than truncate", () => {
+  const project = { framerate: 25 };
+  // 3.98 s at 25 is 100 frames; calling it 99 would be wrong in the direction
+  // that gets noticed at delivery.
+  assert.equal(frameCount({ duration: 3.98 }, null, project), 100);
+  assert.equal(frameCount({ duration: 5.96 }, null, project), 149);
+  assert.equal(frameCount({}, null, project), 0);
+});
+
+test("frame counts use each shot's own sequence rate", () => {
+  const shots = Object.entries(fixture.shots).map(([uuid, s]) => ({ uuid, ...s }));
+  const total = shots.reduce(
+    (sum, s) => sum + frameCount(s, fixture.sequences[s.sequence], fixture.project),
+    0
+  );
+  // The whole reference project at 25 fps: 41 shots, 197.4 seconds.
+  assert.equal(total, 4935);
+  assert.equal(shots.length, 41);
+});
+
+test("long counts stay scannable and clocks roll over at a minute", () => {
+  assert.equal(groupDigits(4935), "4 935");
+  assert.equal(groupDigits(93), "93");
+  assert.equal(clockText(48), "48 s");
+  assert.equal(clockText(128), "2:08");
+  assert.equal(clockText(600), "10:00");
 });
 
 test("swatch text flips with the state colour", () => {
