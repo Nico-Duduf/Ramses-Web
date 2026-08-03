@@ -251,6 +251,29 @@
   outline: none;
 }
 
+/* Nothing-to-do inside the strip, as opposed to inside a lane.
+ *
+ * The two need opposite treatments. In a lane an idle step sits between
+ * coloured chips and should recede, because three of four steps are idle on
+ * most shots. In the strip an idle shot sits next to the gaps BETWEEN
+ * sequences, and at lane contrast the two were indistinguishable: both read as
+ * dark space, with only the rounded corners of a sequence group to tell them
+ * apart.
+ *
+ * So here it gets presence. A shot with no work is still a shot and occupies
+ * running time; the gap between sequences is nothing at all. Solid fill against
+ * the page background, with the hatch raised enough to be seen rather than
+ * merely felt.
+ */
+.strip-seg.seg-idle {
+  background-color: var(--color-ram-line);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 4px,
+    color-mix(in oklab, var(--color-ram-dim) 45%, transparent) 4px 6px
+  );
+}
+
 /* The strip on a project card: same object, quieter, and not interactive. The
  * whole card is the target there, so its segments must not compete for the
  * click or suggest they are separately reachable. */
