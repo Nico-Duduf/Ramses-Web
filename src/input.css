@@ -1,0 +1,39 @@
+/* Tailwind authoring input. Built to app/assets/app.css by tools/build.ps1.
+ *
+ * Tailwind v4: configuration lives here, not in a JS config file, and @source
+ * tells the CLI which files to scan for class names. Both paths are relative to
+ * this file.
+ */
+
+@import "tailwindcss";
+
+@source "../app/index.html";
+@source "../app/js";
+
+/* Dark-committed on purpose. This sits next to Fusion, Nuke and DaVinci all day,
+ * and it matches the Ramses-Client palette so the two read as one tool.
+ *
+ * State colours are NOT here: they come from the server's RamState rows at
+ * runtime, so recolouring a state in Ramses-Client recolours it here too.
+ */
+@theme {
+  --color-ram-bg: #17191c;
+  --color-ram-card: #1f2226;
+  --color-ram-line: #2c3036;
+  --color-ram-fg: #e8e8e8;
+  --color-ram-dim: #8b9199;
+
+  /* Ramses-Client's own two accents. */
+  --color-ram-accent: #2c4468;
+  --color-ram-good: #2b5a4c;
+
+  /* Only used for the error banner. */
+  --color-ram-bad: #c05353;
+}
+
+/* Alpine paints x-data content for one frame before it initialises; x-cloak
+ * hides it until then. Needs a real rule, Alpine only removes the attribute.
+ */
+[x-cloak] {
+  display: none !important;
+}

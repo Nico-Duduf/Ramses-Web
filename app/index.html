@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#17191c" />
+    <title>Ramses</title>
+    <link rel="stylesheet" href="assets/app.css" />
+    <!--
+      Order matters, and it is the opposite of what looks natural.
+
+      Alpine's CDN build starts itself as soon as it executes, firing alpine:init
+      once. Module scripts and deferred classic scripts run in document order, so
+      loading Alpine first means it has already initialised by the time app.js
+      attaches its alpine:init listener: no store, no components, and every
+      x-data on the page throwing "not defined".
+
+      app.js therefore has to come first.
+    -->
+    <script type="module" src="js/app.js"></script>
+    <script defer src="assets/alpine.min.js"></script>
+  </head>
+
+  <body class="min-h-dvh bg-ram-bg text-ram-fg antialiased">
+    <div x-data x-cloak class="mx-auto max-w-3xl px-4 pb-16 pt-[env(safe-area-inset-top)]">
+      <!-- Header -->
+      <header class="flex items-baseline justify-between py-4">
+        <h1 class="font-mono text-sm tracking-widest text-ram-dim">RAMSES</h1>
+        <button
+          x-show="$store.ramses.user"
+          @click="$store.ramses.logout()"
+          class="text-xs text-ram-dim hover:text-ram-fg"
+        >
+          Log out
+        </button>
+      </header>
+
+      <!-- Error banner. Never blocks the view underneath. -->
+      <p
+        x-show="$store.ramses.error"
+        x-text="$store.ramses.error"
+        class="mb-4 rounded border border-ram-bad/40 bg-ram-bad/10 px-3 py-2 text-sm text-ram-bad"
+      ></p>
+
+      <!-- Login -->
+      <section x-show="!$store.ramses.user" x-data="loginView">
+        <form @submit.prevent="submit" class="space-y-3">
+          <input
+            type="email"
+            x-model="email"
+            autocomplete="username"
+            placeholder="email"
+            class="w-full rounded bg-ram-card px-3 py-2.5 outline-none ring-1 ring-ram-line focus:ring-ram-accent"
+          />
+          <input
+            type="password"
+            x-model="password"
+            autocomplete="current-password"
+            placeholder="password"
+            class="w-full rounded bg-ram-card px-3 py-2.5 outline-none ring-1 ring-ram-line focus:ring-ram-accent"
+          />
+          <button
+            type="submit"
+            :disabled="!canSubmit"
+            class="w-full rounded bg-ram-accent py-2.5 font-medium disabled:opacity-40"
+            x-text="$store.ramses.busy ? 'Signing in...' : 'Sign in'"
+          ></button>
+        </form>
+      </section>
+
+      <template x-if="$store.ramses.user">
+        <div>
+          <!-- Projects -->
+          <section
+            x-show="$store.ramses.route.view === 'projects'"
+            x-data="projectsView"
+            class="space-y-2"
+          >
+            <template x-for="p in projects" :key="p.uuid">
+              <button
+                @click="open(p)"
+                class="block w-full rounded bg-ram-card p-3 text-left ring-1 ring-ram-line hover:ring-ram-accent"
+              >
+                <div class="flex items-baseline justify-between">
+                  <span x-text="p.name" class="font-medium"></span>
+                  <span x-text="percent(p)" class="font-mono text-sm text-ram-dim"></span>
+                </div>
+                <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-ram-line">
+                  <div
+                    class="h-full rounded-full bg-ram-good"
+                    :style="{ width: (p.completion ?? 0) + '%' }"
+                  ></div>
+                </div>
+              </button>
+            </template>
+          </section>
+
+          <!-- One project -->
+          <section
+            x-show="$store.ramses.route.view === 'project'"
+            x-data="projectView"
+            class="space-y-6"
+          >
+            <template x-if="data">
+              <div class="space-y-6">
+                <div>
+                  <button @click="back()" class="mb-3 text-xs text-ram-dim hover:text-ram-fg">
+                    &larr; Projects
+                  </button>
+                  <h2 x-text="data.project.name" class="text-lg font-medium"></h2>
+                </div>
+
+                <!-- Completion by step -->
+                <div class="space-y-2">
+                  <template x-for="step in steps" :key="step.uuid">
+                    <div>
+                      <div class="flex items-baseline justify-between text-sm">
+                        <span x-text="step.shortName" class="font-mono"></span>
+                        <span x-text="stepPercent(step.uuid)" class="font-mono text-ram-dim"></span>
+                      </div>
+                      <div class="mt-1 h-1.5 overflow-hidden rounded-full bg-ram-line">
+                        <div
+                          class="h-full rounded-full"
+                          :style="{ width: stepWidth(step.uuid), backgroundColor: step.color || '#51a548' }"
+                        ></div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+
+                <!-- Shots, by sequence, coloured by state -->
+                <template x-for="seq in sequences" :key="seq.uuid">
+                  <div>
+                    <h3
+                      x-text="label(seq)"
+                      class="mb-2 font-mono text-xs tracking-widest text-ram-dim"
+                    ></h3>
+                    <div class="space-y-1">
+                      <template x-for="shot in seq.shots" :key="shot.uuid">
+                        <button
+                          @click="open(shot)"
+                          class="flex w-full items-center gap-1.5 rounded bg-ram-card p-1.5 text-left ring-1 ring-ram-line hover:ring-ram-accent"
+                        >
+                          <span
+                            x-text="label(shot)"
+                            class="w-16 shrink-0 pl-1 font-mono text-sm"
+                          ></span>
+                          <template x-for="step in steps" :key="step.uuid">
+                            <span
+                              class="flex-1 truncate rounded px-1 py-1 text-center font-mono text-[10px] leading-none"
+                              :style="swatch(shot.uuid, step.uuid)"
+                              x-text="stateName(shot.uuid, step.uuid)"
+                            ></span>
+                          </template>
+                        </button>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </section>
+
+          <!-- One shot -->
+          <section x-show="$store.ramses.route.view === 'shot'" x-data="shotView">
+            <template x-if="shot">
+              <div class="space-y-4">
+                <div>
+                  <button @click="back()" class="mb-3 text-xs text-ram-dim hover:text-ram-fg">
+                    &larr; Back
+                  </button>
+                  <h2 class="font-mono text-lg" x-text="label(shot)"></h2>
+                  <p class="text-xs text-ram-dim">
+                    <span x-text="sequence ? label(sequence) : ''"></span>
+                    <span x-show="shot.duration" x-text="' - ' + shot.duration + 's'"></span>
+                  </p>
+                </div>
+
+                <div class="space-y-2">
+                  <template x-for="row in rows" :key="row.step.uuid">
+                    <div class="rounded bg-ram-card p-3 ring-1 ring-ram-line">
+                      <div class="flex items-center justify-between gap-2">
+                        <span x-text="row.step.shortName" class="font-mono text-sm"></span>
+                        <span
+                          class="rounded px-2 py-0.5 font-mono text-xs"
+                          :style="row.swatch"
+                          x-text="row.stateName || 'no task'"
+                        ></span>
+                      </div>
+                      <p
+                        x-show="row.comment"
+                        x-text="row.comment"
+                        class="mt-2 text-sm text-ram-dim"
+                      ></p>
+                      <p
+                        x-show="row.modified"
+                        x-text="row.modified"
+                        class="mt-1 font-mono text-[10px] text-ram-dim"
+                      ></p>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </section>
+        </div>
+      </template>
+
+      <!-- Busy indicator, deliberately unobtrusive: the views keep their content -->
+      <div
+        x-show="$store.ramses.busy"
+        class="fixed inset-x-0 top-0 h-0.5 animate-pulse bg-ram-accent"
+      ></div>
+    </div>
+  </body>
+</html>
