@@ -19,11 +19,15 @@
  * bug, not a style.
  */
 @theme {
-  --color-ram-bg: #131518;
-  --color-ram-card: #1b1e22;
-  --color-ram-line: #262a30;
-  --color-ram-fg: #e6e8ea;
-  --color-ram-dim: #7d858f;
+  --color-ram-bg: #121417;
+  --color-ram-card: #1a1d21;
+  --color-ram-line: #272b31;
+
+  /* Three text weights, not a gradient of greys. Earlier every secondary thing
+   * was the same mid grey at the same size, so nothing led the eye. */
+  --color-ram-fg: #eceef0;
+  --color-ram-mid: #a7aeb6;
+  --color-ram-dim: #767d86;
 
   /* Ramses-Client's own blue, plus a tint of it that survives on a dark
    * background for links and focus rings. */
@@ -40,6 +44,99 @@
     sans-serif;
 }
 
+/* ---------------------------------------------------------------------------
+ * Type scale
+ *
+ * Six roles, and every piece of text on the page picks one. The previous
+ * version had thirteen distinct sizes with 41 of 55 usages at 13px or smaller,
+ * which is why it read as timid and templated: when the whole range is small,
+ * nothing leads and everything whispers.
+ *
+ * Two rules hold it together:
+ *   - Mono is for DATA only: shot codes, counts, percentages, state labels.
+ *     Prose and labels are sans. Setting labels in mono is what made the screen
+ *     read as a terminal dump rather than as a designed thing.
+ *   - Nothing is smaller than 12px, ever, including on a phone.
+ * ------------------------------------------------------------------------- */
+
+/* The one large thing on a screen. Project name, shot code. */
+.t-display {
+  font-size: 1.75rem;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+/* Numbers that are the point rather than an annotation: a completion figure. */
+.t-figure {
+  font-family: var(--font-mono);
+  font-size: 1.625rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Names of things: steps, projects in the list, sequences. */
+.t-label {
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* Prose. Comments are the only real prose in the app. */
+.t-body {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+/* Everything secondary: meta lines, tallies, timestamps. */
+.t-meta {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--color-ram-dim);
+}
+
+/* Data in place: shot codes in the list, frame counts, state labels. */
+.t-data {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/* Column headers and the wordmark. Sans, not mono: these are labels. */
+.t-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ram-dim);
+}
+
+@media (min-width: 48rem) {
+  .t-display {
+    font-size: 2.5rem;
+  }
+  .t-figure {
+    font-size: 2.25rem;
+  }
+  .t-label {
+    font-size: 1.0625rem;
+  }
+  .t-body {
+    font-size: 1rem;
+  }
+  .t-meta {
+    font-size: 0.875rem;
+  }
+  .t-data {
+    font-size: 0.9375rem;
+  }
+  .t-eyebrow {
+    font-size: 0.8125rem;
+  }
+}
+
 /* Alpine paints x-data content for one frame before it initialises; x-cloak
  * hides it until then. Needs a real rule, Alpine only removes the attribute.
  */
@@ -47,54 +144,31 @@
   display: none !important;
 }
 
-/* Shot codes, percentages and step names are set in mono and sit in columns
- * that must line up, so digits have to be fixed width. */
+/* Shot codes, percentages and frame counts sit in columns that must line up. */
 .tnum {
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em;
 }
 
-/* The lane: one shot, segmented by step.
+/* ---------------------------------------------------------------------------
+ * The lane: one shot, segmented by step.
  *
  * A shot is a thing that moves left to right through the pipeline, so it is
- * drawn as a single track rather than as four separate chips. Rounding only the
+ * drawn as a single track rather than as separate chips. Rounding only the
  * outer edges is what makes four elements read as one object.
- */
+ * ------------------------------------------------------------------------- */
 .lane {
   display: grid;
   gap: 2px;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 .lane > :first-child {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 .lane > :last-child {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-
-/* The per-step summary bars.
- *
- * Stacked on a phone, where four bars side by side would be unreadable. Once
- * there is room they adopt the lane's own column template, so each bar sits
- * directly above the column of shots it summarises. The template arrives as
- * --lane-cols because it depends on how many steps the project has, and a
- * media query cannot be expressed in an inline style.
- */
-.step-grid {
-  display: grid;
-  gap: 0.625rem;
-}
-@media (min-width: 48rem) {
-  .step-grid {
-    grid-template-columns: var(--lane-cols);
-    /* Wider than the lane's 2px so the name and percentage of adjacent steps
-     * do not run into each other. The columns drift a few pixels from the lanes
-     * below as a result, which is invisible, where the crowding was not. */
-    gap: 0.75rem;
-  }
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 /* Nothing-to-do. Present, so the lane stays aligned, but silent: on most shots
@@ -102,7 +176,30 @@
  * noise that hid the states that matter.
  */
 .seg-idle {
-  background-color: color-mix(in oklab, var(--color-ram-line) 55%, transparent);
+  background-color: color-mix(in oklab, var(--color-ram-line) 50%, transparent);
+}
+
+/* The per-step summary bars.
+ *
+ * Stacked on a phone, where four side by side would be unreadable. Once there
+ * is room they adopt the lane's own column template, so each bar sits directly
+ * above the column of shots it summarises, and they become the column header:
+ * two rows of the same four names is one too many. The template arrives as
+ * --lane-cols because it depends on the project's step count, and a media query
+ * cannot be expressed in an inline style.
+ */
+.step-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 48rem) {
+  .step-grid {
+    grid-template-columns: var(--lane-cols);
+    /* Wider than the lane's 2px so adjacent names and figures do not run
+     * together. The columns drift a few pixels from the lanes below as a
+     * result, which is invisible, where the crowding was not. */
+    gap: 0.75rem;
+  }
 }
 
 /* One orchestrated entrance rather than scattered effects: rows arrive in

@@ -50,8 +50,11 @@ export function projectView(store) {
     frames(shot) {
       return frameCount(shot, this.data.sequences[shot.sequence], this.data.project);
     },
+    /** Bare number: the column it sits in is headed "Frames", so repeating
+     * the unit on every row of forty is noise. The sequence and project
+     * tallies keep their unit, because those run inline with other figures. */
     framesText(shot) {
-      return groupDigits(this.frames(shot)) + " f";
+      return groupDigits(this.frames(shot));
     },
     /** "27 shots / 2 105 f / 1:24" for a sequence or the whole project. */
     tally(shots, sequenceUuid) {

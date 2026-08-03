@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#131518" />
+    <meta name="theme-color" content="#121417" />
     <title>Ramses</title>
     <link rel="stylesheet" href="assets/app.css" />
     <!--
@@ -22,29 +22,26 @@
     <script defer src="assets/alpine.min.js"></script>
   </head>
 
-  <body class="min-h-dvh bg-ram-bg font-sans text-[15px] text-ram-fg antialiased md:text-base">
+  <body class="min-h-dvh bg-ram-bg font-sans text-ram-fg antialiased">
     <!--
-      Phone first, but not phone only. On a desktop the same layout was a narrow
-      column of 10px type stranded in a wide window. Every breakpoint below buys
-      something specific: room for the lanes, a readable type scale, and the step
-      bars side by side instead of stacked.
+      Every piece of text here picks one of the six roles defined in
+      src/input.css: t-display, t-figure, t-label, t-body, t-meta, t-data,
+      t-eyebrow. No ad-hoc sizes. Mono is for data only.
     -->
     <div
       x-data
       x-cloak
-      class="mx-auto max-w-2xl px-4 pb-20 pt-[max(1rem,env(safe-area-inset-top))] md:max-w-4xl md:px-8 md:pt-8 lg:max-w-5xl"
+      class="mx-auto max-w-2xl px-5 pb-24 pt-[max(1.25rem,env(safe-area-inset-top))] md:max-w-4xl md:px-8 md:pt-10 lg:max-w-5xl"
     >
       <!-- Header. Present once signed in; the login screen carries its own. -->
       <header
         x-show="$store.ramses.user"
-        class="mb-5 flex items-center justify-between border-b border-ram-line pb-3"
+        class="mb-7 flex items-center justify-between border-b border-ram-line pb-4 md:mb-10"
       >
         <div>
-          <p class="font-mono text-[11px] tracking-[0.3em] text-ram-dim md:text-sm md:tracking-[0.35em]">
-            RAMSES
-          </p>
+          <p class="t-eyebrow text-ram-mid">Ramses</p>
           <p
-            class="mt-0.5 text-[11px] text-ram-dim md:mt-1 md:text-xs"
+            class="t-meta mt-1"
             x-text="$store.ramses.busy
               ? 'Refreshing...'
               : ($store.ramses.since ? 'Updated ' + $store.ramses.since : '')"
@@ -54,13 +51,13 @@
           <button
             @click="$store.ramses.refresh()"
             :disabled="$store.ramses.busy"
-            class="rounded px-2.5 py-1.5 text-xs text-ram-dim hover:bg-ram-card hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit disabled:opacity-40 md:px-3 md:py-2 md:text-sm"
+            class="t-meta rounded-md px-3 py-2 hover:bg-ram-card hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit disabled:opacity-40"
           >
             Refresh
           </button>
           <button
             @click="$store.ramses.logout()"
-            class="rounded px-2.5 py-1.5 text-xs text-ram-dim hover:bg-ram-card hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+            class="t-meta rounded-md px-3 py-2 hover:bg-ram-card hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
           >
             Sign out
           </button>
@@ -71,7 +68,7 @@
       <p
         x-show="$store.ramses.error"
         x-text="$store.ramses.error"
-        class="mb-4 rounded border border-ram-bad/40 bg-ram-bad/10 px-3 py-2 text-sm text-ram-bad"
+        class="t-body mb-5 rounded-md border border-ram-bad/40 bg-ram-bad/10 px-4 py-3 text-ram-bad"
       ></p>
 
       <!-- Sign in -->
@@ -80,16 +77,14 @@
         x-data="loginView"
         class="flex min-h-[70dvh] flex-col justify-center"
       >
-        <div class="mb-8 md:mb-10">
-          <h1 class="font-mono text-2xl tracking-[0.42em] text-ram-fg md:text-4xl">
-            RAMSES
-          </h1>
-          <p class="mt-2 text-sm text-ram-dim md:mt-3 md:text-base">
+        <div class="mb-10">
+          <h1 class="t-display">Ramses</h1>
+          <p class="t-body mt-3 text-ram-mid">
             Where everything stands, away from the desk.
           </p>
         </div>
 
-        <form @submit.prevent="submit" class="max-w-md space-y-2.5">
+        <form @submit.prevent="submit" class="max-w-md space-y-3">
           <label class="sr-only" for="email">Email</label>
           <input
             id="email"
@@ -98,7 +93,7 @@
             autocomplete="username"
             inputmode="email"
             placeholder="email"
-            class="w-full rounded-md bg-ram-card px-3.5 py-3 outline-none ring-1 ring-ram-line focus:ring-ram-accent-lit"
+            class="t-body w-full rounded-lg bg-ram-card px-4 py-3.5 outline-none ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit"
           />
           <label class="sr-only" for="password">Password</label>
           <input
@@ -107,17 +102,17 @@
             x-model="password"
             autocomplete="current-password"
             placeholder="password"
-            class="w-full rounded-md bg-ram-card px-3.5 py-3 outline-none ring-1 ring-ram-line focus:ring-ram-accent-lit"
+            class="t-body w-full rounded-lg bg-ram-card px-4 py-3.5 outline-none ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit"
           />
           <button
             type="submit"
             :disabled="!canSubmit"
-            class="w-full rounded-md bg-ram-accent py-3 font-medium transition-opacity hover:opacity-90 disabled:opacity-40"
+            class="t-label w-full rounded-lg bg-ram-accent py-3.5 transition-opacity hover:opacity-90 disabled:opacity-40"
             x-text="$store.ramses.busy ? 'Signing in...' : 'Sign in'"
           ></button>
         </form>
 
-        <p class="mt-6 font-mono text-[11px] text-ram-dim" x-text="host"></p>
+        <p class="t-meta mt-8" x-text="host"></p>
       </section>
 
       <template x-if="$store.ramses.user">
@@ -126,23 +121,20 @@
           <section
             x-show="$store.ramses.route.view === 'projects'"
             x-data="projectsView"
-            class="grid gap-2 md:gap-4"
+            class="grid gap-3 md:gap-5"
             :class="projects.length > 1 ? 'md:grid-cols-2' : 'md:max-w-xl'"
           >
             <template x-for="(p, i) in projects" :key="p.uuid">
               <button
                 @click="open(p)"
-                class="rise block w-full rounded-lg bg-ram-card p-4 text-left ring-1 ring-ram-line transition-colors hover:ring-ram-accent-lit/40 focus-visible:outline-2 focus-visible:outline-ram-accent-lit md:p-6"
+                class="rise block w-full rounded-xl bg-ram-card p-5 text-left ring-1 ring-ram-line transition-colors hover:ring-ram-accent-lit/40 focus-visible:outline-2 focus-visible:outline-ram-accent-lit md:p-7"
                 :style="{ animationDelay: (i * 40) + 'ms' }"
               >
                 <div class="flex items-end justify-between gap-4">
-                  <span x-text="p.name" class="font-medium md:text-lg"></span>
-                  <span
-                    x-text="percent(p)"
-                    class="tnum font-mono text-2xl leading-none text-ram-fg md:text-4xl"
-                  ></span>
+                  <span x-text="p.name" class="t-label"></span>
+                  <span x-text="percent(p)" class="t-figure"></span>
                 </div>
-                <div class="mt-3 h-1 overflow-hidden rounded-full bg-ram-line md:mt-5 md:h-1.5">
+                <div class="mt-4 h-1.5 overflow-hidden rounded-full bg-ram-line md:mt-6">
                   <div
                     class="h-full rounded-full bg-ram-accent-lit transition-[width] duration-500"
                     :style="{ width: (p.completion ?? 0) + '%' }"
@@ -153,7 +145,7 @@
 
             <p
               x-show="projects.length === 0 && !$store.ramses.busy"
-              class="py-12 text-center text-sm text-ram-dim"
+              class="t-body py-16 text-center text-ram-dim"
             >
               No projects are assigned to you yet.
             </p>
@@ -168,135 +160,111 @@
               <div>
                 <button
                   @click="back()"
-                  class="text-xs text-ram-dim hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                  class="t-meta hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
                 >
                   &larr; Projects
                 </button>
-                <h2
-                  x-text="data.project.name"
-                  class="mt-2 text-xl font-medium md:mt-3 md:text-3xl"
-                ></h2>
-                <!-- Scale, schedule and pulse. Three facts, stated in the same
-                     dim type: this app has no behind-schedule detection, so a
-                     passed deadline reads as information, not as an alarm. -->
-                <div
-                  class="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 font-mono text-[11px] text-ram-dim md:mt-2 md:gap-x-5 md:text-sm"
-                >
+                <h2 x-text="data.project.name" class="t-display mt-3"></h2>
+
+                <!-- Scale, schedule and pulse. Three facts in one quiet line:
+                     this app has no behind-schedule detection, so a passed
+                     deadline reads as information, not as an alarm. -->
+                <div class="t-meta mt-2 flex flex-wrap items-baseline gap-x-5 gap-y-1">
                   <span x-text="projectTally" class="tnum"></span>
                   <span x-show="deadline" x-text="deadline" class="tnum"></span>
                   <span x-show="lastChange" x-text="lastChange"></span>
                 </div>
 
                 <!-- Completion by step.
-                     On a phone these stack full width and scroll away, so the
-                     compact header row below does the labelling.
-                     On a desktop they sit on the lane grid itself, one bar per
-                     column, which makes them the natural column header: they
-                     become sticky here and the compact row is hidden, because
-                     two rows of the same four names is one too many. -->
+                     On a phone these stack and scroll away, so the compact row
+                     below does the labelling. On a desktop they sit on the lane
+                     grid, one per column, which makes them the column header. -->
                 <div
-                  class="mt-5 flex items-start gap-2 md:sticky md:top-0 md:z-10 md:-mx-8 md:mt-7 md:gap-4 md:border-b md:border-ram-line md:bg-ram-bg md:px-8 md:pb-3 md:pt-4"
+                  class="mt-7 flex items-start gap-3 md:sticky md:top-0 md:z-10 md:-mx-8 md:mt-10 md:gap-4 md:border-b md:border-ram-line md:bg-ram-bg md:px-8 md:pb-4 md:pt-5"
                 >
                   <span class="hidden shrink-0 md:block md:w-20"></span>
                   <div class="step-grid min-w-0 flex-1" :style="{ '--lane-cols': laneCols }">
-                  <template x-for="step in steps" :key="step.uuid">
-                    <div>
-                      <div class="flex items-baseline justify-between text-xs md:text-sm">
-                        <span
-                          x-text="step.shortName"
-                          class="font-mono tracking-wide"
-                        ></span>
-                        <span
-                          x-text="stepPercent(step.uuid)"
-                          class="tnum font-mono text-ram-dim"
-                        ></span>
-                      </div>
-                      <div class="mt-1 h-1 overflow-hidden rounded-full bg-ram-line md:mt-2 md:h-1.5">
-                        <div
-                          class="h-full rounded-full transition-[width] duration-500"
-                          :style="{ width: stepWidth(step.uuid), backgroundColor: step.color || '#7fa3d8' }"
-                        ></div>
-                      </div>
+                    <template x-for="step in steps" :key="step.uuid">
+                      <div>
+                        <div class="flex items-baseline justify-between gap-2">
+                          <span x-text="step.shortName" class="t-label"></span>
+                          <span
+                            x-text="stepPercent(step.uuid)"
+                            class="t-data text-ram-mid"
+                          ></span>
+                        </div>
+                        <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-ram-line">
+                          <div
+                            class="h-full rounded-full transition-[width] duration-500"
+                            :style="{ width: stepWidth(step.uuid), backgroundColor: step.color || '#7fa3d8' }"
+                          ></div>
+                        </div>
 
-                      <!-- What is left, not just how much. A percentage cannot
-                           say whether the remainder is forty untouched shots or
-                           two in review. Desktop only: on a phone this would be
-                           four more lines above the list it describes. -->
-                      <p class="mt-1.5 hidden truncate font-mono text-[10px] md:block">
-                        <template x-for="(t, i) in tallyFor(step.uuid)" :key="t.name">
-                          <span>
-                            <span x-show="i > 0" class="text-ram-line">/</span>
-                            <span
-                              x-text="t.count + ' ' + t.name"
-                              :style="{ color: t.color }"
-                            ></span>
-                          </span>
-                        </template>
-                      </p>
-                    </div>
-                  </template>
+                        <!-- What is left, not just how much. A percentage cannot
+                             say whether the remainder is thirty untouched shots
+                             or two in review. -->
+                        <p class="mt-2 hidden md:block">
+                          <template x-for="(t, i) in tallyFor(step.uuid)" :key="t.name">
+                            <span class="t-data whitespace-nowrap">
+                              <span x-show="i > 0" class="text-ram-line">/</span>
+                              <span
+                                x-text="t.count + ' ' + t.name"
+                                :style="{ color: t.color }"
+                              ></span>
+                            </span>
+                          </template>
+                        </p>
+                      </div>
+                    </template>
                   </div>
-                  <span
-                    class="hidden shrink-0 text-right font-mono text-xs tracking-wide text-ram-dim md:block md:w-20"
-                    >frames</span
-                  >
+                  <span class="t-eyebrow hidden shrink-0 text-right md:block md:w-16">
+                    Frames
+                  </span>
                 </div>
 
                 <!-- Phone only. On a desktop the summary bars above are already
-                     one per column and carry these same four names, so this row
-                     would repeat them; there, they do this job themselves. -->
+                     one per column and carry these same names. -->
                 <div
-                  class="sticky top-0 z-10 -mx-4 mt-7 border-b border-ram-line bg-ram-bg px-4 pb-1.5 pt-2 md:hidden"
+                  class="sticky top-0 z-10 -mx-5 mt-7 border-b border-ram-line bg-ram-bg px-5 pb-2 pt-3 md:hidden"
                 >
-                  <div class="flex items-center gap-2 md:gap-4">
-                    <span class="w-14 shrink-0 md:w-20"></span>
+                  <div class="flex items-center gap-3">
+                    <span class="w-16 shrink-0"></span>
                     <div class="lane flex-1" :style="laneStyle">
                       <template x-for="step in steps" :key="step.uuid">
                         <span
                           x-text="step.shortName"
-                          class="truncate text-center font-mono text-[10px] tracking-wide text-ram-dim md:text-xs md:tracking-[0.15em]"
+                          class="t-eyebrow truncate text-center"
                         ></span>
                       </template>
                     </div>
-                    <!-- Mirrors the frame-count column on each shot row, so the
-                         step labels stay centred over their segments. -->
-                    <span
-                      class="w-12 shrink-0 text-right font-mono text-[10px] tracking-wide text-ram-dim md:w-20 md:text-xs"
-                      >frames</span
-                    >
+                    <span class="t-eyebrow w-12 shrink-0 text-right">Fr</span>
                   </div>
                 </div>
 
                 <!-- Shots, by sequence -->
                 <template x-for="seq in sequences" :key="seq.uuid">
-                  <div class="mt-5 md:mt-8">
-                    <h3 class="mb-1.5 flex items-center gap-2 md:mb-3 md:gap-4">
-                      <span
-                        x-text="label(seq)"
-                        class="font-mono text-[11px] tracking-[0.2em] text-ram-dim md:text-sm"
-                      ></span>
+                  <div class="mt-8 md:mt-10">
+                    <h3 class="mb-3 flex items-baseline gap-4">
+                      <span x-text="label(seq)" class="t-label text-ram-mid"></span>
                       <span class="h-px flex-1 bg-ram-line"></span>
-                      <span
-                        x-text="tally(seq.shots, seq.uuid)"
-                        class="tnum font-mono text-[11px] text-ram-dim md:text-sm"
-                      ></span>
+                      <span x-text="tally(seq.shots, seq.uuid)" class="t-meta tnum"></span>
                     </h3>
 
-                    <div class="space-y-1 md:space-y-1.5">
+                    <div class="space-y-1.5 md:space-y-2">
                       <template x-for="(shot, i) in seq.shots" :key="shot.uuid">
                         <button
                           @click="open(shot)"
-                          class="rise flex w-full items-center gap-2 rounded py-0.5 text-left focus-visible:outline-2 focus-visible:outline-ram-accent-lit md:gap-4"
+                          class="rise flex w-full items-center gap-3 rounded-md py-0.5 text-left focus-visible:outline-2 focus-visible:outline-ram-accent-lit md:gap-4"
                           :style="{ animationDelay: Math.min(i * 18, 360) + 'ms' }"
                         >
                           <span
                             x-text="label(shot)"
-                            class="tnum w-14 shrink-0 font-mono text-[13px] md:w-20 md:text-base"
+                            class="t-data w-16 shrink-0 md:w-20"
                           ></span>
-                          <div class="lane h-6 flex-1 md:h-9" :style="laneStyle">
+                          <div class="lane h-8 flex-1 md:h-11" :style="laneStyle">
                             <template x-for="step in steps" :key="step.uuid">
                               <span
-                                class="flex items-center justify-center truncate font-mono text-[10px] leading-none md:text-xs md:tracking-wide"
+                                class="t-data flex items-center justify-center truncate"
                                 :class="segment(shot.uuid, step.uuid).idle ? 'seg-idle' : ''"
                                 :style="segment(shot.uuid, step.uuid).style"
                                 x-text="segment(shot.uuid, step.uuid).label"
@@ -305,7 +273,7 @@
                           </div>
                           <span
                             x-text="framesText(shot)"
-                            class="tnum w-12 shrink-0 text-right font-mono text-[10px] text-ram-dim md:w-20 md:text-xs"
+                            class="t-data w-12 shrink-0 text-right text-ram-dim md:w-16"
                           ></span>
                         </button>
                       </template>
@@ -322,36 +290,31 @@
               <div>
                 <button
                   @click="back()"
-                  class="text-xs text-ram-dim hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                  class="t-meta hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
                 >
                   &larr; Back
                 </button>
 
-                <div class="mt-2 flex items-baseline gap-3 md:mt-3 md:gap-5">
-                  <h2 class="tnum font-mono text-2xl md:text-5xl" x-text="label(shot)"></h2>
-                  <p class="text-xs text-ram-dim md:text-sm">
-                    <span x-text="sequence ? label(sequence) : ''"></span>
-                    <span
-                      x-show="shot.duration"
-                      x-text="' / ' + frames + ' f / ' + Number(shot.duration).toFixed(2) + ' s / ' + fps + ' fps'"
-                      class="tnum font-mono"
-                    ></span>
-                  </p>
-                </div>
+                <h2 class="t-display mt-3 font-mono tnum" x-text="label(shot)"></h2>
+                <p class="t-meta mt-2">
+                  <span x-text="sequence ? label(sequence) : ''"></span>
+                  <span
+                    x-show="shot.duration"
+                    x-text="' / ' + frames + ' frames / ' + Number(shot.duration).toFixed(2) + ' s / ' + fps + ' fps'"
+                    class="tnum"
+                  ></span>
+                </p>
 
-                <div class="mt-5 space-y-1.5 md:mt-8 md:space-y-3">
+                <div class="mt-7 space-y-2 md:mt-10 md:space-y-3">
                   <template x-for="(row, i) in rows" :key="row.step.uuid">
                     <div
-                      class="rise rounded-lg bg-ram-card p-3.5 ring-1 ring-ram-line md:p-5"
+                      class="rise rounded-xl bg-ram-card p-4 ring-1 ring-ram-line md:p-6"
                       :style="{ animationDelay: (i * 40) + 'ms' }"
                     >
-                      <div class="flex items-center justify-between gap-3">
+                      <div class="flex items-center justify-between gap-4">
+                        <span x-text="row.step.shortName" class="t-label"></span>
                         <span
-                          x-text="row.step.shortName"
-                          class="font-mono text-[13px] tracking-wide md:text-base"
-                        ></span>
-                        <span
-                          class="rounded px-2 py-0.5 font-mono text-[10px] md:px-2.5 md:py-1 md:text-xs"
+                          class="t-data rounded px-2.5 py-1"
                           :class="row.state ? '' : 'text-ram-dim ring-1 ring-ram-line'"
                           :style="row.state ? row.swatch : {}"
                           x-text="row.stateName || 'nothing to do'"
@@ -360,13 +323,9 @@
                       <p
                         x-show="row.comment"
                         x-text="row.comment"
-                        class="mt-2 text-[13px] leading-snug text-ram-fg/80 md:mt-3 md:text-sm"
+                        class="t-body mt-3 text-ram-mid"
                       ></p>
-                      <p
-                        x-show="row.modified"
-                        x-text="row.modified"
-                        class="mt-1.5 font-mono text-[10px] text-ram-dim md:mt-2 md:text-xs"
-                      ></p>
+                      <p x-show="row.modified" x-text="row.modified" class="t-meta mt-2"></p>
                     </div>
                   </template>
                 </div>
