@@ -33,7 +33,7 @@ files land directly in the API folder, beside `index.php` and `init.php`.
     include("projects_get_users.php");
 ```
 
-`tools/deploy.ps1` copies the files but will not edit `index.php`; that is a
+`tools/publish.ps1` stages the files but will not edit `index.php`; that is a
 three-line change to someone else's file and it should be visible in their diff,
 not applied behind their back.
 

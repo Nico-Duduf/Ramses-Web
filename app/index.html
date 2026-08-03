@@ -175,6 +175,34 @@
                   <span x-show="lastChange" x-text="lastChange"></span>
                 </div>
 
+                <!-- The show strip: the whole project in one object, every shot
+                     sized by its length. The only thing here weighted by
+                     running time rather than by shot count, which is what the
+                     schedule actually runs on. -->
+                <div class="mt-7 md:mt-9">
+                  <div class="strip">
+                    <template x-for="group in strip" :key="group.uuid">
+                      <div
+                        class="strip-group"
+                        :style="{ flexBasis: group.width + '%' }"
+                        :aria-label="'Sequence ' + group.name"
+                      >
+                        <template x-for="s in group.segments" :key="s.uuid">
+                          <button
+                            @click="openShot(s.uuid)"
+                            :title="s.title"
+                            :aria-label="s.title"
+                            :class="s.idle ? 'seg-idle' : ''"
+                            :style="{ flexBasis: s.width + '%', backgroundColor: s.color }"
+                            class="strip-seg"
+                          ></button>
+                        </template>
+                      </div>
+                    </template>
+                  </div>
+                  <p class="t-meta mt-2" x-text="stripCaption"></p>
+                </div>
+
                 <!-- Completion by step.
                      On a phone these stack and scroll away, so the compact row
                      below does the labelling. On a desktop they sit on the lane

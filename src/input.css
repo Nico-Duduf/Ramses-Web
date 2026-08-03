@@ -179,6 +179,56 @@
   background-color: color-mix(in oklab, var(--color-ram-line) 50%, transparent);
 }
 
+/* ---------------------------------------------------------------------------
+ * The show strip.
+ *
+ * The whole project as one object: every shot a segment, its width its share
+ * of the running time, its colour the state of its last pipeline step. It is
+ * the only element weighted by length rather than by shot count, and it is
+ * deliberately the one bold thing on the page. Everything around it stays
+ * quiet so that it reads.
+ *
+ * Hairline gaps rather than gutters, so it reads as one continuous ribbon in
+ * the way a strip of film does, not as a row of tiles.
+ * ------------------------------------------------------------------------- */
+.strip {
+  display: flex;
+  gap: 5px;
+  height: 2.5rem;
+  overflow: hidden;
+  border-radius: 5px;
+}
+@media (min-width: 48rem) {
+  .strip {
+    height: 3.5rem;
+  }
+}
+
+/* Sequences are separated by a wider gap than shots are, so the strip carries
+ * the show's structure as well as its length: you can see where one sequence
+ * ends and the next begins without a single label. */
+.strip-group {
+  display: flex;
+  gap: 1px;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.strip-seg {
+  /* A two-frame shot is still a shot: without a floor it would vanish, and a
+   * strip that silently omits work is worse than no strip. */
+  min-width: 3px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  transition: filter 0.15s;
+}
+.strip-seg:hover,
+.strip-seg:focus-visible {
+  filter: brightness(1.35);
+  outline: none;
+}
+
 /* The per-step summary bars.
  *
  * Stacked on a phone, where four side by side would be unreadable. Once there

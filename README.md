@@ -53,6 +53,36 @@ found in production costs an upload and a colleague's confusion.
 `app/` is copied wholesale to the server, so it must never grow a test, a script
 or a doc. Those live in the folders above it.
 
+## Deploying
+
+Everything goes into the one folder on the server that holds Ramses-Server's
+`index.php`. `tools\publish.ps1` stages `publish\ramses\` mirroring that
+folder, and you upload its contents with an SFTP client:
+
+    app\        -> a new app/ subfolder, served at <api>/app/
+    *.php       -> four new files beside index.php
+
+**One manual step, once.** Nothing here edits `index.php`, because a three-line
+change to Ramses-Server's own file should show up in its diff rather than being
+applied behind its back. Add these by hand:
+
+```php
+    include("users_reset_password.php");
+    include("weblogin.php");          // <-- add, MUST be above login.php
+    include("login.php");
+```
+
+```php
+    include("projects_get.php");
+    include("weboverview.php");       // <-- add
+    include("setstatus.php");         // <-- add
+```
+
+`weblogin.php` has to come before `login.php`: it rewrites the request so the
+stock `?login` handler picks it up, and it is skipped entirely if login has
+already run. See [server/README.md](server/README.md) for what each endpoint
+does and [docs/DEPLOY.md](docs/DEPLOY.md) for the full routine.
+
 ## Why the completion numbers must be reproduced exactly
 
 The percentages here have to agree with the ones Ramses-Client shows, or the app
