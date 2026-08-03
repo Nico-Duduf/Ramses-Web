@@ -231,15 +231,13 @@
                         <!-- What is left, not just how much. A percentage cannot
                              say whether the remainder is thirty untouched shots
                              or two in review. -->
-                        <p class="mt-2 hidden md:block">
-                          <template x-for="(t, i) in tallyFor(step.uuid)" :key="t.name">
-                            <span class="t-data whitespace-nowrap">
-                              <span x-show="i > 0" class="text-ram-line">/</span>
-                              <span
-                                x-text="t.count + ' ' + t.name"
-                                :style="{ color: t.color }"
-                              ></span>
-                            </span>
+                        <p class="mt-2 hidden flex-wrap gap-x-3 gap-y-0.5 md:flex">
+                          <template x-for="t in tallyFor(step.uuid)" :key="t.name">
+                            <span
+                              class="t-data whitespace-nowrap"
+                              x-text="t.count + ' ' + t.name"
+                              :style="{ color: t.color }"
+                            ></span>
                           </template>
                         </p>
                       </div>
@@ -274,8 +272,12 @@
                   <div class="mt-8 md:mt-10">
                     <h3 class="mb-3 flex items-baseline gap-4">
                       <span x-text="label(seq)" class="t-label text-ram-mid"></span>
-                      <span class="h-px flex-1 bg-ram-line"></span>
                       <span x-text="tally(seq.shots, seq.uuid)" class="t-meta tnum"></span>
+                      <!-- The rule goes last so the sequence total stays beside
+                           its own name. Right-aligned, it sat under the Frames
+                           heading with the per-shot counts below it, reading as
+                           if the column had two different kinds of number. -->
+                      <span class="h-px flex-1 bg-ram-line"></span>
                     </h3>
 
                     <div class="space-y-1.5 md:space-y-2">

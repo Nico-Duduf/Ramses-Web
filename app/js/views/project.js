@@ -65,7 +65,7 @@ export function projectView(store) {
         0
       );
       const seconds = shots.reduce((sum, s) => sum + (s.duration || 0), 0);
-      return `${shots.length} / ${groupDigits(frames)} f / ${clockText(seconds)}`;
+      return `${shots.length} shots / ${groupDigits(frames)} f / ${clockText(seconds)}`;
     },
     get projectTally() {
       const shots = Object.entries(this.data.shots).map(([uuid, s]) => ({ uuid, ...s }));
