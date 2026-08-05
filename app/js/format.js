@@ -146,12 +146,12 @@ export function sortShots(shots) {
  *
  * A sequence may override the project's rate, and Ramses stores the override
  * value whether or not the flag is set, so the flag is what decides. Falls back
- * to the project, then to 25: a wrong-but-stated rate is more useful here than
+ * to the project, then to 24 (like the Ramses client): a wrong-but-stated rate is more useful here than
  * a blank, because the shot list is scanned for relative size, not audited.
  */
 export function framerateFor(sequence, project) {
   if (sequence?.overrideFramerate && sequence.framerate) return sequence.framerate;
-  return project?.framerate || 25;
+  return project?.framerate || 24;
 }
 
 /**
@@ -161,9 +161,10 @@ export function framerateFor(sequence, project) {
  * bids, retakes and delivery are all counted in frames. Rounded, not floored,
  * because a 3.98 second shot at 25 is 100 frames and calling it 99 would be
  * wrong in the direction that matters.
+ * If the duration is not set yet, default to 5s like the Ramses client.
  */
 export function frameCount(shot, sequence, project) {
-  return Math.round((shot?.duration || 0) * framerateFor(sequence, project));
+  return Math.round((shot?.duration || 5) * framerateFor(sequence, project));
 }
 
 /**
