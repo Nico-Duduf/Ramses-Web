@@ -52,6 +52,22 @@ export function projectView(store) {
      */
     seqFilter: "",
     search: "",
+    /**
+     * Which project the filters belong to.
+     *
+     * This component is created once and reused for every project, so without
+     * this a sequence uuid chosen in one show stays selected in the next, where
+     * it matches nothing: an empty shot list, no visible reason, and a picker
+     * showing a sequence name that does not exist here. Driven from the
+     * template by x-effect, so it follows whatever the router does.
+     */
+    filterProject: "",
+    syncFilters(uuid) {
+      if (!uuid || uuid === this.filterProject) return;
+      this.filterProject = uuid;
+      this.seqFilter = "";
+      this.search = "";
+    },
     get filtering() {
       return this.seqFilter !== "" || this.search.trim() !== "";
     },

@@ -167,7 +167,7 @@
             x-data="projectView"
           >
             <template x-if="data">
-              <div>
+              <div x-effect="syncFilters(data.project.uuid)">
                 <button
                   @click="back()"
                   class="t-meta hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
