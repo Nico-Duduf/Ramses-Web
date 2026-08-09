@@ -21,7 +21,10 @@ one.
 
 ## Requirements
 
-- A Ramses-Server installation you can upload files to, served over **HTTPS**
+- **Ramses-Server 1.0.0-RC12 or newer**, served over **HTTPS**, that you can
+  upload files to. That release is where the endpoints this app calls live. On
+  an older server, use the `standalone-php` tag of this repo, which ships them
+  separately.
 - An SFTP client
 - Windows, for the build scripts (PowerShell)
 - Python 3, to run the local preview
@@ -40,9 +43,9 @@ Then open <http://127.0.0.1:8099/ramses/app/> and sign in with anything.
 
 ## Deploy
 
-Ramses-Web installs into your existing Ramses-Server folder, the one containing
-`index.php`. It adds an `app/` subfolder and four PHP files, and does not modify
-any file that is already there.
+Ramses-Server ships this app from 1.0.0-RC12 on, so a normal server install
+already has it at `/ramses/app/`. Deploying by hand is for updating the app
+without rebuilding the server.
 
 **1. Build and stage the release.**
 
@@ -52,36 +55,19 @@ any file that is already there.
 
 This creates `publish\ramses\`, laid out exactly like the server.
 
-**2. Upload the contents of `publish\ramses\`** into your Ramses-Server folder.
-You are adding one folder and four files:
+**2. Upload the contents of `publish\ramses\`** into your Ramses-Server folder,
+the one containing `index.php`. You are replacing one folder:
 
-    app\             ->  a new app/ subfolder
-    *.php            ->  four new files next to index.php
+    app\             ->  the app/ subfolder
 
 Check that `app\.htaccess` uploaded. Some SFTP clients hide dotfiles, and the
 app needs it to serve its stylesheet and scripts.
 
-**3. Add three lines to `index.php`.** This is the only change to an existing
-file, and it is only needed once:
+**3. Open `https://your-server/ramses/app/`** and sign in.
 
-```php
-    include("users_reset_password.php");
-    include("weblogin.php");          // add this line
-    include("login.php");
-```
-
-```php
-    include("projects_get.php");
-    include("weboverview.php");       // add this line
-    include("setstatus.php");         // and this one
-```
-
-`weblogin.php` must come before `login.php`. It prepares the request for the
-server's own login handler, and has no effect if login has already run.
-
-**4. Open `https://your-server/ramses/app/`** and sign in.
-
-Later releases are steps 1 and 2 again. Step 3 stays done.
+Ramses-Server's own `tools\deploy.py` copies this repo's `app\` into the server
+package, so a full server deployment carries the app with it and these steps
+are not needed.
 
 ### If something is wrong
 
@@ -95,7 +81,6 @@ Later releases are steps 1 and 2 again. Step 3 stays done.
 ## Layout
 
     app/         The only folder that goes on the server
-    server/      Four PHP endpoints, installed next to index.php
     src/         Tailwind source for the stylesheet
     tools/       Build, preview and release scripts
     tests/       Test suite and sample project data

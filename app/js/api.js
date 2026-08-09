@@ -137,7 +137,9 @@ export async function ping() {
  * Logs in with a plain password over HTTPS.
  *
  * The pepper (`clientKey`) that Ramses-Client folds into the password never
- * reaches the browser; ?weblogin applies it server-side. See server/README.md.
+ * reaches the browser; ?weblogin applies it server-side. It is handled by
+ * Ramses-Server's login.php from 1.0.0-RC12 on; before that, by weblogin.php
+ * from this repo's standalone-php tag.
  */
 export async function login(email, password) {
   const content = await request("weblogin", { email, password });

@@ -68,7 +68,8 @@ asset steps, so this does not currently bite.
 
 No sync session. The browser never implements push/fetch/pull; it asks
 `?weboverview` for one project's rows and computes everything locally, which
-keeps the formula in exactly one place. See `server/README.md` for why.
+keeps the formula in exactly one place: `app/js/format.js`, mirroring
+Ramses-Client. The endpoint is Ramses-Server's `project_overview.php`.
 
 ## Auth constraints, from reading Ramses-Server
 
