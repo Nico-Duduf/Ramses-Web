@@ -16,14 +16,14 @@ to `https://server.tld/ramses/`, the app ends up at
 
 **Overmind's server**, confirmed 2026-08-09:
 
-    https://www.overmind-studios.de/ramses/            the API, version 1.0.0-RC6
+    https://www.overmind-studios.de/ramses/            the API, version 1.0.0-RC12
     <the folder Ramses-Server is installed in>/    the folder it lives in
     https://www.overmind-studios.de/ramses/app/        where the app goes
 
-That server predates RC12, so it still runs the standalone endpoints uploaded
-by hand from the `standalone-php` tag of this repo. Until it is upgraded, do
-not delete `weblogin.php`, `weboverview.php`, `setstatus.php` or
-`webcommon.php` from it.
+Upgraded from 1.0.0-RC6 on 2026-08-09, which is what put the endpoints on the
+server. The standalone `weblogin.php`, `weboverview.php`, `setstatus.php` and
+`webcommon.php` that used to sit beside `index.php` are no longer included by
+anything and have been removed.
 
 ## How it goes out
 
