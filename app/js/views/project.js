@@ -9,6 +9,7 @@ import {
   shotSteps,
   showStrip,
   sinceText,
+  sortSequences,
   sortShots,
   stateColor,
   stateTally,
@@ -61,8 +62,8 @@ export function projectView(store) {
     /** Sequences in configured order, each with its shots in natural order. */
     get allSequences() {
       if (!this.data) return [];
-      return Object.entries(this.data.sequences)
-        .map(([uuid, seq]) => ({
+      return sortSequences(
+        Object.entries(this.data.sequences).map(([uuid, seq]) => ({
           uuid,
           ...seq,
           shots: sortShots(
@@ -71,7 +72,7 @@ export function projectView(store) {
               .map(([uuid, s]) => ({ uuid, ...s }))
           ),
         }))
-        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      );
     },
     /**
      * The same list, narrowed for display.

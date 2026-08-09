@@ -27,6 +27,7 @@ import {
   terminalStep,
   projectCompletion,
   shotSteps,
+  sortSequences,
   sortShots,
   stepCompletion,
   taskCompletion,
@@ -310,6 +311,44 @@ test("the show strip covers the whole project, weighted by length", () => {
   assert.ok(
     segments.some((s) => s.idle),
     "the reference project has a shot with no work at its last step"
+  );
+});
+
+test("sequences fall back to natural order when none is set", () => {
+  // The reference project sends no `order` on any sequence, so sorting on it
+  // alone did nothing and the page followed payload order: 001, 003, 002.
+  const seqs = Object.entries(fixture.sequences).map(([uuid, s]) => ({ uuid, ...s }));
+  assert.ok(
+    seqs.every((s) => s.order === undefined),
+    "fixture must still have unordered sequences, or this proves nothing"
+  );
+  assert.deepEqual(
+    sortSequences(seqs).map((s) => s.shortName),
+    ["001", "002", "003"]
+  );
+
+  // An explicit order still wins over the name.
+  assert.deepEqual(
+    sortSequences([
+      { shortName: "001", order: 2 },
+      { shortName: "002", order: 1 },
+    ]).map((s) => s.shortName),
+    ["002", "001"]
+  );
+
+  // Digit runs compare as numbers, as they do for shots.
+  assert.deepEqual(
+    sortSequences([{ shortName: "SQ10" }, { shortName: "SQ9" }]).map((s) => s.shortName),
+    ["SQ9", "SQ10"]
+  );
+});
+
+test("the strip reads in the same order, and its groups are named", () => {
+  const groups = showStrip(fixture, null);
+  assert.deepEqual(
+    groups.map((g) => g.name),
+    ["001", "002", "003"],
+    "the strip must not disagree with the shot list about sequence order"
   );
 });
 
