@@ -21,6 +21,7 @@ import {
   framerateFor,
   groupDigits,
   lastActivity,
+  matchesSearch,
   parseStamp,
   stateTally,
   terminalStep,
@@ -310,6 +311,34 @@ test("the show strip covers the whole project, weighted by length", () => {
     segments.some((s) => s.idle),
     "the reference project has a shot with no work at its last step"
   );
+});
+
+test("search matches the way Ramses-Client's does", () => {
+  // Same rule as RamObjectSortFilterProxyModel::filterAcceptsRowObject: short
+  // name OR name, case-insensitive substring, empty query matches everything.
+  const shots = Object.values(fixture.shots);
+  assert.equal(shots.length, 51);
+
+  const hit = (q) => shots.filter((s) => matchesSearch(s, q));
+
+  assert.equal(hit("").length, 51, "an empty query is not a filter");
+  assert.equal(hit("   ").length, 51, "nor is whitespace");
+  assert.equal(hit("0615").length, 1);
+  assert.equal(hit("0615")[0].shortName, "0615");
+
+  // A substring, not a prefix: typing the tail of a shot code is the common
+  // case when someone reads it out over the phone.
+  assert.ok(hit("15").length >= 1, "matches inside the code, not only at the start");
+  assert.equal(hit("zzzz").length, 0);
+
+  // Case folds both ways, and the name is searched as well as the short name.
+  assert.equal(matchesSearch({ shortName: "SH010", name: "Opening" }, "sh01"), true);
+  assert.equal(matchesSearch({ shortName: "SH010", name: "Opening" }, "OPEN"), true);
+  assert.equal(matchesSearch({ shortName: "SH010", name: "Opening" }, "closing"), false);
+
+  // Missing fields are not a crash: the payload trims what it sends.
+  assert.equal(matchesSearch({}, "x"), false);
+  assert.equal(matchesSearch(undefined, ""), true);
 });
 
 test("swatch text flips with the state colour", () => {

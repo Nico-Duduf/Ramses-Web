@@ -142,6 +142,27 @@ export function sortShots(shots) {
 }
 
 /**
+ * Does this object match a search string?
+ *
+ * Deliberately the same rule as Ramses-Client's
+ * RamObjectSortFilterProxyModel::filterAcceptsRowObject: a case-insensitive
+ * substring of the short name OR the name, and an empty query matches
+ * everything. Typing "0570" in one tool and the other should not produce
+ * different lists.
+ *
+ * Not a fuzzy match, and not a regex. Shot codes are short and known; the value
+ * is in narrowing fifty rows to one, not in guessing what was meant.
+ */
+export function matchesSearch(obj, query) {
+  const q = (query || "").trim().toLowerCase();
+  if (!q) return true;
+  return (
+    (obj?.shortName || "").toLowerCase().includes(q) ||
+    (obj?.name || "").toLowerCase().includes(q)
+  );
+}
+
+/**
  * The frame rate that actually applies to a shot.
  *
  * A sequence may override the project's rate, and Ramses stores the override

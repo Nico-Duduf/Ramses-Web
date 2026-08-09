@@ -276,6 +276,61 @@
                   </span>
                 </div>
 
+                <!-- Narrowing the list: a sequence to look in, a string to look
+                     for. The same pair Ramses-Client puts above its shot table,
+                     in the same order, so the two tools are one habit.
+
+                     Above the sticky column header on purpose. It belongs to
+                     the shot list, and pinning it as well would spend a second
+                     row of a phone screen on a control used for a few seconds
+                     at a time. -->
+                <div class="mt-7 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                  <label class="t-meta">
+                    Show
+                    <select
+                      x-model="seqFilter"
+                      class="step-picker"
+                      aria-label="Filter by sequence"
+                    >
+                      <option value="">all shots</option>
+                      <template x-for="seq in sequenceOptions" :key="seq.uuid">
+                        <option :value="seq.uuid" x-text="label(seq)"></option>
+                      </template>
+                    </select>
+                  </label>
+
+                  <!-- flex-1 + min-w-0 so the field takes the rest of the line
+                       on a phone, where this pair wraps onto its own row, and
+                       shrinks instead of pushing Clear off the edge. Fixed
+                       width from md up, where it sits beside the picker. -->
+                  <div class="flex min-w-0 flex-1 items-baseline gap-2 md:flex-none">
+                    <input
+                      x-model="search"
+                      type="search"
+                      inputmode="search"
+                      autocomplete="off"
+                      placeholder="Find a shot"
+                      aria-label="Find a shot"
+                      class="t-meta w-full min-w-0 rounded-md bg-ram-card px-3 py-1 text-ram-fg ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit focus-visible:outline-none md:w-48"
+                    />
+                    <!-- One tap to undo, because the alternative on a phone is
+                         select-all-and-delete on a field you can barely see. -->
+                    <button
+                      x-show="filtering"
+                      @click="clearFilters()"
+                      class="t-meta whitespace-nowrap text-ram-dim hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                    >
+                      Clear
+                    </button>
+                  </div>
+
+                  <span
+                    x-show="filtering"
+                    x-text="matchCount + (matchCount === 1 ? ' shot' : ' shots')"
+                    class="t-meta tnum"
+                  ></span>
+                </div>
+
                 <!-- Phone only. On a desktop the summary bars above are already
                      one per column and carry these same names. -->
                 <div
@@ -305,7 +360,16 @@
                   <div class="mt-8 md:mt-10">
                     <h3 class="mb-3 flex items-baseline gap-4">
                       <span x-text="label(seq)" class="t-label text-ram-mid"></span>
-                      <span x-text="tally(seq.shots, seq.uuid)" class="t-meta tnum"></span>
+                      <!-- allShots, not the filtered list: this describes the
+                           sequence, not the search. "SQ010, 1 shot" under a
+                           heading for a sequence of twenty-seven would be a lie
+                           about the show rather than a fact about the query. -->
+                      <span x-text="tally(seq.allShots, seq.uuid)" class="t-meta tnum"></span>
+                      <span
+                        x-show="filtering && seq.shots.length !== seq.allShots.length"
+                        x-text="seq.shots.length + ' shown'"
+                        class="t-meta tnum text-ram-dim"
+                      ></span>
                       <!-- The rule goes last so the sequence total stays beside
                            its own name. Right-aligned, it sat under the Frames
                            heading with the per-shot counts below it, reading as
@@ -343,6 +407,15 @@
                     </div>
                   </div>
                 </template>
+
+                <!-- Says which two filters are in force, because the sequence
+                     and the search AND together and an empty list otherwise
+                     reads as a broken page. -->
+                <p
+                  x-show="filtering && matchCount === 0"
+                  x-text="emptyText"
+                  class="t-body mt-10 text-center text-ram-mid"
+                ></p>
               </div>
             </template>
           </section>
