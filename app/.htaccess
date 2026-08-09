@@ -1,21 +1,23 @@
-# The app lives inside the API folder, and Ramses-Server ships an .htaccess
-# there that denies everything except index.php:
+# This app is served from inside the Ramses-Server folder, so it inherits
+# whatever .htaccess rules apply there. Two of them can break it, and both are
+# handled below.
 #
-#     Order allow,deny
-#     Deny from All
-#     <FilesMatch "^(index\.php)?$">
-#         Allow from All
-#     </FilesMatch>
+# 1. A deny-all in the API folder. Ramses-Server used to ship one that allowed
+#    only index.php:
 #
-# .htaccess rules are inherited by subdirectories, so wherever that file is in
-# force, every request for app.css or a .js module under app/ is a 403 and the
-# app renders as an unstyled, dead page. This re-allows the static files for
-# this folder only.
+#        Order allow,deny
+#        Deny from All
+#        <FilesMatch "^(index\.php)?$">
+#            Allow from All
+#        </FilesMatch>
 #
-# As of 2026-08-03 that deny is NOT active on the Overmind host (requesting
-# config/config.php returns 200, not 403), so this file is currently doing
-# nothing. It stays because the day the server's own .htaccess starts working
-# is the day the app breaks, and the failure would look like a bad upload.
+#    Those rules are inherited by subdirectories, so every request for app.css
+#    or a .js module became a 403 and the app rendered as an unstyled, dead
+#    page. Ramses-Server 1.0.0-RC12 dropped them, but servers older than that
+#    still have them, and a host may impose its own. Re-allowing static files
+#    for this folder costs nothing where nothing denies them.
+#
+# 2. A long cache lifetime on static files. See the note further down.
 
 <IfModule mod_authz_core.c>
     # Apache 2.4
@@ -33,16 +35,19 @@ IndexIgnore *
 
 # Always revalidate.
 #
-# The host sets Cache-Control: max-age=31536000 on static files, a one-year
-# cache. That is right for assets with versioned filenames and wrong for this
-# app, which is uploaded by hand under stable names: a phone that visited once
-# kept the old JavaScript for a year and silently ran a mix of old and new
-# files. The symptom was a feature appearing on one screen and not another,
-# because the two shipped in different releases.
+# Hosts commonly set a long Cache-Control on static files; one seen in practice
+# was max-age=31536000, a full year. That is right for assets with versioned
+# filenames and wrong for this app, whose filenames are stable across releases:
+# a phone that visited once kept the old JavaScript for a year and silently ran
+# a mix of old and new files. The symptom was a feature appearing on one screen
+# and not another, because the two shipped in different releases.
 #
-# no-cache does not mean do not store, it means revalidate before use. The
-# server already sends ETags, so an unchanged file costs a 304 and no body.
+# no-cache does not mean do not store, it means revalidate before use. Apache
+# sends ETags for static files, so an unchanged file costs a 304 and no body.
 # The whole app is about 120 KB, so this is cheap and never stale.
+#
+# A device that visited before this file was in place is still holding the old
+# copies and will not ask for new ones. Clear its site data once.
 <IfModule mod_headers.c>
     <FilesMatch "\.(html|css|js)$">
         Header set Cache-Control "no-cache"
