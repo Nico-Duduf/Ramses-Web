@@ -456,10 +456,12 @@
                           x-text="row.stateName || 'nothing to do'"
                         ></span>
                       </div>
+                      <!-- The one thing on this screen a person wrote. See
+                           .comment in src/input.css for why it is ruled. -->
                       <p
                         x-show="row.comment"
                         x-text="row.comment"
-                        class="t-body mt-3 text-ram-mid"
+                        class="comment t-body mt-3 text-ram-mid"
                       ></p>
                       <p x-show="row.modified" x-text="row.modified" class="t-meta mt-2"></p>
                     </div>
