@@ -79,9 +79,6 @@
       >
         <div class="mb-10">
           <h1 class="t-display">Ramses</h1>
-          <p class="t-body mt-3 text-ram-mid">
-            Where everything stands, away from the desk.
-          </p>
         </div>
 
         <form @submit.prevent="submit" class="max-w-md space-y-3">
@@ -92,7 +89,7 @@
             x-model="email"
             autocomplete="username"
             inputmode="email"
-            placeholder="email"
+            placeholder="Email"
             class="t-body w-full rounded-lg bg-ram-card px-4 py-3.5 outline-none ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit"
           />
           <label class="sr-only" for="password">Password</label>
@@ -101,13 +98,18 @@
             type="password"
             x-model="password"
             autocomplete="current-password"
-            placeholder="password"
+            placeholder="Password"
             class="t-body w-full rounded-lg bg-ram-card px-4 py-3.5 outline-none ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit"
           />
+          <!-- Disabled is a different control, not a faded one. Dimming the
+               whole button to 40% took the label with it, so the first thing
+               anyone saw on opening the app was a primary action that looked
+               broken. Muted fill, dim label, visible ring: clearly inactive,
+               still legible. -->
           <button
             type="submit"
             :disabled="!canSubmit"
-            class="t-label w-full rounded-lg bg-ram-accent py-3.5 transition-opacity hover:opacity-90 disabled:opacity-40"
+            class="t-label w-full rounded-lg bg-ram-accent py-3.5 text-ram-fg transition hover:opacity-90 disabled:bg-ram-card disabled:text-ram-dim disabled:ring-1 disabled:ring-ram-line"
             x-text="$store.ramses.busy ? 'Signing in...' : 'Sign in'"
           ></button>
         </form>
@@ -271,7 +273,13 @@
                       </div>
                     </template>
                   </div>
-                  <span class="t-eyebrow hidden shrink-0 text-right md:block md:w-16">
+                  <!-- self-end: this labels the column of numbers below, not
+                       the step bars beside it. Aligned to the top of a
+                       three-line block it sat level with the step names and
+                       read as a fifth metric that had lost its bar. -->
+                  <span
+                    class="t-eyebrow hidden shrink-0 text-right md:block md:w-16 md:self-end"
+                  >
                     Frames
                   </span>
                 </div>
