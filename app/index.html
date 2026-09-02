@@ -79,9 +79,6 @@
       >
         <div class="mb-10">
           <h1 class="t-display">Ramses</h1>
-          <p class="t-body mt-3 text-ram-mid">
-            Where everything stands, away from the desk.
-          </p>
         </div>
 
         <form @submit.prevent="submit" class="max-w-md space-y-3">
@@ -92,7 +89,7 @@
             x-model="email"
             autocomplete="username"
             inputmode="email"
-            placeholder="email"
+            placeholder="Email"
             class="t-body w-full rounded-lg bg-ram-card px-4 py-3.5 outline-none ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit"
           />
           <label class="sr-only" for="password">Password</label>
@@ -101,13 +98,18 @@
             type="password"
             x-model="password"
             autocomplete="current-password"
-            placeholder="password"
+            placeholder="Password"
             class="t-body w-full rounded-lg bg-ram-card px-4 py-3.5 outline-none ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit"
           />
+          <!-- Disabled is a different control, not a faded one. Dimming the
+               whole button to 40% took the label with it, so the first thing
+               anyone saw on opening the app was a primary action that looked
+               broken. Muted fill, dim label, visible ring: clearly inactive,
+               still legible. -->
           <button
             type="submit"
             :disabled="!canSubmit"
-            class="t-label w-full rounded-lg bg-ram-accent py-3.5 transition-opacity hover:opacity-90 disabled:opacity-40"
+            class="t-label w-full rounded-lg bg-ram-accent py-3.5 text-ram-fg transition hover:opacity-90 disabled:bg-ram-card disabled:text-ram-dim disabled:ring-1 disabled:ring-ram-line"
             x-text="$store.ramses.busy ? 'Signing in...' : 'Sign in'"
           ></button>
         </form>
@@ -167,7 +169,7 @@
             x-data="projectView"
           >
             <template x-if="data">
-              <div>
+              <div x-effect="syncFilters(data.project.uuid)">
                 <button
                   @click="back()"
                   class="t-meta hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
@@ -271,9 +273,70 @@
                       </div>
                     </template>
                   </div>
-                  <span class="t-eyebrow hidden shrink-0 text-right md:block md:w-16">
-                    Frames
+                  <!-- self-end: this labels the column of numbers below, not
+                       the step bars beside it. Aligned to the top of a
+                       three-line block it sat level with the step names and
+                       read as a fifth metric that had lost its bar. -->
+                  <span
+                    class="t-meta hidden shrink-0 text-right md:block md:w-16 md:self-end"
+                  >
+                    # f
                   </span>
+                </div>
+
+                <!-- Narrowing the list: a sequence to look in, a string to look
+                     for. The same pair Ramses-Client puts above its shot table,
+                     in the same order, so the two tools are one habit.
+
+                     Above the sticky column header on purpose. It belongs to
+                     the shot list, and pinning it as well would spend a second
+                     row of a phone screen on a control used for a few seconds
+                     at a time. -->
+                <div class="mt-7 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                  <label class="t-meta">
+                    Show
+                    <select
+                      x-model="seqFilter"
+                      class="step-picker"
+                      aria-label="Filter by sequence"
+                    >
+                      <option value="">all shots</option>
+                      <template x-for="seq in sequenceOptions" :key="seq.uuid">
+                        <option :value="seq.uuid" x-text="label(seq)"></option>
+                      </template>
+                    </select>
+                  </label>
+
+                  <!-- flex-1 + min-w-0 so the field takes the rest of the line
+                       on a phone, where this pair wraps onto its own row, and
+                       shrinks instead of pushing Clear off the edge. Fixed
+                       width from md up, where it sits beside the picker. -->
+                  <div class="flex min-w-0 flex-1 items-baseline gap-2 md:flex-none">
+                    <input
+                      x-model="search"
+                      type="search"
+                      inputmode="search"
+                      autocomplete="off"
+                      placeholder="Find a shot"
+                      aria-label="Find a shot"
+                      class="t-meta w-full min-w-0 rounded-md bg-ram-card px-3 py-1 text-ram-fg ring-1 ring-ram-line placeholder:text-ram-dim focus:ring-ram-accent-lit focus-visible:outline-none md:w-48"
+                    />
+                    <!-- One tap to undo, because the alternative on a phone is
+                         select-all-and-delete on a field you can barely see. -->
+                    <button
+                      x-show="filtering"
+                      @click="clearFilters()"
+                      class="t-meta whitespace-nowrap text-ram-dim hover:text-ram-fg focus-visible:outline-2 focus-visible:outline-ram-accent-lit"
+                    >
+                      Clear
+                    </button>
+                  </div>
+
+                  <span
+                    x-show="filtering"
+                    x-text="matchCount + (matchCount === 1 ? ' shot' : ' shots')"
+                    class="t-meta tnum"
+                  ></span>
                 </div>
 
                 <!-- Phone only. On a desktop the summary bars above are already
@@ -296,7 +359,7 @@
                         ></span>
                       </template>
                     </div>
-                    <span class="t-eyebrow w-12 shrink-0 text-right">Frames</span>
+                    <span class="t-meta w-12 shrink-0 text-right"># f</span>
                   </div>
                 </div>
 
@@ -305,7 +368,16 @@
                   <div class="mt-8 md:mt-10">
                     <h3 class="mb-3 flex items-baseline gap-4">
                       <span x-text="label(seq)" class="t-label text-ram-mid"></span>
-                      <span x-text="tally(seq.shots, seq.uuid)" class="t-meta tnum"></span>
+                      <!-- allShots, not the filtered list: this describes the
+                           sequence, not the search. "SQ010, 1 shot" under a
+                           heading for a sequence of twenty-seven would be a lie
+                           about the show rather than a fact about the query. -->
+                      <span x-text="tally(seq.allShots, seq.uuid)" class="t-meta tnum"></span>
+                      <span
+                        x-show="filtering && seq.shots.length !== seq.allShots.length"
+                        x-text="seq.shots.length + ' shown'"
+                        class="t-meta tnum text-ram-dim"
+                      ></span>
                       <!-- The rule goes last so the sequence total stays beside
                            its own name. Right-aligned, it sat under the Frames
                            heading with the per-shot counts below it, reading as
@@ -343,6 +415,15 @@
                     </div>
                   </div>
                 </template>
+
+                <!-- Says which two filters are in force, because the sequence
+                     and the search AND together and an empty list otherwise
+                     reads as a broken page. -->
+                <p
+                  x-show="filtering && matchCount === 0"
+                  x-text="emptyText"
+                  class="t-body mt-10 text-center text-ram-mid"
+                ></p>
               </div>
             </template>
           </section>
@@ -383,10 +464,12 @@
                           x-text="row.stateName || 'nothing to do'"
                         ></span>
                       </div>
+                      <!-- The one thing on this screen a person wrote. See
+                           .comment in src/input.css for why it is ruled. -->
                       <p
                         x-show="row.comment"
                         x-text="row.comment"
-                        class="t-body mt-3 text-ram-mid"
+                        class="comment t-body mt-3 text-ram-mid"
                       ></p>
                       <p x-show="row.modified" x-text="row.modified" class="t-meta mt-2"></p>
                     </div>

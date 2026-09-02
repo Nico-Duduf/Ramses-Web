@@ -21,11 +21,13 @@ import {
   framerateFor,
   groupDigits,
   lastActivity,
+  matchesSearch,
   parseStamp,
   stateTally,
   terminalStep,
   projectCompletion,
   shotSteps,
+  sortSequences,
   sortShots,
   stepCompletion,
   taskCompletion,
@@ -310,6 +312,72 @@ test("the show strip covers the whole project, weighted by length", () => {
     segments.some((s) => s.idle),
     "the reference project has a shot with no work at its last step"
   );
+});
+
+test("sequences fall back to natural order when none is set", () => {
+  // The reference project sends no `order` on any sequence, so sorting on it
+  // alone did nothing and the page followed payload order: 001, 003, 002.
+  const seqs = Object.entries(fixture.sequences).map(([uuid, s]) => ({ uuid, ...s }));
+  assert.ok(
+    seqs.every((s) => s.order === undefined),
+    "fixture must still have unordered sequences, or this proves nothing"
+  );
+  assert.deepEqual(
+    sortSequences(seqs).map((s) => s.shortName),
+    ["001", "002", "003"]
+  );
+
+  // An explicit order still wins over the name.
+  assert.deepEqual(
+    sortSequences([
+      { shortName: "001", order: 2 },
+      { shortName: "002", order: 1 },
+    ]).map((s) => s.shortName),
+    ["002", "001"]
+  );
+
+  // Digit runs compare as numbers, as they do for shots.
+  assert.deepEqual(
+    sortSequences([{ shortName: "SQ10" }, { shortName: "SQ9" }]).map((s) => s.shortName),
+    ["SQ9", "SQ10"]
+  );
+});
+
+test("the strip reads in the same order, and its groups are named", () => {
+  const groups = showStrip(fixture, null);
+  assert.deepEqual(
+    groups.map((g) => g.name),
+    ["001", "002", "003"],
+    "the strip must not disagree with the shot list about sequence order"
+  );
+});
+
+test("search matches the way Ramses-Client's does", () => {
+  // Same rule as RamObjectSortFilterProxyModel::filterAcceptsRowObject: short
+  // name OR name, case-insensitive substring, empty query matches everything.
+  const shots = Object.values(fixture.shots);
+  assert.equal(shots.length, 51);
+
+  const hit = (q) => shots.filter((s) => matchesSearch(s, q));
+
+  assert.equal(hit("").length, 51, "an empty query is not a filter");
+  assert.equal(hit("   ").length, 51, "nor is whitespace");
+  assert.equal(hit("0615").length, 1);
+  assert.equal(hit("0615")[0].shortName, "0615");
+
+  // A substring, not a prefix: typing the tail of a shot code is the common
+  // case when someone reads it out over the phone.
+  assert.ok(hit("15").length >= 1, "matches inside the code, not only at the start");
+  assert.equal(hit("zzzz").length, 0);
+
+  // Case folds both ways, and the name is searched as well as the short name.
+  assert.equal(matchesSearch({ shortName: "SH010", name: "Opening" }, "sh01"), true);
+  assert.equal(matchesSearch({ shortName: "SH010", name: "Opening" }, "OPEN"), true);
+  assert.equal(matchesSearch({ shortName: "SH010", name: "Opening" }, "closing"), false);
+
+  // Missing fields are not a crash: the payload trims what it sends.
+  assert.equal(matchesSearch({}, "x"), false);
+  assert.equal(matchesSearch(undefined, ""), true);
 });
 
 test("swatch text flips with the state colour", () => {

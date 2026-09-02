@@ -135,9 +135,54 @@ export function label(obj) {
  * fixed in Ramses-Out's shot table. Compare digit runs numerically.
  */
 export function sortShots(shots) {
-  const key = (s) => label(s);
-  return [...shots].sort((a, b) =>
-    key(a).localeCompare(key(b), undefined, { numeric: true, sensitivity: "base" })
+  return [...shots].sort(naturalCompare);
+}
+
+/** By label, digit runs compared as numbers. */
+function naturalCompare(a, b) {
+  return label(a).localeCompare(label(b), undefined, {
+    numeric: true,
+    sensitivity: "base",
+  });
+}
+
+/**
+ * Sequences in the order they should be read.
+ *
+ * `order` first, because a project that has arranged its sequences means it.
+ * But that field is optional and frequently absent: the reference project sends
+ * no order on any sequence, so every comparison was 0, the sort did nothing,
+ * and the whole page fell back to whatever order the payload happened to
+ * iterate in. That showed up as a sequence picker reading 001, 003, 002, with
+ * the shot groups and the strip in the same arbitrary order.
+ *
+ * So an unordered set falls back to the same natural sort the shots use. Two
+ * sequences that both say 0 are not deliberately tied, they are unset.
+ */
+export function sortSequences(sequences) {
+  return [...sequences].sort(
+    (a, b) => (a.order ?? 0) - (b.order ?? 0) || naturalCompare(a, b)
+  );
+}
+
+/**
+ * Does this object match a search string?
+ *
+ * Deliberately the same rule as Ramses-Client's
+ * RamObjectSortFilterProxyModel::filterAcceptsRowObject: a case-insensitive
+ * substring of the short name OR the name, and an empty query matches
+ * everything. Typing "0570" in one tool and the other should not produce
+ * different lists.
+ *
+ * Not a fuzzy match, and not a regex. Shot codes are short and known; the value
+ * is in narrowing fifty rows to one, not in guessing what was meant.
+ */
+export function matchesSearch(obj, query) {
+  const q = (query || "").trim().toLowerCase();
+  if (!q) return true;
+  return (
+    (obj?.shortName || "").toLowerCase().includes(q) ||
+    (obj?.name || "").toLowerCase().includes(q)
   );
 }
 
@@ -267,10 +312,12 @@ export function showStrip(data, stepUuid) {
   const last = chosen || terminalStep(steps, pipes);
   if (!last) return [];
 
-  const grouped = Object.entries(sequences)
-    .map(([uuid, seq]) => ({
+  const grouped = sortSequences(
+    Object.entries(sequences).map(([uuid, seq]) => ({
       uuid,
-      order: seq.order ?? 0,
+      order: seq.order,
+      name: seq.name,
+      shortName: seq.shortName,
       shots: sortShots(
         Object.entries(shots)
           .filter(([, s]) => s.sequence === uuid)
@@ -278,7 +325,7 @@ export function showStrip(data, stepUuid) {
       ),
       framerate: framerateFor(seq, project),
     }))
-    .sort((a, b) => a.order - b.order);
+  );
 
   const total =
     grouped.reduce(
@@ -293,6 +340,9 @@ export function showStrip(data, stepUuid) {
       );
       return {
         uuid: group.uuid,
+        // Carried through for the group's aria-label, which read "Sequence
+        // undefined" while this was missing.
+        name: label(group),
         width: (frames.reduce((a, b) => a + b, 0) / total) * 100,
         segments: group.shots.map((shot, i) => {
           const groupFrames = frames.reduce((a, b) => a + b, 0) || 1;

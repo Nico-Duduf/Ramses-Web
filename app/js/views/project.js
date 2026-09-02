@@ -5,9 +5,11 @@ import {
   groupDigits,
   label,
   lastActivity,
+  matchesSearch,
   shotSteps,
   showStrip,
   sinceText,
+  sortSequences,
   sortShots,
   stateColor,
   stateTally,
@@ -36,11 +38,48 @@ export function projectView(store) {
     get laneStyle() {
       return { gridTemplateColumns: this.laneCols };
     },
+    /**
+     * Narrowing the list, the same two controls Ramses-Client puts above its
+     * shot table: a sequence to look in, and a string to look for.
+     *
+     * They AND together, as they do there. Selecting SQ010 and searching for a
+     * shot in SQ020 therefore shows nothing, which is correct and briefly
+     * confusing, so the empty state says which two things are in force.
+     *
+     * Neither touches the show strip or any completion figure. Those describe
+     * the project; a number that changed while you typed would have stopped
+     * describing anything.
+     */
+    seqFilter: "",
+    search: "",
+    /**
+     * Which project the filters belong to.
+     *
+     * This component is created once and reused for every project, so without
+     * this a sequence uuid chosen in one show stays selected in the next, where
+     * it matches nothing: an empty shot list, no visible reason, and a picker
+     * showing a sequence name that does not exist here. Driven from the
+     * template by x-effect, so it follows whatever the router does.
+     */
+    filterProject: "",
+    syncFilters(uuid) {
+      if (!uuid || uuid === this.filterProject) return;
+      this.filterProject = uuid;
+      this.seqFilter = "";
+      this.search = "";
+    },
+    get filtering() {
+      return this.seqFilter !== "" || this.search.trim() !== "";
+    },
+    clearFilters() {
+      this.seqFilter = "";
+      this.search = "";
+    },
     /** Sequences in configured order, each with its shots in natural order. */
-    get sequences() {
+    get allSequences() {
       if (!this.data) return [];
-      return Object.entries(this.data.sequences)
-        .map(([uuid, seq]) => ({
+      return sortSequences(
+        Object.entries(this.data.sequences).map(([uuid, seq]) => ({
           uuid,
           ...seq,
           shots: sortShots(
@@ -49,7 +88,42 @@ export function projectView(store) {
               .map(([uuid, s]) => ({ uuid, ...s }))
           ),
         }))
-        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      );
+    },
+    /**
+     * The same list, narrowed for display.
+     *
+     * `shots` is what gets drawn; `allShots` is kept so the sequence heading can
+     * go on describing the sequence rather than the search result. A heading
+     * reading "SQ010, 1 shot" when SQ010 has twenty-seven of them would be a
+     * plain lie about the show.
+     */
+    get sequences() {
+      const seqs = this.allSequences
+        .filter((seq) => this.seqFilter === "" || seq.uuid === this.seqFilter)
+        .map((seq) => ({
+          ...seq,
+          allShots: seq.shots,
+          shots: seq.shots.filter((s) => matchesSearch(s, this.search)),
+        }));
+      // An empty sequence heading with nothing under it is just a question the
+      // page refuses to answer, so drop it. Only when filtering: a genuinely
+      // empty sequence is worth seeing.
+      return this.filtering ? seqs.filter((seq) => seq.shots.length) : seqs;
+    },
+    /** For the picker. Every sequence, whatever is currently selected. */
+    get sequenceOptions() {
+      return this.allSequences;
+    },
+    get matchCount() {
+      return this.sequences.reduce((n, seq) => n + seq.shots.length, 0);
+    },
+    /** "No shots in SQ010 match "0570"", naming both filters in force. */
+    get emptyText() {
+      const seq = this.seqFilter ? this.data.sequences[this.seqFilter] : null;
+      const where = seq ? `in ${label(seq)}` : "in this project";
+      const what = this.search.trim() ? ` match "${this.search.trim()}"` : "";
+      return `No shots ${where}${what}.`;
     },
     /** A shot's length in frames, at its own sequence's rate. */
     frames(shot) {

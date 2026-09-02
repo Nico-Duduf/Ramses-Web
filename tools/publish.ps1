@@ -3,16 +3,16 @@
 #     tools\publish.ps1
 #
 # Then upload the CONTENTS of publish\ramses\ into the server's ramses folder,
-# the one holding index.php. One drag: an app\ subfolder and four .php files
-# that land next to index.php.
+# the one holding index.php. One drag: an app\ subfolder.
 #
 # For Overmind that folder is
 #     <the folder Ramses-Server is installed in>/
 # serving https://www.overmind-studios.de/ramses/
 #
-# Note the PHP files go NEXT TO index.php, not into a src\ subfolder. src\ is
-# how Ramses-Server's repository is laid out; its contents are what gets
-# deployed, so on the server there is no src\ at all.
+# This stages the APP ONLY. Ramses-Server ships the endpoints and the app
+# itself as of 1.0.0-RC12, and its own tools\deploy.py copies this repo's app\
+# into the server package. Use that for a full server deployment; use this when
+# you have changed a view and want it on a phone without rebuilding a server.
 #
 # There is no upload step here on purpose. No host, no credentials and no
 # private key path live in this repo, and staging locally means you can see
@@ -62,11 +62,7 @@ New-Item -ItemType Directory -Path $stage -Force | Out-Null
 # rather than adding excludes here.
 Copy-Item (Join-Path $root "app") (Join-Path $stage "app") -Recurse
 
-# ...and the endpoints land beside index.php, in the same folder.
-Copy-Item (Join-Path $root "server\*.php") $stage
-
 $appCount = (Get-ChildItem (Join-Path $stage "app") -Recurse -File).Count
-$phpCount = (Get-ChildItem $stage -File).Count
 
 @"
 Ramses-Web, staged $(Get-Date -Format "yyyy-MM-dd HH:mm")
@@ -78,34 +74,21 @@ index.php. For Overmind that is
 
 You are dropping in:
 
-    app\             $appCount files, a new subfolder -> /ramses/app/
-    *.php            $phpCount files, next to index.php
+    app\             $appCount files -> /ramses/app/
 
-Nothing is overwritten: all four PHP names are new.
-
-The PHP files do NOT go into a src\ subfolder. src\ is how the Ramses-Server
-repository is laid out; what gets deployed is its contents, so there is no
-src\ on the server.
+This replaces the app and nothing else. The endpoints it calls ship with
+Ramses-Server itself from 1.0.0-RC12 on, so there is nothing to add beside
+index.php any more.
 
 The app MUST be same-origin with the API and exactly one level below it: it
 resolves the API as "../" relative to itself, and the PHP session cookie it
 authenticates with is marked secure, so it also has to be HTTPS. Ending up at
 https://www.overmind-studios.de/ramses/app/ satisfies all three.
 
-STILL TO DO BY HAND, once, on the server:
-
-    Add three include lines to index.php.
-
-        include("users_reset_password.php");
-        include("weblogin.php");          <-- add, MUST be before login.php
-        include("login.php");
-
-        include("projects_get.php");
-        include("weboverview.php");       <-- add
-        include("setstatus.php");         <-- add
-
-    See server\README.md in the repo for the full context.
+Requires Ramses-Server 1.0.0-RC12 or newer, which is where the endpoints
+(login, project_overview, set_status) live. On an older server, use the
+standalone-php tag of this repo, which still ships them separately.
 "@ | Set-Content -Path (Join-Path $publish "UPLOAD.txt") -Encoding utf8
 
-Write-Host ("Staged {0} app files and {1} PHP files in {2}" -f $appCount, $phpCount, $publish) -ForegroundColor Green
+Write-Host ("Staged {0} app files in {1}" -f $appCount, $publish) -ForegroundColor Green
 Write-Host "Read publish\UPLOAD.txt, then upload."

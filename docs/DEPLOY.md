@@ -1,25 +1,29 @@
 # Deploying
 
-Everything goes into one folder on the server: the one holding Ramses-Server's
-`index.php`.
+Ramses-Server ships this app. From 1.0.0-RC12 its `tools/deploy.py` copies
+`Ramses-Web/app` into the server package, so deploying the server deploys the
+app, and the endpoints the app calls (`login`, `project_overview`,
+`set_status`) are part of the server itself.
+
+What follows is the hand-upload path, for putting a changed app on a server you
+do not want to rebuild.
 
     app/         ->  <api root>/app/     static files, served as-is
-    server/*.php ->  <api root>/         four PHP files, next to index.php
 
 `<api root>` is wherever Ramses-Server is installed. If the desktop client talks
 to `https://server.tld/ramses/`, the app ends up at
 `https://server.tld/ramses/app/`.
 
-**Overmind's server**, confirmed 2026-08-03:
+**Overmind's server**, confirmed 2026-08-09:
 
-    https://www.overmind-studios.de/ramses/            the API, version 1.0.0-RC6
+    https://www.overmind-studios.de/ramses/            the API, version 1.0.0-RC12
     <the folder Ramses-Server is installed in>/    the folder it lives in
     https://www.overmind-studios.de/ramses/app/        where the app goes
 
-The PHP files do **not** go into a `src/` subfolder. `src/` is how the
-Ramses-Server repository is laid out; what gets deployed is its *contents*, so
-there is no `src/` on the server. `init.php` and `index.php` sit directly in
-`ramses/`, and the endpoints join them there.
+Upgraded from 1.0.0-RC6 on 2026-08-09, which is what put the endpoints on the
+server. The standalone `weblogin.php`, `weboverview.php`, `setstatus.php` and
+`webcommon.php` that used to sit beside `index.php` are no longer included by
+anything and have been removed.
 
 ## How it goes out
 
@@ -33,8 +37,7 @@ next to it saying where each half goes:
     # then drag the CONTENTS of publish\ramses\ into the server's ramses folder
 
 `publish\ramses\` mirrors the destination exactly, so it is one drag: an `app\`
-subfolder plus four `.php` files that land beside `index.php`. `publish\` is
-gitignored and rebuilt from scratch each run.
+subfolder. `publish\` is gitignored and rebuilt from scratch each run.
 
 No host, credentials or key path live in this repo, and nothing here connects to
 anything. Staging first also means you can look at exactly what is about to go
@@ -58,12 +61,11 @@ configures a URL, and that is deliberate:
 1. `tools\fetch-tools.ps1` then `tools\build.ps1`.
 2. `node --test` should be green.
 3. `tools\publish.ps1`, then upload the contents of `publish\ramses\`.
-4. Add the three `include` lines to the server's `index.php` by hand. See
-   `server/README.md`; nothing here edits that file, because a three-line change
-   to Ramses-Server's own file should show up in its diff.
-5. Open the app, log in, confirm the project list appears.
+4. Open the app, log in, confirm the project list appears.
 
-Only step 4 is once-only. Later releases are steps 1 to 3 without the fetch.
+Later releases are the same without the fetch. Nothing is once-only any more:
+the server-side wiring that used to need hand-editing `index.php` is part of
+Ramses-Server from 1.0.0-RC12.
 
 ## The stale-stylesheet guard
 

@@ -45,6 +45,28 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * A clickable thing looks clickable
+ *
+ * Every interactive element here is a real <button>: project cards, shot rows,
+ * strip segments, back, refresh, sign out. That is deliberate, for keyboard
+ * focus and for the focus-visible rings.
+ *
+ * Browsers render a button with the arrow cursor, and Tailwind v4's Preflight
+ * no longer overrides that the way v3 did. The result on desktop was a page
+ * where hover states lit up but the cursor never changed, so nothing read as
+ * clickable. Phones were unaffected, which is why it went unnoticed.
+ *
+ * :not(:disabled) because the refresh button disables itself while a request is
+ * in flight, and a pointer cursor on a dead control is a small lie.
+ * ------------------------------------------------------------------------- */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * Type scale
  *
  * Six roles, and every piece of text on the page picks one. The previous
@@ -87,6 +109,27 @@
 .t-body {
   font-size: 0.9375rem;
   line-height: 1.5;
+}
+
+/* A comment is a message left on the task, and it has to look like one.
+ *
+ * Set as a plain paragraph it sat between a step name and a timestamp and read
+ * as a caption describing the step, which is the one thing it is not. Some
+ * comments are written by an artist and some by Ramses-Ingest, but either way
+ * they are a note attached to that task at that moment, not a label this app
+ * wrote about the step. They are also the whole reason to open a shot rather
+ * than read its lane.
+ *
+ * A rule down the left is the quietest way to say quoted. No italics, which
+ * hurt at this size on a phone, and no quotation marks, which sit badly around
+ * text that runs to several lines or ends in a path.
+ */
+.comment {
+  /* Not --color-ram-line: that is the card's own ring colour, so a rule drawn
+   * in it reads as more card rather than as a mark on the text. Dim is the
+   * quietest thing that still registers as deliberate. */
+  border-left: 2px solid var(--color-ram-dim);
+  padding-left: 0.75rem;
 }
 
 /* Everything secondary: meta lines, tallies, timestamps. */
